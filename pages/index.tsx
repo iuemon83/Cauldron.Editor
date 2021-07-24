@@ -3,7 +3,11 @@ import Card from "../components/Card";
 import { useEffect, useState } from "react";
 import { CardDetail, cardEmpty } from "../types/CardDetail";
 import { CardSetDetail } from "../types/CardSetDetail";
-import { getCardMetaData, globalCache } from "../components/CauldronApi";
+import {
+  getCardMetaData,
+  getSampleCardSet,
+  globalCache,
+} from "../components/CauldronApi";
 import {
   Button,
   TextField,
@@ -164,7 +168,9 @@ const Home: React.FC<Props> = (props: Props) => {
         onClick={handleAddCardButtonClick}
         color="primary"
         startIcon={<AddIcon />}
-      />
+      >
+        New Card
+      </Button>
     );
   };
 
@@ -199,9 +205,47 @@ const Home: React.FC<Props> = (props: Props) => {
         onClick={handleDeleteCardButtonClick}
         color="secondary"
         startIcon={<DeleteIcon />}
-      />
+      >
+        Delete
+      </Button>
     );
   };
+
+  const OpenSampleCardsetButton = () => {
+    const handleButtonClick = async () => {
+      const cardset = await getSampleCardSet();
+
+      console.log(cardset);
+
+      openCardSet(cardset);
+    };
+
+    return (
+      <Button
+        color="inherit"
+        onClick={() => handleButtonClick()}
+        startIcon={<OpenInBrowserIcon />}
+      >
+        サンプル
+      </Button>
+    );
+  };
+
+  const openCardSet = (newCardSet: CardSetDetail) => {
+    const message = "編集中のカードセットは削除されます。よろしいですか？";
+    if (!confirm(message)) {
+      return;
+    }
+
+    const sorted = {
+      ...newCardSet,
+      cards: newCardSet.cards.sort((l, r) => l.name.localeCompare(r.name)),
+    };
+
+    setCardIndex(0);
+    setCardset(sorted);
+  };
+
   const DownloadButton = () => {
     const saveJson = (filename: string, jsonSource: {}) => {
       const json = JSON.stringify(jsonSource);
@@ -235,18 +279,16 @@ const Home: React.FC<Props> = (props: Props) => {
     );
   };
 
-  const LoadCardsetButton = () => {
-    const handleChangeLoadCardset = (
-      e: React.ChangeEvent<HTMLInputElement>
-    ) => {
+  const OpenCardsetButton = () => {
+    const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!e.target.files || e.target.files.length === 0) {
         return;
       }
 
       const cardsetFile = e.target.files[0];
       const reader = new FileReader();
-      reader.onload = (e) => {
-        const json = e.target?.result;
+      reader.onload = (ev) => {
+        const json = ev.target?.result;
         if (typeof json !== "string") {
           return;
         }
@@ -254,8 +296,10 @@ const Home: React.FC<Props> = (props: Props) => {
         console.log(json);
 
         const cardset = JSON.parse(json);
-        setCardIndex(0);
-        setCardset(cardset);
+        openCardSet(cardset);
+
+        // 同じファイルが連続で選択されても動くように
+        e.target.value = "";
       };
       reader.readAsText(cardsetFile);
     };
@@ -265,7 +309,7 @@ const Home: React.FC<Props> = (props: Props) => {
         <input
           style={{ display: "none" }}
           id="load-cardset"
-          onChange={handleChangeLoadCardset}
+          onChange={handleChangeInput}
           type="file"
         />
 
@@ -293,7 +337,6 @@ const Home: React.FC<Props> = (props: Props) => {
           onChange={(e) => setCardset({ ...cardset, name: e.target.value })}
         />
         <AddCardButton></AddCardButton>
-        <DeleteCardButton></DeleteCardButton>
       </div>
       <Divider />
       <List>
@@ -364,7 +407,8 @@ const Home: React.FC<Props> = (props: Props) => {
             Cauldron DCG - カード作成ツール
           </Typography>
           <DownloadButton></DownloadButton>
-          <LoadCardsetButton></LoadCardsetButton>
+          <OpenCardsetButton></OpenCardsetButton>
+          <OpenSampleCardsetButton></OpenSampleCardsetButton>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
@@ -400,6 +444,7 @@ const Home: React.FC<Props> = (props: Props) => {
       </nav>
       <main className={classes.main}>
         <div className={classes.toolbar} />
+        <DeleteCardButton></DeleteCardButton>
         <Card
           detail={cardset.cards[cardIndex]}
           onChanged={handleCardChange}
