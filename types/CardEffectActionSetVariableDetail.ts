@@ -5,9 +5,10 @@ export type CardEffectActionSetVariableDetail = {
   numValue: NumValueDetail;
 };
 
-export const CardEffectActionAddCardEmpty = (): CardEffectActionSetVariableDetail => {
-  return {
-    name: "",
-    numValue: numValueEmpty(),
+export const CardEffectActionSetVariableEmpty =
+  (): CardEffectActionSetVariableDetail => {
+    return {
+      name: "",
+      numValue: numValueEmpty(),
+    };
   };
-};

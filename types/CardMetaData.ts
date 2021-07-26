@@ -23,6 +23,8 @@ export type TextCompare = CardMetadataElm;
 export type TextValueCalculatorValueType = CardMetadataElm;
 export type ZoneName = CardMetadataElm;
 export type CardConditionContext = CardMetadataElm;
+export type OwnerConditionValue = CardMetadataElm;
+export type PositionTypeValue = CardMetadataElm;
 export type PlayerConditionContext = CardMetadataElm;
 export type PlayerConditionType = CardMetadataElm;
 export type CardSetConditionType = CardMetadataElm;
@@ -48,6 +50,8 @@ export type CardMetaData = {
   textValueCalculatorValueTypes: TextValueCalculatorValueType[];
   zoneNames: ZoneName[];
   cardConditionContexts: CardConditionContext[];
+  ownerConditionValues: OwnerConditionValue[];
+  positionTypeValues: PositionTypeValue[];
   playerConditionContexts: PlayerConditionContext[];
   playerConditionTypes: PlayerConditionType[];
   cardSetConditionTypes: CardSetConditionType[];

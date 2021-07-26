@@ -6,12 +6,13 @@ import {
 
 export type CardEffectActionModifyDamageDetail = {
   value: NumValueModifierDetail;
-  choice: ChoiceDetail;
+  choice: ChoiceDetail | undefined;
 };
 
-export const CardEffectActionModifyDamageEmpty = (): CardEffectActionModifyDamageDetail => {
-  return {
-    value: numValueModifierEmpty(),
-    choice: choiceEmpty(),
+export const CardEffectActionModifyDamageEmpty =
+  (): CardEffectActionModifyDamageDetail => {
+    return {
+      value: numValueModifierEmpty(),
+      choice: undefined,
+    };
   };
-};

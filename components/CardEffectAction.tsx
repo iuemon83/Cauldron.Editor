@@ -8,6 +8,8 @@ import { CardEffectActionModifyCardEmpty } from "../types/CardEffectActionModify
 import { CardEffectActionModifyDamageEmpty } from "../types/CardEffectActionModifyDamageDetail";
 import { cardEffectActionModifyPlayerEmpty } from "../types/CardEffectActionModifyPlayerDetail";
 import { cardEffectActionMoveCardEmpty } from "../types/CardEffectActionMoveCardDetail";
+import { CardEffectActionSetVariableEmpty } from "../types/CardEffectActionSetVariableDetail";
+import { CardEffectActionWinEmpty } from "../types/CardEffectActionWinDetail";
 import CardEffectActionAddCard from "./CardEffectActionAddCard";
 import CardEffectActionAddEffect from "./CardEffectActionAddEffect";
 import CardEffectActionDamage from "./CardEffectActionDamage";
@@ -17,6 +19,8 @@ import CardEffectActionModifyCard from "./CardEffectActionModifyCard";
 import CardEffectActionModifyDamage from "./CardEffectActionModifyDamage";
 import CardEffectActionModifyPlayer from "./CardEffectActionModifyPlayer";
 import CardEffectActionMoveCard from "./CardEffectActionMoveCard";
+import CardEffectActionSetVariable from "./CardEffectActionSetVariable";
+import CardEffectActionWin from "./CardEffectActionWin";
 import InputOption from "./input/InputOption";
 
 interface Props {
@@ -142,6 +146,29 @@ const CardEffectAction: React.FC<Props> = ({ detail, onChanged }) => {
             detail={d!}
             onChanged={h}
           ></CardEffectActionAddEffect>
+        )}
+      />
+      <InputOption
+        label="値のセット"
+        detail={detail}
+        keyName="setVariable"
+        empty={CardEffectActionSetVariableEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => (
+          <CardEffectActionSetVariable
+            detail={d!}
+            onChanged={h}
+          ></CardEffectActionSetVariable>
+        )}
+      />
+      <InputOption
+        label="勝利"
+        detail={detail}
+        keyName="win"
+        empty={CardEffectActionWinEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => (
+          <CardEffectActionWin detail={d!} onChanged={h}></CardEffectActionWin>
         )}
       />
     </>

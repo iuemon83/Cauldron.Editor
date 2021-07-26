@@ -1,18 +1,18 @@
 import { TextField } from "@material-ui/core";
 
-interface Props {
+interface Props<T, U extends keyof T> {
   label: string;
-  detail: any;
-  keyName: string;
+  detail: T;
+  keyName: U;
   onChanged: (e: any) => void;
 }
 
-const InputText: React.FC<Props> = ({ label, detail, keyName, onChanged }) => {
+const InputText = <T extends {}, U extends keyof T>(p: Props<T, U>) => {
   return (
     <TextField
-      label={label}
-      value={detail[keyName]}
-      onChange={(e) => onChanged({ [keyName]: e.target.value })}
+      label={p.label}
+      value={p.detail[p.keyName]}
+      onChange={(e) => p.onChanged({ [p.keyName]: e.target.value })}
     />
   );
 };

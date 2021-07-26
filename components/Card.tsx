@@ -12,13 +12,11 @@ import {
   Checkbox,
   Switch,
   TextField,
-  Button,
   FormGroup,
 } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import AddIcon from "@material-ui/icons/Add";
 import { makeStyles } from "@material-ui/core/styles";
 import FormSet from "./input/FormSet";
+import InputList from "./input/InputList";
 
 const useStyles = makeStyles((theme) => ({
   costInputField: {
@@ -50,34 +48,6 @@ const Card: React.FC<Props> = ({ detail, onChanged }) => {
     globalCache.metadata!.cardAbilities.map((v) => [v.code, v.displayText])
   );
   const cardAbilities = Object.keys(cardAbilitiesLabelsByValue);
-
-  console.log(cardAbilitiesLabelsByValue);
-
-  const clearCardEffect = () => {
-    onChanged({ effects: [] });
-  };
-
-  const addCardEffect = () => {
-    const newValue: CardEffectDetail = cardEffectEmpty();
-    onChanged({
-      effects: [...detail.effects, newValue],
-    });
-  };
-
-  const removeCardEffect = (index: number) => {
-    const newlist = [...detail.effects];
-    newlist.splice(index, 1);
-
-    onChanged({
-      effects: newlist,
-    });
-  };
-
-  const onCardEffectChanged = (x: CardEffectDetail, index: number) => {
-    const newlist = [...detail.effects];
-    newlist.splice(index, 1, x);
-    onChanged({ effects: newlist });
-  };
 
   const handleAbilityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const index = Number(e.target.value);
@@ -198,43 +168,16 @@ const Card: React.FC<Props> = ({ detail, onChanged }) => {
           onChanged={onChanged}
         />
       </div>
-      <FormSet
-        label={
-          <>
-            効果
-            <Button
-              variant="contained"
-              onClick={() => addCardEffect()}
-              color="primary"
-              startIcon={<AddIcon />}
-            />
-            <Button
-              variant="contained"
-              onClick={() => clearCardEffect()}
-              color="secondary"
-            >
-              Clear
-            </Button>
-          </>
-        }
-      >
-        {detail.effects.map((e, index) => (
-          <FormGroup key={index}>
-            <span>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => removeCardEffect(index)}
-                startIcon={<DeleteIcon />}
-              />
-            </span>
-            <CardEffect
-              detail={e}
-              onChanged={(x) => onCardEffectChanged({ ...e, ...x }, index)}
-            ></CardEffect>
-          </FormGroup>
-        ))}
-      </FormSet>
+      <InputList
+        label="効果"
+        detail={detail}
+        keyName="effects"
+        newItem={cardEffectEmpty}
+        onChanged={onChanged}
+        jtx={(item, onItemChanged) => (
+          <CardEffect detail={item} onChanged={onItemChanged}></CardEffect>
+        )}
+      />
     </>
   );
 };

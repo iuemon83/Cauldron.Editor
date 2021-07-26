@@ -28,13 +28,21 @@ const CardCondition: React.FC<Props> = ({ detail, onChanged }) => {
   );
   const cardConditionContexts = Object.keys(cardConditionContextsLabelsByValue);
 
+  const ownerConditionValuesLabelsByValue = Object.fromEntries(
+    globalCache.metadata!.ownerConditionValues.map((v) => [
+      v.code,
+      v.displayText,
+    ])
+  );
+  const ownerConditionValues = Object.keys(ownerConditionValuesLabelsByValue);
+
   return (
     <>
       <InputSelect
         label="コンテキスト"
         values={cardConditionContexts}
         detail={detail}
-        keyName={"context"}
+        keyName={"contextCondition"}
         getLabel={(v) => cardConditionContextsLabelsByValue[v]}
         onChanged={onChanged}
       />
@@ -101,6 +109,14 @@ const CardCondition: React.FC<Props> = ({ detail, onChanged }) => {
         jtx={(d, h) => (
           <ZoneCondition detail={d!} onChanged={h}></ZoneCondition>
         )}
+      />
+      <InputSelect
+        label="所有者の条件"
+        values={ownerConditionValues}
+        detail={detail}
+        keyName={"ownerCondition"}
+        getLabel={(v) => ownerConditionValuesLabelsByValue[v]}
+        onChanged={onChanged}
       />
     </>
   );

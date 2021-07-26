@@ -146,6 +146,7 @@ const Home: React.FC<Props> = (props: Props) => {
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number
   ) => {
+    console.log(cardset.cards[index]);
     setCardIndex(index);
   };
 

@@ -1,5 +1,5 @@
 import { globalCache } from "../components/CauldronApi";
-import { CardConditionContext } from "./CardMetaData";
+import { CardConditionContext, OwnerConditionValue } from "./CardMetaData";
 import { CardSetConditionDetail } from "./CardSetConditionDetail";
 import { CardTypeConditionDetail } from "./CardTypeConditionDetail";
 import { NumConditionDetail } from "./NumConditionDetail";
@@ -7,7 +7,7 @@ import { TextConditionDetail } from "./TextConditionDetail";
 import { ZoneConditionDetail } from "./ZoneConditionDetail";
 
 export type CardConditionDetail = {
-  context: CardConditionContext["code"];
+  contextCondition: CardConditionContext["code"];
   cardSetCondition: CardSetConditionDetail | undefined;
   costCondition: NumConditionDetail | undefined;
   nameCondition: TextConditionDetail | undefined;
@@ -15,11 +15,12 @@ export type CardConditionDetail = {
   powerCondition: NumConditionDetail | undefined;
   toughnessCondition: NumConditionDetail | undefined;
   zoneCondition: ZoneConditionDetail | undefined;
+  ownerCondition: OwnerConditionValue["code"];
 };
 
 export const cardConditionEmpty = (): CardConditionDetail => {
   return {
-    context: globalCache.metadata!.cardConditionContexts[0].code,
+    contextCondition: globalCache.metadata!.cardConditionContexts[0].code,
     cardSetCondition: undefined,
     costCondition: undefined,
     nameCondition: undefined,
@@ -27,5 +28,6 @@ export const cardConditionEmpty = (): CardConditionDetail => {
     toughnessCondition: undefined,
     typeCondition: undefined,
     zoneCondition: undefined,
+    ownerCondition: globalCache.metadata!.ownerConditionValues[0].code,
   };
 };

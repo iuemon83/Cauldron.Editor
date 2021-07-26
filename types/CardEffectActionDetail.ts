@@ -7,6 +7,8 @@ import { CardEffectActionModifyCardDetail } from "./CardEffectActionModifyCardDe
 import { CardEffectActionModifyDamageDetail } from "./CardEffectActionModifyDamageDetail";
 import { CardEffectActionModifyPlayerDetail } from "./CardEffectActionModifyPlayerDetail";
 import { CardEffectActionMoveCardDetail } from "./CardEffectActionMoveCardDetail";
+import { CardEffectActionSetVariableDetail } from "./CardEffectActionSetVariableDetail";
+import { CardEffectActionWinDetail } from "./CardEffectActionWinDetail";
 
 export type CardEffectActionDetail = {
   damage: CardEffectActionDamageDetail | undefined;
@@ -18,6 +20,8 @@ export type CardEffectActionDetail = {
   drawCard: CardEffectActionDrawCardDetail | undefined;
   moveCard: CardEffectActionMoveCardDetail | undefined;
   addEffect: CardEffectActionAddEffectDetail | undefined;
+  setVariable: CardEffectActionSetVariableDetail | undefined;
+  win: CardEffectActionWinDetail | undefined;
 };
 
 export const cardEffectActionEmpty = (): CardEffectActionDetail => {
@@ -31,5 +35,7 @@ export const cardEffectActionEmpty = (): CardEffectActionDetail => {
     drawCard: undefined,
     moveCard: undefined,
     addEffect: undefined,
+    setVariable: undefined,
+    win: undefined,
   };
 };

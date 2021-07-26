@@ -13,7 +13,7 @@ const CardEffectActionDestroyCard: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <FormSet label="削除するカードの選択条件">
+      <FormSet label="破壊するカードの選択条件">
         <Choice
           detail={detail.choice}
           onChanged={(x) =>
