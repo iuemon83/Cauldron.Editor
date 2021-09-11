@@ -33,6 +33,7 @@ import ArtifactIcon from "@material-ui/icons/AccountBalance";
 import CreatureIcon from "@material-ui/icons/Accessibility";
 import MagicIcon from "@material-ui/icons/Whatshot";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const drawerWidth = 240;
 
@@ -369,17 +370,33 @@ const Home: React.FC<Props> = (props: Props) => {
       return;
     }
 
-    LoadMetadata().then(() => {
-      setCardset({
-        name: "",
-        cards: [newCard(cardIndex)],
+    LoadMetadata()
+      .then(() => {
+        setCardset({
+          name: "",
+          cards: [newCard(cardIndex)],
+        });
+        setLoading(false);
+      })
+      .catch(() => {
+        alert("エラーが発生しました。");
       });
-      setLoading(false);
-    });
   }, []);
 
   if (loading) {
-    return <>Loading...</>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          minHeight: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
   }
 
   const container =

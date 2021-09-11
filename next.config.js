@@ -4,7 +4,6 @@ module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
       /* development only config options here */
-      assetPrefix: "/Cauldron.Web",
     };
   }
 
