@@ -1,5 +1,6 @@
 import Head from "next/head";
 import CardSetEditor from "../components/CardSetEditor";
+import CardSetDataViewer from "../components/CardSetDataViewer";
 import { useEffect, useState } from "react";
 import { cardEmpty } from "../types/CardDetail";
 import { CardSetDetail } from "../types/CardSetDetail";
@@ -295,7 +296,7 @@ const Home: React.FC<Props> = (props: Props) => {
           ></CardSetEditor>
         </TabPanel>
         <TabPanel value={tabValue} index={1}>
-          data
+          <CardSetDataViewer cardset={cardset} />
         </TabPanel>
         <TabPanel value={tabValue} index={2}>
           about
