@@ -1,10 +1,10 @@
-import { Button, FormGroup } from "@material-ui/core";
+import { Button, FormGroup } from "@mui/material";
 import { CardEffectActionAddEffectDetail } from "../types/CardEffectActionAddEffectDetail";
 import { CardEffectDetail, cardEffectEmpty } from "../types/CardEffectDetail";
 import CardEffect from "./CardEffect";
 import Choice from "./Choice";
-import DeleteIcon from "@material-ui/icons/Delete";
-import AddIcon from "@material-ui/icons/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 import FormSet from "./input/FormSet";
 
 interface Props {
@@ -44,17 +44,8 @@ const CardEffectActionAddEffect: React.FC<Props> = ({ detail, onChanged }) => {
       <FormSet
         label={
           <>
-            <Button
-              variant="contained"
-              onClick={() => addCardEffect()}
-              color="primary"
-              startIcon={<AddIcon />}
-            />
-            <Button
-              variant="contained"
-              onClick={() => clearCardEffect()}
-              color="secondary"
-            >
+            <Button variant="contained" onClick={() => addCardEffect()} color="primary" startIcon={<AddIcon />} />
+            <Button variant="contained" onClick={() => clearCardEffect()} color="secondary">
               Clear
             </Button>
           </>
@@ -63,17 +54,9 @@ const CardEffectActionAddEffect: React.FC<Props> = ({ detail, onChanged }) => {
         {detail.effectToAdd.map((e, index) => (
           <FormGroup key={index}>
             <span>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => removeCardEffect(index)}
-                startIcon={<DeleteIcon />}
-              />
+              <Button variant="contained" color="secondary" onClick={() => removeCardEffect(index)} startIcon={<DeleteIcon />} />
             </span>
-            <CardEffect
-              detail={e}
-              onChanged={(x) => onCardEffectChanged({ ...e, ...x }, index)}
-            ></CardEffect>
+            <CardEffect detail={e} onChanged={(x) => onCardEffectChanged({ ...e, ...x }, index)}></CardEffect>
           </FormGroup>
         ))}
         <FormSet label="効果を追加するカードの選択条件">

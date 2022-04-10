@@ -1,5 +1,5 @@
 import InputNumber from "./InputNumber";
-import { FormControlLabel, Checkbox, FormControl } from "@material-ui/core";
+import { FormControlLabel, Checkbox, FormControl } from "@mui/material";
 
 interface Props {
   label: string;
@@ -8,12 +8,7 @@ interface Props {
   onChanged: (e: any) => void;
 }
 
-const InputNumberOption: React.FC<Props> = ({
-  label,
-  detail,
-  keyName,
-  onChanged,
-}) => {
+const InputNumberOption: React.FC<Props> = ({ label, detail, keyName, onChanged }) => {
   return (
     <FormControl>
       <FormControlLabel
@@ -29,14 +24,7 @@ const InputNumberOption: React.FC<Props> = ({
         }
         label={label}
       />
-      {detail[keyName] !== undefined && (
-        <InputNumber
-          label=""
-          detail={detail}
-          keyName={keyName}
-          onChanged={onChanged}
-        />
-      )}
+      {detail[keyName] !== undefined && <InputNumber label="" detail={detail} keyName={keyName} onChanged={onChanged} />}
     </FormControl>
   );
 };

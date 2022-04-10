@@ -1,30 +1,28 @@
-import React, { useEffect } from "react";
-import "../styles/globals.css";
-import type { AppProps /*, AppContext */ } from "next/app";
-import { ThemeProvider as StyledComponentsThemeProvider } from "styled-components";
-import { ThemeProvider as MaterialUIThemeProvider } from "@material-ui/core/styles";
-import { StylesProvider } from "@material-ui/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import Head from "next/head";
+import type { AppProps } from "next/app";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { CacheProvider, EmotionCache } from "@emotion/react";
 import theme from "../styles/theme";
+import createEmotionCache from "../styles/createEmotionCache";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    const jssStyles: Element | null =
-      document.querySelector("#jss-server-side");
-    if (jssStyles) {
-      jssStyles.parentElement?.removeChild(jssStyles);
-    }
-  }, []);
+const clientSideEmotionCache = createEmotionCache();
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
 
+function MyApp(props: MyAppProps) {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
-    <StylesProvider injectFirst>
-      <MaterialUIThemeProvider theme={theme}>
-        <StyledComponentsThemeProvider theme={theme}>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </StyledComponentsThemeProvider>
-      </MaterialUIThemeProvider>
-    </StylesProvider>
+    <CacheProvider value={emotionCache}>
+      <Head>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+      </Head>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </CacheProvider>
   );
 }
 

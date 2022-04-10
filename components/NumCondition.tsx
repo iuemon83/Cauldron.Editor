@@ -2,7 +2,7 @@ import { NumConditionDetail } from "../types/NumConditionDetail";
 import { globalCache } from "./CauldronApi";
 import InputNumber from "./input/InputNumber";
 import InputSelect from "./input/InputSelect";
-import { FormControlLabel, Switch } from "@material-ui/core";
+import { FormControlLabel, Switch } from "@mui/material";
 
 interface Props {
   detail: NumConditionDetail;
@@ -11,22 +11,14 @@ interface Props {
 
 const NumCondition: React.FC<Props> = ({ detail, onChanged }) => {
   const numComparesLabelsByValue = Object.fromEntries(
-    globalCache.metadata!.numConditionCompares.map((v) => [
-      v.code,
-      v.displayText,
-    ])
+    globalCache.metadata!.numConditionCompares.map((v) => [v.code, v.displayText])
   );
   const numCompares = Object.keys(numComparesLabelsByValue);
 
   return (
     <>
       <div>
-        <InputNumber
-          label="値"
-          keyName="value"
-          detail={detail}
-          onChanged={onChanged}
-        />
+        <InputNumber label="値" keyName="value" detail={detail} onChanged={onChanged} />
       </div>
       <div>
         <InputSelect
@@ -40,12 +32,7 @@ const NumCondition: React.FC<Props> = ({ detail, onChanged }) => {
       </div>
       <div>
         <FormControlLabel
-          control={
-            <Switch
-              checked={detail.not}
-              onChange={(e) => onChanged({ not: e.target.checked })}
-            />
-          }
+          control={<Switch checked={detail.not} onChange={(e) => onChanged({ not: e.target.checked })} />}
           label="not?"
         />
       </div>

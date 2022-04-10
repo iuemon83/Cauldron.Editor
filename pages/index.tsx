@@ -4,55 +4,14 @@ import CardSetDataViewer from "../components/CardSetDataViewer";
 import { useEffect, useState } from "react";
 import { cardEmpty } from "../types/CardDetail";
 import { CardSetDetail } from "../types/CardSetDetail";
-import {
-  getCardMetaData,
-  getSampleCardSet,
-  globalCache,
-} from "../components/CauldronApi";
-import {
-  Button,
-  CssBaseline,
-  AppBar,
-  Toolbar,
-  Typography,
-  Paper,
-  Tabs,
-  Tab,
-  CircularProgress,
-} from "@material-ui/core";
-import ListAltIcon from "@material-ui/icons/ListAlt";
-import EqualizerIcon from "@material-ui/icons/Equalizer";
-import InfoIcon from "@material-ui/icons/Info";
-import GetAppIcon from "@material-ui/icons/GetApp";
-import OpenInBrowserIcon from "@material-ui/icons/OpenInBrowser";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-    },
-    "& .MuiButton-root": {
-      margin: theme.spacing(1),
-    },
-    "& .MuiFormControl-root": {
-      margin: theme.spacing(1),
-    },
-    display: "flex",
-    flexGrow: 1,
-  },
-  main: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    height: "100vh",
-    overflow: "scroll",
-  },
-  // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
-  title: {
-    flexGrow: 1,
-  },
-}));
+import { getCardMetaData, getSampleCardSet, globalCache } from "../components/CauldronApi";
+import { Button, CssBaseline, AppBar, Toolbar, Typography, Paper, Tabs, Tab, CircularProgress } from "@mui/material";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import EqualizerIcon from "@mui/icons-material/Equalizer";
+import InfoIcon from "@mui/icons-material/Info";
+import GetAppIcon from "@mui/icons-material/GetApp";
+import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
+import { styled } from "@mui/material/styles";
 
 interface Props {
   /**
@@ -70,8 +29,6 @@ const Home: React.FC<Props> = (props: Props) => {
     cards: [],
   } as CardSetDetail);
   const [cardIndex, setCardIndex] = useState(-1);
-
-  const classes = useStyles();
 
   const [tabValue, setTabValue] = useState(0);
 
@@ -104,7 +61,7 @@ const Home: React.FC<Props> = (props: Props) => {
       })
       .catch((a) => {
         console.log(a);
-        alert("エラーが発生しました。");
+        alert("api呼び出しでエラーが発生しました。");
       });
   }, []);
 
@@ -151,10 +108,7 @@ const Home: React.FC<Props> = (props: Props) => {
       const json = JSON.stringify(jsonSource);
 
       const element = document.createElement("a");
-      element.setAttribute(
-        "href",
-        "data:application/json;charset=utf-8," + encodeURIComponent(json)
-      );
+      element.setAttribute("href", "data:application/json;charset=utf-8," + encodeURIComponent(json));
       element.setAttribute("download", filename);
 
       element.style.display = "none";
@@ -167,15 +121,10 @@ const Home: React.FC<Props> = (props: Props) => {
 
     const filename = "cardset.json";
 
-    const downloadCardSet = (cardset: CardSetDetail) =>
-      saveJson(filename, cardset);
+    const downloadCardSet = (cardset: CardSetDetail) => saveJson(filename, cardset);
 
     return (
-      <Button
-        color="inherit"
-        onClick={() => downloadCardSet(cardset)}
-        startIcon={<GetAppIcon />}
-      >
+      <Button color="inherit" onClick={() => downloadCardSet(cardset)} startIcon={<GetAppIcon />}>
         保存
       </Button>
     );
@@ -208,27 +157,18 @@ const Home: React.FC<Props> = (props: Props) => {
 
     return (
       <label htmlFor="load-cardset">
-        <input
-          style={{ display: "none" }}
-          id="load-cardset"
-          onChange={handleChangeInput}
-          type="file"
-        />
+        <input style={{ display: "none" }} id="load-cardset" onChange={handleChangeInput} type="file" />
 
-        <Button
-          color="inherit"
-          component="span"
-          startIcon={<OpenInBrowserIcon />}
-        >
+        <Button color="inherit" component="span" startIcon={<OpenInBrowserIcon />}>
           開く
         </Button>
       </label>
     );
   };
 
-  const OpenSampleCardsetButton = () => {
+  const OpenSampleCardsetButton = (props: { id: number }) => {
     const handleButtonClick = async () => {
-      const cardset = await getSampleCardSet();
+      const cardset = await getSampleCardSet(props.id);
 
       console.log(cardset);
 
@@ -236,18 +176,38 @@ const Home: React.FC<Props> = (props: Props) => {
     };
 
     return (
-      <Button
-        color="inherit"
-        onClick={() => handleButtonClick()}
-        startIcon={<OpenInBrowserIcon />}
-      >
-        サンプル
+      <Button color="inherit" onClick={() => handleButtonClick()} startIcon={<OpenInBrowserIcon />}>
+        サンプル{props.id}
       </Button>
     );
   };
 
+  const Root = styled(`div`)(({ theme }) => ({
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+    },
+    "& .MuiButton-root": {
+      margin: theme.spacing(1),
+    },
+    "& .MuiFormControl-root": {
+      margin: theme.spacing(1),
+    },
+    display: "flex",
+    flexGrow: 1,
+  }));
+
+  const StyledMain = styled(`main`)(({ theme }) => ({
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    height: "100vh",
+    overflow: "scroll",
+  }));
+
+  // エラーになるのでとりあえずanyにしてる
+  const ToolbarSpacer = styled(`div`)(({ theme }) => ({ ...theme.mixins.toolbar } as any));
+
   return (
-    <div className={classes.root}>
+    <Root>
       <Head>
         <title>Cauldron DCG Editor</title>
         <link rel="icon" href="/favicon.ico" />
@@ -256,30 +216,29 @@ const Home: React.FC<Props> = (props: Props) => {
       <CssBaseline />
       <AppBar position="fixed">
         <Toolbar>
-          <Typography variant="h6" noWrap className={classes.title}>
+          <Typography
+            sx={{
+              flexGrow: 1,
+            }}
+          >
             Cauldron DCG Editor
           </Typography>
           <DownloadButton></DownloadButton>
           <OpenCardsetButton></OpenCardsetButton>
-          <OpenSampleCardsetButton></OpenSampleCardsetButton>
+          <OpenSampleCardsetButton id={1}></OpenSampleCardsetButton>
+          <OpenSampleCardsetButton id={2}></OpenSampleCardsetButton>
         </Toolbar>
       </AppBar>
       <Paper>
-        <div className={classes.toolbar} />
-        <Tabs
-          orientation="vertical"
-          value={tabValue}
-          onChange={handleTabChange}
-          indicatorColor="primary"
-          textColor="primary"
-        >
+        <ToolbarSpacer />
+        <Tabs orientation="vertical" value={tabValue} onChange={handleTabChange} indicatorColor="primary" textColor="primary">
           <Tab icon={<ListAltIcon />} label="Card Set" />
           <Tab icon={<EqualizerIcon />} label="Data" />
           <Tab icon={<InfoIcon />} label="About" />
         </Tabs>
       </Paper>
-      <main className={classes.main}>
-        <div className={classes.toolbar} />
+      <StyledMain>
+        <ToolbarSpacer />
         <TabPanel value={tabValue} index={0}>
           <CardSetEditor
             cardset={cardset}
@@ -301,8 +260,8 @@ const Home: React.FC<Props> = (props: Props) => {
         <TabPanel value={tabValue} index={2}>
           about
         </TabPanel>
-      </main>
-    </div>
+      </StyledMain>
+    </Root>
   );
 };
 

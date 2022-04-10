@@ -1,6 +1,6 @@
-import { Button, FormGroup } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import AddIcon from "@material-ui/icons/Add";
+import { Button, FormGroup } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 import React from "react";
 import FormSet from "./FormSet";
 
@@ -17,9 +17,7 @@ interface Props<K extends string, U, T extends HasArray<K, U>> {
   newItem: () => U;
 }
 
-const InputList = <K extends string, U, T extends HasArray<K, U>>(
-  p: Props<K, U, T>
-) => {
+const InputList = <K extends string, U, T extends HasArray<K, U>>(p: Props<K, U, T>) => {
   const clearItems = () => {
     p.onChanged({ [p.keyName]: [] } as any);
   };
@@ -52,17 +50,8 @@ const InputList = <K extends string, U, T extends HasArray<K, U>>(
       label={
         <>
           {p.label}
-          <Button
-            variant="contained"
-            onClick={() => addItem()}
-            color="primary"
-            startIcon={<AddIcon />}
-          />
-          <Button
-            variant="contained"
-            onClick={() => clearItems()}
-            color="secondary"
-          >
+          <Button variant="contained" onClick={() => addItem()} color="primary" startIcon={<AddIcon />} />
+          <Button variant="contained" onClick={() => clearItems()} color="secondary">
             Clear
           </Button>
         </>
@@ -71,12 +60,7 @@ const InputList = <K extends string, U, T extends HasArray<K, U>>(
       {p.detail[p.keyName].map((elm, index) => (
         <FormGroup key={index}>
           <span>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => removeItem(index)}
-              startIcon={<DeleteIcon />}
-            />
+            <Button variant="contained" color="secondary" onClick={() => removeItem(index)} startIcon={<DeleteIcon />} />
           </span>
           {p.jtx(elm, (x) => onItemChanged({ ...elm, ...x }, index))}
         </FormGroup>

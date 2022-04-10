@@ -1,13 +1,10 @@
-import {
-  CardConditionDetail,
-  cardConditionEmpty,
-} from "../types/CardConditionDetail";
+import { CardConditionDetail, cardConditionEmpty } from "../types/CardConditionDetail";
 import { ChoiceSourceDetail } from "../types/ChoiceSourceDetail";
 import CardCondition from "./CardCondition";
 
-import { Button, FormGroup } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import AddIcon from "@material-ui/icons/Add";
+import { Button, FormGroup } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 import FormSet from "./input/FormSet";
 
 interface Props {
@@ -47,12 +44,7 @@ const OrCardConditionList: React.FC<Props> = ({ detail, onChanged }) => {
       label={
         <>
           カードの選択条件
-          <Button
-            variant="contained"
-            onClick={() => add()}
-            color="primary"
-            startIcon={<AddIcon />}
-          />
+          <Button variant="contained" onClick={() => add()} color="primary" startIcon={<AddIcon />} />
           <Button variant="contained" onClick={() => clear()} color="secondary">
             Clear
           </Button>
@@ -62,17 +54,9 @@ const OrCardConditionList: React.FC<Props> = ({ detail, onChanged }) => {
       {detail.orCardConditions.map((e, index) => (
         <FormGroup key={index}>
           <span>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => remove(index)}
-              startIcon={<DeleteIcon />}
-            />
+            <Button variant="contained" color="secondary" onClick={() => remove(index)} startIcon={<DeleteIcon />} />
           </span>
-          <CardCondition
-            detail={e}
-            onChanged={(x) => onOrCardConditionsChanged({ ...e, ...x }, index)}
-          ></CardCondition>
+          <CardCondition detail={e} onChanged={(x) => onOrCardConditionsChanged({ ...e, ...x }, index)}></CardCondition>
         </FormGroup>
       ))}
     </FormSet>

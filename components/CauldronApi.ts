@@ -13,8 +13,8 @@ export const globalCache: { metadata: CardMetaData | null } = {
   metadata: null,
 };
 
-export async function getSampleCardSet(): Promise<CardSetDetail> {
-  const url = `${process.env.NEXT_PUBLIC_API_URL_BASE}/SampleCardSet`;
+export async function getSampleCardSet(id: number): Promise<CardSetDetail> {
+  const url = `${process.env.NEXT_PUBLIC_API_URL_BASE}/SampleCardSet/${id}`;
 
   const response = await axios.get(url,{ timeout : 10000 });
   return response.data;

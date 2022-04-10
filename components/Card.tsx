@@ -1,38 +1,15 @@
 import React from "react";
 import { CardDetail } from "../types/CardDetail";
-import { CardEffectDetail, cardEffectEmpty } from "../types/CardEffectDetail";
+import { cardEffectEmpty } from "../types/CardEffectDetail";
 import CardEffect from "./CardEffect";
 import { globalCache } from "./CauldronApi";
 import InputNumber from "./input/InputNumber";
 import InputNumberOption from "./input/InputNumberOption";
 import InputSelect from "./input/InputSelect";
 import InputText from "./input/InputText";
-import {
-  FormControlLabel,
-  Checkbox,
-  Switch,
-  TextField,
-  FormGroup,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { FormControlLabel, Checkbox, Switch, TextField, FormGroup } from "@mui/material";
 import FormSet from "./input/FormSet";
 import InputList from "./input/InputList";
-
-const useStyles = makeStyles((theme) => ({
-  costInputField: {
-    width: "8ch",
-  },
-  powerInputField: {
-    width: "8ch",
-    textAlign: "right",
-  },
-  toughnessInputField: {
-    width: "10ch",
-  },
-  flavorTextInputField: {
-    width: "40ch",
-  },
-}));
 
 interface Props {
   detail: CardDetail;
@@ -40,13 +17,9 @@ interface Props {
 }
 
 const Card: React.FC<Props> = ({ detail, onChanged }) => {
-  const cardTypesLabelsByValue = Object.fromEntries(
-    globalCache.metadata!.cardTypes.map((v) => [v.code, v.displayText])
-  );
+  const cardTypesLabelsByValue = Object.fromEntries(globalCache.metadata!.cardTypes.map((v) => [v.code, v.displayText]));
   const cardTypes = Object.keys(cardTypesLabelsByValue);
-  const cardAbilitiesLabelsByValue = Object.fromEntries(
-    globalCache.metadata!.cardAbilities.map((v) => [v.code, v.displayText])
-  );
+  const cardAbilitiesLabelsByValue = Object.fromEntries(globalCache.metadata!.cardAbilities.map((v) => [v.code, v.displayText]));
   const cardAbilities = Object.keys(cardAbilitiesLabelsByValue);
 
   const handleAbilityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,34 +30,19 @@ const Card: React.FC<Props> = ({ detail, onChanged }) => {
 
       onChanged({ abilities: newlist });
     } else {
-      const newlist = detail.abilities.filter(
-        (x) => x !== cardAbilities[index]
-      );
+      const newlist = detail.abilities.filter((x) => x !== cardAbilities[index]);
 
       onChanged({ abilities: newlist });
     }
   };
 
-  const classes = useStyles();
-
   return (
     <>
       <div>
-        <InputText
-          label="名前"
-          detail={detail}
-          keyName="name"
-          onChanged={onChanged}
-        />
+        <InputText label="名前" detail={detail} keyName="name" onChanged={onChanged} />
       </div>
       <div>
-        <InputNumber
-          label="コスト"
-          detail={detail}
-          keyName="cost"
-          onChanged={onChanged}
-          className={classes.costInputField}
-        />
+        <InputNumber label="コスト" detail={detail} keyName="cost" onChanged={onChanged} sx={{ width: "8ch" }} />
       </div>
       <div>
         <TextField
@@ -92,17 +50,12 @@ const Card: React.FC<Props> = ({ detail, onChanged }) => {
           multiline
           value={detail.flavorText}
           onChange={(e) => onChanged({ flavorText: e.target.value })}
-          className={classes.flavorTextInputField}
+          sx={{ width: "40ch" }}
         />
       </div>
       <div>
         <FormControlLabel
-          control={
-            <Switch
-              checked={detail.isToken}
-              onChange={(e) => onChanged({ isToken: e.target.checked })}
-            />
-          }
+          control={<Switch checked={detail.isToken} onChange={(e) => onChanged({ isToken: e.target.checked })} />}
           label="トークン"
         />
       </div>
@@ -122,16 +75,13 @@ const Card: React.FC<Props> = ({ detail, onChanged }) => {
           detail={detail}
           keyName="power"
           onChanged={onChanged}
-          className={classes.powerInputField}
+          sx={{
+            width: "8ch",
+            textAlign: "right",
+          }}
         />
         /
-        <InputNumber
-          label="タフネス"
-          detail={detail}
-          keyName="toughness"
-          onChanged={onChanged}
-          className={classes.toughnessInputField}
-        />
+        <InputNumber label="タフネス" detail={detail} keyName="toughness" onChanged={onChanged} sx={{ width: "10ch" }} />
       </div>
       <div>
         <FormSet label="アビリティ">
@@ -139,13 +89,7 @@ const Card: React.FC<Props> = ({ detail, onChanged }) => {
             {cardAbilities.map((e, index) => (
               <FormControlLabel
                 key={index}
-                control={
-                  <Checkbox
-                    value={index}
-                    checked={detail.abilities.indexOf(e) !== -1}
-                    onChange={handleAbilityChange}
-                  />
-                }
+                control={<Checkbox value={index} checked={detail.abilities.indexOf(e) !== -1} onChange={handleAbilityChange} />}
                 label={cardAbilitiesLabelsByValue[e]}
               />
             ))}
@@ -174,9 +118,7 @@ const Card: React.FC<Props> = ({ detail, onChanged }) => {
         keyName="effects"
         newItem={cardEffectEmpty}
         onChanged={onChanged}
-        jtx={(item, onItemChanged) => (
-          <CardEffect detail={item} onChanged={onItemChanged}></CardEffect>
-        )}
+        jtx={(item, onItemChanged) => <CardEffect detail={item} onChanged={onItemChanged}></CardEffect>}
       />
     </>
   );

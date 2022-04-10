@@ -1,6 +1,6 @@
 import { CardTypeConditionDetail } from "../types/CardTypeConditionDetail";
 import { globalCache } from "./CauldronApi";
-import { FormControlLabel, Checkbox, Switch } from "@material-ui/core";
+import { FormControlLabel, Checkbox, Switch } from "@mui/material";
 
 interface Props {
   detail: CardTypeConditionDetail;
@@ -8,9 +8,7 @@ interface Props {
 }
 
 const CardTypeCondition: React.FC<Props> = ({ detail, onChanged }) => {
-  const cardTypesLabelsByValue = Object.fromEntries(
-    globalCache.metadata!.cardTypes.map((v) => [v.code, v.displayText])
-  );
+  const cardTypesLabelsByValue = Object.fromEntries(globalCache.metadata!.cardTypes.map((v) => [v.code, v.displayText]));
   const cardTypes = Object.keys(cardTypesLabelsByValue);
 
   const handleCardTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,25 +32,14 @@ const CardTypeCondition: React.FC<Props> = ({ detail, onChanged }) => {
         {cardTypes.map((e, index) => (
           <FormControlLabel
             key={index}
-            control={
-              <Checkbox
-                value={index}
-                checked={detail.value.indexOf(e) !== -1}
-                onChange={handleCardTypeChange}
-              />
-            }
+            control={<Checkbox value={index} checked={detail.value.indexOf(e) !== -1} onChange={handleCardTypeChange} />}
             label={cardTypesLabelsByValue[e]}
           />
         ))}
       </div>
       <div>
         <FormControlLabel
-          control={
-            <Switch
-              checked={detail.not}
-              onChange={(e) => onChanged({ not: e.target.checked })}
-            />
-          }
+          control={<Switch checked={detail.not} onChange={(e) => onChanged({ not: e.target.checked })} />}
           label="not?"
         />
       </div>

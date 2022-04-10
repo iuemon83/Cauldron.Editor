@@ -1,4 +1,4 @@
-import { Select, InputLabel, MenuItem, FormControl } from "@material-ui/core";
+import { Select, InputLabel, MenuItem, FormControl } from "@mui/material";
 
 interface Props<T, U extends keyof T> {
   label: string;

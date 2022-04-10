@@ -1,4 +1,4 @@
-import { FormControlLabel, Checkbox } from "@material-ui/core";
+import { FormControlLabel, Checkbox } from "@mui/material";
 import FormSet from "./FormSet";
 
 interface Props<K extends {}, T extends keyof K> {
@@ -10,14 +10,7 @@ interface Props<K extends {}, T extends keyof K> {
   jtx: (d: K[T], h: (x: Partial<K[T]>) => void) => React.ReactNode;
 }
 
-const InputOption = <K extends {}, T extends keyof K>({
-  label,
-  detail,
-  keyName: key,
-  empty,
-  onChanged,
-  jtx,
-}: Props<K, T>) => {
+const InputOption = <K extends {}, T extends keyof K>({ label, detail, keyName: key, empty, onChanged, jtx }: Props<K, T>) => {
   const handleChangeChild = (x: Partial<K[T]>) => {
     const p: any = {
       [key]: {
@@ -37,15 +30,7 @@ const InputOption = <K extends {}, T extends keyof K>({
   return (
     <FormSet
       label={
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={detail[key] !== undefined}
-              onChange={handleHasChange}
-            />
-          }
-          label={label}
-        />
+        <FormControlLabel control={<Checkbox checked={detail[key] !== undefined} onChange={handleHasChange} />} label={label} />
       }
     >
       {detail[key] !== undefined && jtx(detail[key], handleChangeChild)}

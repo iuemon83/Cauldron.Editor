@@ -18,5 +18,8 @@ module.exports = (phase, { defaultConfig }) => {
   return {
     /* config options for all phases except development here */
     assetPrefix: "/editor",
+    experimental: {
+      outputStandalone: true,
+    },
   };
 };

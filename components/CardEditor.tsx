@@ -1,11 +1,5 @@
-import {
-  Button,
-  Typography,
-  Divider,
-  Breadcrumbs,
-  Link,
-} from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { Button, Typography, Divider, Breadcrumbs, Link } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { CardDetail } from "../types/CardDetail";
 import Card from "../components/Card";
 
@@ -19,8 +13,7 @@ interface Props {
 }
 
 const CardEditor: React.FC<Props> = (props: Props) => {
-  const { cardsetName, card, onChanged, deleteCard, cardIndex, setCardIndex } =
-    props;
+  const { cardsetName, card, onChanged, deleteCard, cardIndex, setCardIndex } = props;
 
   const handleClickCardsetLink = () => {
     setCardIndex(-1);
@@ -32,12 +25,7 @@ const CardEditor: React.FC<Props> = (props: Props) => {
     };
 
     return (
-      <Button
-        variant="contained"
-        onClick={handleDeleteCardButtonClick}
-        color="secondary"
-        startIcon={<DeleteIcon />}
-      >
+      <Button variant="contained" onClick={handleDeleteCardButtonClick} color="secondary" startIcon={<DeleteIcon />}>
         Delete
       </Button>
     );

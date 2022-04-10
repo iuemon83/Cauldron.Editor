@@ -1,4 +1,4 @@
-import { TextField } from "@material-ui/core";
+import { TextField } from "@mui/material";
 
 interface Props<T, U extends keyof T> {
   label: string;
@@ -8,13 +8,7 @@ interface Props<T, U extends keyof T> {
 }
 
 const InputText = <T extends {}, U extends keyof T>(p: Props<T, U>) => {
-  return (
-    <TextField
-      label={p.label}
-      value={p.detail[p.keyName]}
-      onChange={(e) => p.onChanged({ [p.keyName]: e.target.value })}
-    />
-  );
+  return <TextField label={p.label} value={p.detail[p.keyName]} onChange={(e) => p.onChanged({ [p.keyName]: e.target.value })} />;
 };
 
 export default InputText;

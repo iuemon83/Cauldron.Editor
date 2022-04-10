@@ -1,21 +1,10 @@
-import {
-  Button,
-  Divider,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Link,
-} from "@material-ui/core";
+import { Button, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Link } from "@mui/material";
 import { cardEmpty } from "../types/CardDetail";
-import AddIcon from "@material-ui/icons/Add";
-import DeleteIcon from "@material-ui/icons/Delete";
-import ArtifactIcon from "@material-ui/icons/AccountBalance";
-import CreatureIcon from "@material-ui/icons/Accessibility";
-import MagicIcon from "@material-ui/icons/Whatshot";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ArtifactIcon from "@mui/icons-material/AccountBalance";
+import CreatureIcon from "@mui/icons-material/Accessibility";
+import MagicIcon from "@mui/icons-material/Whatshot";
 import { CardSetDetail } from "../types/CardSetDetail";
 import CardEditor from "../components/CardEditor";
 import InputText from "./input/InputText";
@@ -42,12 +31,7 @@ const CardSetEditor: React.FC<Props> = (props: Props) => {
     };
 
     return (
-      <Button
-        variant="contained"
-        onClick={handleAddCardButtonClick}
-        color="primary"
-        startIcon={<AddIcon />}
-      >
+      <Button variant="contained" onClick={handleAddCardButtonClick} color="primary" startIcon={<AddIcon />}>
         New Card
       </Button>
     );
@@ -96,20 +80,10 @@ const CardSetEditor: React.FC<Props> = (props: Props) => {
   if (cardIndex < 0) {
     return (
       <>
-        <InputText
-          label="カードセット名"
-          detail={cardset}
-          keyName="name"
-          onChanged={setCardset}
-        />
+        <InputText label="カードセット名" detail={cardset} keyName="name" onChanged={setCardset} />
         <Divider />
         <AddCardButton></AddCardButton>
-        <Button
-          variant="contained"
-          onClick={() => handleClearCardsButtonClick()}
-          color="secondary"
-          startIcon={<DeleteIcon />}
-        >
+        <Button variant="contained" onClick={() => handleClearCardsButtonClick()} color="secondary" startIcon={<DeleteIcon />}>
           Clear
         </Button>
         <TableContainer component={Paper}>
@@ -128,19 +102,10 @@ const CardSetEditor: React.FC<Props> = (props: Props) => {
               {cardset.cards.map((card, index) => (
                 <TableRow key={index} hover>
                   <TableCell>
-                    {card.type === "creature" ? (
-                      <CreatureIcon />
-                    ) : card.type === "artifact" ? (
-                      <ArtifactIcon />
-                    ) : (
-                      <MagicIcon />
-                    )}
+                    {card.type === "creature" ? <CreatureIcon /> : card.type === "artifact" ? <ArtifactIcon /> : <MagicIcon />}
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    <Link
-                      href="#"
-                      onClick={() => handleCardListItemClick(index)}
-                    >
+                    <Link href="#" onClick={() => handleCardListItemClick(index)}>
                       {card.name}
                     </Link>
                   </TableCell>

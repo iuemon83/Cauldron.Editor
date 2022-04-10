@@ -3,13 +3,7 @@ import { textValueCalculatorEmpty } from "../types/TextValueCalculatorDetail";
 import { TextValueDetail } from "../types/TextValueDetail";
 import { globalCache } from "./CauldronApi";
 import Choice from "./Choice";
-import {
-  FormControlLabel,
-  Switch,
-  Select,
-  MenuItem,
-  InputLabel,
-} from "@material-ui/core";
+import { FormControlLabel, Switch, Select, MenuItem, InputLabel } from "@mui/material";
 import InputText from "./input/InputText";
 
 interface Props {
@@ -19,22 +13,14 @@ interface Props {
 
 const TextValue: React.FC<Props> = ({ detail, onChanged }) => {
   const valueTypesLabelsByValue = Object.fromEntries(
-    globalCache.metadata!.textValueCalculatorValueTypes.map((v) => [
-      v.code,
-      v.displayText,
-    ])
+    globalCache.metadata!.textValueCalculatorValueTypes.map((v) => [v.code, v.displayText])
   );
   const valueTypes = Object.keys(valueTypesLabelsByValue);
 
   const pureValueInput = () => {
     return (
       <>
-        <InputText
-          label="値"
-          detail={detail}
-          keyName="pureValue"
-          onChanged={onChanged}
-        />
+        <InputText label="値" detail={detail} keyName="pureValue" onChanged={onChanged} />
       </>
     );
   };
@@ -88,9 +74,7 @@ const TextValue: React.FC<Props> = ({ detail, onChanged }) => {
     return detail.textValueCalculator ? dynamicValueInput() : pureValueInput();
   };
 
-  const handleIsDynamicValueChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleIsDynamicValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.checked ? textValueCalculatorEmpty() : undefined;
 
     onChanged({ textValueCalculator: newValue });
@@ -99,12 +83,7 @@ const TextValue: React.FC<Props> = ({ detail, onChanged }) => {
   return (
     <>
       <FormControlLabel
-        control={
-          <Switch
-            checked={detail.textValueCalculator !== undefined}
-            onChange={handleIsDynamicValueChange}
-          />
-        }
+        control={<Switch checked={detail.textValueCalculator !== undefined} onChange={handleIsDynamicValueChange} />}
         label="動的?"
       />
       <div>{valueInput()}</div>
