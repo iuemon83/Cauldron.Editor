@@ -10,7 +10,7 @@ type HasArray<K extends string, U> = {
 
 interface Props<K extends string, U, T extends HasArray<K, U>> {
   label: string;
-  detail: T;
+  model: T;
   keyName: K;
   onChanged: (e: Partial<T>) => void;
   jtx: (item: U, onItemChanged: (x: Partial<U>) => void) => React.ReactNode;
@@ -26,12 +26,12 @@ const InputList = <K extends string, U, T extends HasArray<K, U>>(p: Props<K, U,
     const newValue = p.newItem();
 
     p.onChanged({
-      [p.keyName]: [...p.detail[p.keyName], newValue],
+      [p.keyName]: [...p.model[p.keyName], newValue],
     } as any);
   };
 
   const removeItem = (index: number) => {
-    const newlist = [...p.detail[p.keyName]];
+    const newlist = [...p.model[p.keyName]];
     newlist.splice(index, 1);
 
     p.onChanged({
@@ -40,7 +40,7 @@ const InputList = <K extends string, U, T extends HasArray<K, U>>(p: Props<K, U,
   };
 
   const onItemChanged = (x: U, index: number) => {
-    const newlist = [...p.detail[p.keyName]];
+    const newlist = [...p.model[p.keyName]];
     newlist.splice(index, 1, x);
     p.onChanged({ [p.keyName]: newlist } as any);
   };
@@ -57,7 +57,7 @@ const InputList = <K extends string, U, T extends HasArray<K, U>>(p: Props<K, U,
         </>
       }
     >
-      {p.detail[p.keyName].map((elm, index) => (
+      {p.model[p.keyName].map((elm, index) => (
         <FormGroup key={index}>
           <span>
             <Button variant="contained" color="secondary" onClick={() => removeItem(index)} startIcon={<DeleteIcon />} />

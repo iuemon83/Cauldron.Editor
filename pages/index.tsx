@@ -1,9 +1,9 @@
 import Head from "next/head";
-import CardSetEditor from "../components/CardSetEditor";
-import CardSetDataViewer from "../components/CardSetDataViewer";
+import CardSetEditorForm from "../components/CardSetEditorForm";
+import CardSetDataViewerForm from "../components/CardSetDataViewerForm";
 import { useEffect, useState } from "react";
-import { cardEmpty } from "../types/CardDetail";
-import { CardSetDetail } from "../types/CardSetDetail";
+import { cardEmpty } from "../types/Card";
+import { CardSet } from "../types/CardSet";
 import { getCardMetaData, getSampleCardSet, globalCache } from "../components/CauldronApi";
 import { Button, CssBaseline, AppBar, Toolbar, Typography, Paper, Tabs, Tab, CircularProgress } from "@mui/material";
 import ListAltIcon from "@mui/icons-material/ListAlt";
@@ -27,7 +27,7 @@ const Home: React.FC<Props> = (props: Props) => {
   const [cardset, setCardset] = useState({
     name: "",
     cards: [],
-  } as CardSetDetail);
+  } as CardSet);
   const [cardIndex, setCardIndex] = useState(-1);
 
   const [tabValue, setTabValue] = useState(0);
@@ -88,7 +88,7 @@ const Home: React.FC<Props> = (props: Props) => {
     setTabValue(newValue);
   };
 
-  const openCardSet = (newCardSet: CardSetDetail) => {
+  const openCardSet = (newCardSet: CardSet) => {
     const message = "編集中のカードセットは削除されます。よろしいですか？";
     if (!confirm(message)) {
       return;
@@ -121,7 +121,7 @@ const Home: React.FC<Props> = (props: Props) => {
 
     const filename = "cardset.json";
 
-    const downloadCardSet = (cardset: CardSetDetail) => saveJson(filename, cardset);
+    const downloadCardSet = (cardset: CardSet) => saveJson(filename, cardset);
 
     return (
       <Button color="inherit" onClick={() => downloadCardSet(cardset)} startIcon={<GetAppIcon />}>
@@ -240,7 +240,7 @@ const Home: React.FC<Props> = (props: Props) => {
       <StyledMain>
         <ToolbarSpacer />
         <TabPanel value={tabValue} index={0}>
-          <CardSetEditor
+          <CardSetEditorForm
             cardset={cardset}
             setCardset={(newCardset) => {
               setCardset((oldCardset) => {
@@ -252,10 +252,10 @@ const Home: React.FC<Props> = (props: Props) => {
             }}
             cardIndex={cardIndex}
             setCardIndex={(x) => setCardIndex(x)}
-          ></CardSetEditor>
+          ></CardSetEditorForm>
         </TabPanel>
         <TabPanel value={tabValue} index={1}>
-          <CardSetDataViewer cardset={cardset} />
+          <CardSetDataViewerForm cardset={cardset} />
         </TabPanel>
         <TabPanel value={tabValue} index={2}>
           about

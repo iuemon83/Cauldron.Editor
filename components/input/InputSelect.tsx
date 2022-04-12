@@ -3,7 +3,7 @@ import { Select, InputLabel, MenuItem, FormControl } from "@mui/material";
 interface Props<T, U extends keyof T> {
   label: string;
   values: T[U][];
-  detail: T;
+  model: T;
   keyName: U;
   getLabel: (value: T[U]) => string;
   onChanged: (e: any) => void;
@@ -14,7 +14,7 @@ const InputSelect = <T extends {}, U extends keyof T>(p: Props<T, U>) => {
     <FormControl>
       <InputLabel>{p.label}</InputLabel>
       <Select
-        value={p.values.indexOf(p.detail[p.keyName])}
+        value={p.values.indexOf(p.model[p.keyName])}
         onChange={(e) =>
           p.onChanged({
             [p.keyName]: p.values[Number(e.target.value)],

@@ -3,18 +3,18 @@ import { FormControlLabel, Checkbox, FormControl } from "@mui/material";
 
 interface Props {
   label: string;
-  detail: any;
+  model: any;
   keyName: string;
   onChanged: (e: any) => void;
 }
 
-const InputNumberOption: React.FC<Props> = ({ label, detail, keyName, onChanged }) => {
+const InputNumberOption: React.FC<Props> = ({ label, model, keyName, onChanged }) => {
   return (
     <FormControl>
       <FormControlLabel
         control={
           <Checkbox
-            checked={detail[keyName] !== undefined}
+            checked={model[keyName] !== undefined}
             onChange={(e) =>
               onChanged({
                 [keyName]: e.target.checked ? 0 : undefined,
@@ -24,7 +24,7 @@ const InputNumberOption: React.FC<Props> = ({ label, detail, keyName, onChanged 
         }
         label={label}
       />
-      {detail[keyName] !== undefined && <InputNumber label="" detail={detail} keyName={keyName} onChanged={onChanged} />}
+      {model[keyName] !== undefined && <InputNumber label="" model={model} keyName={keyName} onChanged={onChanged} />}
     </FormControl>
   );
 };
