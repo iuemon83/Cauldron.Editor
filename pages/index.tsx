@@ -13,15 +13,7 @@ import GetAppIcon from "@mui/icons-material/GetApp";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
 import { styled } from "@mui/material/styles";
 
-interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window;
-}
-
-const Home: React.FC<Props> = (props: Props) => {
+const Home: React.VFC = () => {
   const [loading, setLoading] = useState(true);
 
   const [cardset, setCardset] = useState({
@@ -63,7 +55,7 @@ const Home: React.FC<Props> = (props: Props) => {
         console.log(a);
         alert("api呼び出しでエラーが発生しました。");
       });
-  }, []);
+  }, [loading]);
 
   if (loading) {
     return (
@@ -182,30 +174,6 @@ const Home: React.FC<Props> = (props: Props) => {
     );
   };
 
-  const Root = styled(`div`)(({ theme }) => ({
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-    },
-    "& .MuiButton-root": {
-      margin: theme.spacing(1),
-    },
-    "& .MuiFormControl-root": {
-      margin: theme.spacing(1),
-    },
-    display: "flex",
-    flexGrow: 1,
-  }));
-
-  const StyledMain = styled(`main`)(({ theme }) => ({
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    height: "100vh",
-    overflow: "scroll",
-  }));
-
-  // エラーになるのでとりあえずanyにしてる
-  const ToolbarSpacer = styled(`div`)(({ theme }) => ({ ...theme.mixins.toolbar } as any));
-
   return (
     <Root>
       <Head>
@@ -288,3 +256,26 @@ function TabPanel(props: TabPanelProps) {
     </div>
   );
 }
+
+const Root = styled(`div`)(({ theme }) => ({
+  "& .MuiTextField-root": {
+    margin: theme.spacing(1),
+  },
+  "& .MuiButton-root": {
+    margin: theme.spacing(1),
+  },
+  "& .MuiFormControl-root": {
+    margin: theme.spacing(1),
+  },
+  display: "flex",
+  flexGrow: 1,
+}));
+
+const StyledMain = styled(`main`)(({ theme }) => ({
+  flexGrow: 1,
+  padding: theme.spacing(3),
+  height: "100vh",
+}));
+
+// エラーになるのでとりあえずanyにしてる
+const ToolbarSpacer = styled(`div`)(({ theme }) => ({ ...theme.mixins.toolbar } as any));
