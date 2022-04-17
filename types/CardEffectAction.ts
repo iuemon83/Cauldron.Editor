@@ -1,4 +1,5 @@
 import { CardEffectActionAddCard } from "./CardEffectActionAddCard";
+import { CardEffectActionExcludeCard } from "./CardEffectActionExcludeCard";
 import { CardEffectActionAddEffect } from "./CardEffectActionAddEffect";
 import { CardEffectActionDamage } from "./CardEffectActionDamage";
 import { CardEffectActionDestroyCard } from "./CardEffectActionDestroyCard";
@@ -14,6 +15,7 @@ import { CardEffectActionReserveEffect } from "./CardEffectActionReserveEffect";
 export type CardEffectAction = {
   damage: CardEffectActionDamage | undefined;
   addCard: CardEffectActionAddCard | undefined;
+  excludeCard: CardEffectActionExcludeCard | undefined;
   modifyCard: CardEffectActionModifyCard | undefined;
   destroyCard: CardEffectActionDestroyCard | undefined;
   modifyDamage: CardEffectActionModifyDamage | undefined;
@@ -30,6 +32,7 @@ export const cardEffectActionEmpty = (): CardEffectAction => {
   return {
     damage: undefined,
     addCard: undefined,
+    excludeCard: undefined,
     modifyCard: undefined,
     destroyCard: undefined,
     modifyDamage: undefined,

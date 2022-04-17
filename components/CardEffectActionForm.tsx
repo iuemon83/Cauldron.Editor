@@ -22,8 +22,10 @@ import CardEffectActionMoveCardForm from "./CardEffectActionMoveCardForm";
 import CardEffectActionSetVariableForm from "./CardEffectActionSetVariableForm";
 import CardEffectActionWinForm from "./CardEffectActionWinForm";
 import CardEffectActionReserveEffectForm from "./CardEffectActionReserveEffectForm";
+import CardEffectActionExcludeCardForm from "./CardEffectActionExcludeCardForm";
 import InputOption from "./input/InputOption";
 import { cardEffectActionReserveEffectEmpty } from "../types/CardEffectActionReserveEffect";
+import { cardEffectActionExcludeCardEmpty } from "../types/CardEffectActionExcludeCard";
 
 interface Props {
   model: CardEffectAction;
@@ -48,6 +50,14 @@ const CardEffectActionForm: React.FC<Props> = ({ model, onChanged }) => {
         empty={CardEffectActionAddCardEmpty}
         onChanged={onChanged}
         jtx={(d, h) => <CardEffectActionAddCardForm model={d!} onChanged={h}></CardEffectActionAddCardForm>}
+      />
+      <InputOption
+        label="カードの除外"
+        model={model}
+        keyName="excludeCard"
+        empty={cardEffectActionExcludeCardEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardEffectActionExcludeCardForm model={d!} onChanged={h} />}
       />
       <InputOption
         label="カードの修整"

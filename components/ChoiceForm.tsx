@@ -2,7 +2,6 @@ import { Choice } from "../types/Choice";
 import { globalCache } from "./CauldronApi";
 import ChoiceSourceForm from "./ChoiceSourceForm";
 import FormSet from "./input/FormSet";
-import InputNumber from "./input/InputNumber";
 import InputSelect from "./input/InputSelect";
 import NumValueForm from "./NumValueForm";
 
@@ -19,7 +18,7 @@ const ChoiceForm: React.FC<Props> = ({ model, onChanged }) => {
     <>
       <div>
         <InputSelect
-          label="選択方式"
+          label="選択方法"
           values={howList}
           model={model}
           keyName={"how"}
@@ -30,7 +29,7 @@ const ChoiceForm: React.FC<Props> = ({ model, onChanged }) => {
       <FormSet label="対象の数">
         <NumValueForm model={model.numPicks} onChanged={(x) => onChanged({ numPicks: { ...model.numPicks, ...x } })} />
       </FormSet>
-      <FormSet label="選択候補">
+      <FormSet label="選択できる候補">
         <ChoiceSourceForm model={model.source} onChanged={(e) => onChanged({ source: { ...model.source, ...e } })} />
       </FormSet>
     </>

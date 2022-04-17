@@ -23,7 +23,7 @@ const ChoiceSourceForm: React.FC<Props> = ({ model, onChanged }) => {
     <>
       <div>
         <InputSelect
-          label="選択方式"
+          label="選択方法"
           values={howList}
           model={model}
           keyName={"how"}
