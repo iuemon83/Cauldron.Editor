@@ -14,8 +14,10 @@ import NumConditionForm from "./NumConditionForm";
 import TextConditionForm from "./TextConditionForm";
 import ZoneConditionForm from "./ZoneConditionForm";
 import ActionContextCardsForm from "./ActionContextCardsForm";
+import CardAnnotationConditionForm from "./CardAnnotationConditionForm";
 import { actionContextCardsEmpty } from "../types/ActionContextCards";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { cardAnnotationConditionEmpty } from "../types/CardAnnotationCondition";
 
 interface Props {
   model: CardCondition;
@@ -127,6 +129,14 @@ const CardConditionForm: React.FC<Props> = ({ model, onChanged }) => {
         empty={zoneConditionEmpty}
         onChanged={onChanged}
         jtx={(d, h) => <ZoneConditionForm model={d!} onChanged={h}></ZoneConditionForm>}
+      />
+      <InputOption
+        label="アノテーションの条件"
+        model={model}
+        keyName="annotationCondition"
+        empty={cardAnnotationConditionEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardAnnotationConditionForm model={d!} onChanged={h} />}
       />
       <InputOption
         label="アビリティの条件"

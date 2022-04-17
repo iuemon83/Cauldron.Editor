@@ -31,7 +31,7 @@ const CardEffectTimingDamageBeforeForm: React.FC<Props> = ({ model, onChanged })
         />
       </div>
       <InputOption
-        label="カードの選択条件"
+        label="攻撃カードの条件"
         model={model}
         keyName="sourceCardCondition"
         empty={cardConditionEmpty}
@@ -39,7 +39,7 @@ const CardEffectTimingDamageBeforeForm: React.FC<Props> = ({ model, onChanged })
         jtx={(d, h) => <CardConditionForm model={d!} onChanged={h}></CardConditionForm>}
       />
       <InputOption
-        label="プレイヤーの選択条件"
+        label="防御プレイヤーの条件"
         model={model}
         keyName="takePlayerCondition"
         empty={playerConditionEmpty}
@@ -47,7 +47,7 @@ const CardEffectTimingDamageBeforeForm: React.FC<Props> = ({ model, onChanged })
         jtx={(d, h) => <PlayerConditionForm model={d!} onChanged={h}></PlayerConditionForm>}
       />
       <InputOption
-        label="カードの選択条件"
+        label="防御カードの条件"
         model={model}
         keyName="takeCardCondition"
         empty={cardConditionEmpty}

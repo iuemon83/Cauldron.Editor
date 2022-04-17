@@ -6,6 +6,7 @@ export type Card = {
   cost: number;
   name: string;
   flavorText: string;
+  annotations: string[];
   type: CardType["code"];
   power: number;
   toughness: number;
@@ -21,6 +22,7 @@ export const cardEmpty = (): Card => {
     cost: 0,
     name: "",
     flavorText: "",
+    annotations: [],
     type: globalCache.metadata!.cardTypes[0].code,
     power: 0,
     toughness: 0,

@@ -53,6 +53,23 @@ const CardForm: React.FC<Props> = ({ model, onChanged }) => {
           sx={{ width: "40ch" }}
         />
       </div>
+      <InputList
+        label="アノテーション"
+        model={model}
+        keyName="annotations"
+        newItem={() => ""}
+        onChanged={onChanged}
+        jtx={(item, onItemChanged, index) => (
+          <TextField
+            value={model.annotations[index]}
+            onChange={(e) => {
+              const newlist = [...model.annotations];
+              newlist[index] = e.target.value;
+              onChanged({ annotations: newlist });
+            }}
+          />
+        )}
+      />
       <div>
         <FormControlLabel
           control={<Switch checked={model.isToken} onChange={(e) => onChanged({ isToken: e.target.checked })} />}

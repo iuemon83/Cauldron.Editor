@@ -13,7 +13,7 @@ interface Props<K extends string, U, T extends HasArray<K, U>> {
   model: T;
   keyName: K;
   onChanged: (e: Partial<T>) => void;
-  jtx: (item: U, onItemChanged: (x: Partial<U>) => void) => React.ReactNode;
+  jtx: (item: U, onItemChanged: (x: Partial<U>) => void, index: number) => React.ReactNode;
   newItem: () => U;
 }
 
@@ -62,7 +62,7 @@ const InputList = <K extends string, U, T extends HasArray<K, U>>(p: Props<K, U,
           <span>
             <Button variant="contained" color="secondary" onClick={() => removeItem(index)} startIcon={<DeleteIcon />} />
           </span>
-          {p.jtx(elm, (x) => onItemChanged({ ...elm, ...x }, index))}
+          {p.jtx(elm, (x) => onItemChanged({ ...elm, ...x }, index), index)}
         </FormGroup>
       ))}
     </FormSet>
