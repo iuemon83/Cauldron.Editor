@@ -29,7 +29,7 @@ export type CardCondition = {
   typeCondition: CardTypeCondition | undefined;
   zoneCondition: ZoneCondition | undefined;
   ownerCondition: OwnerConditionValue["code"];
-  abilityCondition: CardAbility["code"];
+  abilityCondition: CardAbility["code"][] | undefined;
   counterCondition: CounterCondition | undefined;
 };
 
@@ -48,7 +48,7 @@ export const cardConditionEmpty = (): CardCondition => {
     typeCondition: undefined,
     zoneCondition: undefined,
     ownerCondition: globalCache.metadata!.ownerConditionValues[0].code,
-    abilityCondition: globalCache.metadata!.cardAbilities[0].code,
+    abilityCondition: undefined,
     counterCondition: undefined,
   };
 };

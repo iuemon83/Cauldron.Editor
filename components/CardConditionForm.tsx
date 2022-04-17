@@ -15,6 +15,7 @@ import TextConditionForm from "./TextConditionForm";
 import ZoneConditionForm from "./ZoneConditionForm";
 import ActionContextCardsForm from "./ActionContextCardsForm";
 import { actionContextCardsEmpty } from "../types/ActionContextCards";
+import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 
 interface Props {
   model: CardCondition;
@@ -31,6 +32,27 @@ const CardConditionForm: React.FC<Props> = ({ model, onChanged }) => {
     globalCache.metadata!.ownerConditionValues.map((v) => [v.code, v.displayText])
   );
   const ownerConditionValues = Object.keys(ownerConditionValuesLabelsByValue);
+
+  const cardAbilitiesLabelsByValue = Object.fromEntries(globalCache.metadata!.cardAbilities.map((v) => [v.code, v.displayText]));
+  const cardAbilities = Object.keys(cardAbilitiesLabelsByValue);
+
+  const handleAbilityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const index = Number(e.target.value);
+
+    if (model.abilityCondition === undefined) {
+      return;
+    }
+
+    if (e.target.checked) {
+      const newlist = [...model.abilityCondition, cardAbilities[index]];
+
+      onChanged({ abilityCondition: newlist });
+    } else {
+      const newlist = model.abilityCondition.filter((x) => x !== cardAbilities[index]);
+
+      onChanged({ abilityCondition: newlist });
+    }
+  };
 
   return (
     <>
@@ -105,6 +127,24 @@ const CardConditionForm: React.FC<Props> = ({ model, onChanged }) => {
         empty={zoneConditionEmpty}
         onChanged={onChanged}
         jtx={(d, h) => <ZoneConditionForm model={d!} onChanged={h}></ZoneConditionForm>}
+      />
+      <InputOption
+        label="アビリティの条件"
+        model={model}
+        keyName="abilityCondition"
+        empty={() => []}
+        onChanged={onChanged}
+        jtx={(d, h) => (
+          <FormGroup row>
+            {cardAbilities.map((e, index) => (
+              <FormControlLabel
+                key={index}
+                control={<Checkbox value={index} checked={d!.indexOf(e) !== -1} onChange={handleAbilityChange} />}
+                label={cardAbilitiesLabelsByValue[e]}
+              />
+            ))}
+          </FormGroup>
+        )}
       />
       <InputSelect
         label="所有者の条件"

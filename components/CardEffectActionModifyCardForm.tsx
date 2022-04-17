@@ -4,6 +4,8 @@ import ChoiceForm from "./ChoiceForm";
 import FormSet from "./input/FormSet";
 import InputOption from "./input/InputOption";
 import NumValueModifierForm from "./NumValueModifierForm";
+import CreatureAbilityModifierForm from "./CreatureAbilityModifierForm";
+import { creatureAbilityModifierEmpty } from "../types/CreatureAbilityModifier";
 
 interface Props {
   model: CardEffectActionModifyCard;
@@ -36,6 +38,14 @@ const CardEffectActionModifyCardForm: React.FC<Props> = ({ model, onChanged }) =
         empty={numValueModifierEmpty}
         onChanged={onChanged}
         jtx={(d, h) => <NumValueModifierForm model={d!} onChanged={h}></NumValueModifierForm>}
+      />
+      <InputOption
+        label="アビリティ"
+        model={model}
+        keyName="ability"
+        empty={creatureAbilityModifierEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CreatureAbilityModifierForm model={d!} onChanged={h} />}
       />
       <FormSet label="対象の選択条件">
         <ChoiceForm

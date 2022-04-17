@@ -33,6 +33,8 @@ export type ActionContextCardsOfExcludeCardType = CardMetadataElm;
 export type ActionContextCardsOfModifyCardType = CardMetadataElm;
 export type ActionContextCardsOfModifyCounterType = CardMetadataElm;
 export type ActionContextCardsOfMoveCardType = CardMetadataElm;
+export type CreatureAbilityModifierOperator = CardMetadataElm;
+export type AnnotationsModifierOperator = CardMetadataElm;
 
 export type CardMetaData = {
   cardTypes: CardType[];
@@ -66,4 +68,6 @@ export type CardMetaData = {
   actionContextCardsOfModifyCardTypes: ActionContextCardsOfModifyCardType[];
   actionContextCardsOfModifyCounterTypes: ActionContextCardsOfModifyCounterType[];
   actionContextCardsOfMoveCardTypes: ActionContextCardsOfMoveCardType[];
+  creatureAbilityModifierOperators: CreatureAbilityModifierOperator[];
+  annotationsModifierOperators: AnnotationsModifierOperator[];
 };
