@@ -11,6 +11,7 @@ import { CardEffectActionMoveCard } from "./CardEffectActionMoveCard";
 import { CardEffectActionSetVariable } from "./CardEffectActionSetVariable";
 import { CardEffectActionWin } from "./CardEffectActionWin";
 import { CardEffectActionReserveEffect } from "./CardEffectActionReserveEffect";
+import { CardEffectActionModifyCounter } from "./CardEffectActionModifyCounter";
 
 export type CardEffectAction = {
   damage: CardEffectActionDamage | undefined;
@@ -24,6 +25,7 @@ export type CardEffectAction = {
   moveCard: CardEffectActionMoveCard | undefined;
   addEffect: CardEffectActionAddEffect | undefined;
   setVariable: CardEffectActionSetVariable | undefined;
+  modifyCounter: CardEffectActionModifyCounter | undefined;
   win: CardEffectActionWin | undefined;
   reserveEffect: CardEffectActionReserveEffect | undefined;
 };
@@ -41,6 +43,7 @@ export const cardEffectActionEmpty = (): CardEffectAction => {
     moveCard: undefined,
     addEffect: undefined,
     setVariable: undefined,
+    modifyCounter: undefined,
     win: undefined,
     reserveEffect: undefined,
   };

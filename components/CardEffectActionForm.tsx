@@ -23,9 +23,11 @@ import CardEffectActionSetVariableForm from "./CardEffectActionSetVariableForm";
 import CardEffectActionWinForm from "./CardEffectActionWinForm";
 import CardEffectActionReserveEffectForm from "./CardEffectActionReserveEffectForm";
 import CardEffectActionExcludeCardForm from "./CardEffectActionExcludeCardForm";
+import CardEffectActionModifyCounterForm from "./CardEffectActionModifyCounterForm";
 import InputOption from "./input/InputOption";
 import { cardEffectActionReserveEffectEmpty } from "../types/CardEffectActionReserveEffect";
 import { cardEffectActionExcludeCardEmpty } from "../types/CardEffectActionExcludeCard";
+import { cardEffectActionModifyCounterEmpty } from "../types/CardEffectActionModifyCounter";
 
 interface Props {
   model: CardEffectAction;
@@ -122,6 +124,14 @@ const CardEffectActionForm: React.FC<Props> = ({ model, onChanged }) => {
         empty={CardEffectActionSetVariableEmpty}
         onChanged={onChanged}
         jtx={(d, h) => <CardEffectActionSetVariableForm model={d!} onChanged={h}></CardEffectActionSetVariableForm>}
+      />
+      <InputOption
+        label="カウンターの修整"
+        model={model}
+        keyName="modifyCounter"
+        empty={cardEffectActionModifyCounterEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardEffectActionModifyCounterForm model={d!} onChanged={h} />}
       />
       <InputOption
         label="勝利"
