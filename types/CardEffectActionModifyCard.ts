@@ -10,6 +10,7 @@ export type CardEffectActionModifyCard = {
   ability: CreatureAbilityModifier | undefined;
   annotations: AnnotationsModifier | undefined;
   choice: Choice;
+  name: string | undefined;
 };
 
 export const CardEffectActionModifyCardEmpty = (): CardEffectActionModifyCard => {
@@ -20,5 +21,6 @@ export const CardEffectActionModifyCardEmpty = (): CardEffectActionModifyCard =>
     ability: undefined,
     annotations: undefined,
     choice: choiceEmpty(),
+    name: undefined,
   };
 };

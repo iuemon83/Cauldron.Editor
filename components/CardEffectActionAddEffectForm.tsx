@@ -6,6 +6,7 @@ import ChoiceForm from "./ChoiceForm";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import FormSet from "./input/FormSet";
+import InputTextOption from "./input/InputTextOption";
 
 interface Props {
   model: CardEffectActionAddEffect;
@@ -41,6 +42,7 @@ const CardEffectActionAddEffectForm: React.FC<Props> = ({ model, onChanged }) =>
 
   return (
     <>
+      <InputTextOption label="アクション名" model={model} keyName="name" onChanged={onChanged} />
       <FormSet
         label={
           <>

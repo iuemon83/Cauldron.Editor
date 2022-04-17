@@ -91,8 +91,8 @@ const Home: React.VFC = () => {
       cards: newCardSet.cards.sort((l, r) => l.name.localeCompare(r.name)),
     };
 
-    setCardset(sorted);
     setCardIndex(-1);
+    setCardset(sorted);
   };
 
   const DownloadButton = () => {

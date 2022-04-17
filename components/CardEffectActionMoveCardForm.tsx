@@ -6,6 +6,7 @@ import ChoiceForm from "./ChoiceForm";
 import FormSet from "./input/FormSet";
 import InputOption from "./input/InputOption";
 import InputSelect from "./input/InputSelect";
+import InputTextOption from "./input/InputTextOption";
 import InsertCardPositionForm from "./InsertCardPositionForm";
 
 interface Props {
@@ -19,6 +20,7 @@ const CardEffectActionMoveCardForm: React.FC<Props> = ({ model, onChanged }) => 
 
   return (
     <>
+      <InputTextOption label="アクション名" model={model} keyName="name" onChanged={onChanged} />
       <InputSelect
         label="移動先"
         values={zoneNames}

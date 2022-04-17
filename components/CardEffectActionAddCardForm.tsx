@@ -5,6 +5,7 @@ import ChoiceForm from "./ChoiceForm";
 import FormSet from "./input/FormSet";
 import InputNumber from "./input/InputNumber";
 import InputOption from "./input/InputOption";
+import InputTextOption from "./input/InputTextOption";
 import InsertCardPositionForm from "./InsertCardPositionForm";
 import ZoneValueForm from "./ZoneValueForm";
 
@@ -16,6 +17,7 @@ interface Props {
 const CardEffectActionAddCardForm: React.FC<Props> = ({ model, onChanged }) => {
   return (
     <>
+      <InputTextOption label="アクション名" model={model} keyName="name" onChanged={onChanged} />
       <FormSet label="生成する場所">
         <ZoneValueForm
           model={model.zoneToAddCard}

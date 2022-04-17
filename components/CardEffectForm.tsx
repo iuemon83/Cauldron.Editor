@@ -6,7 +6,6 @@ import CardEffectActionForm from "./CardEffectActionForm";
 import CardEffectConditionForm from "./CardEffectConditionForm";
 import FormSet from "./input/FormSet";
 import InputList from "./input/InputList";
-import InputText from "./input/InputText";
 import { TextField } from "@mui/material";
 
 interface Props {

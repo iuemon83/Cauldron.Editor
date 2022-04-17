@@ -7,14 +7,15 @@ export type CardEffectActionAddCard = {
   zoneToAddCard: ZoneValue;
   insertCardPosition: InsertCardPosition | undefined;
   numOfAddCards: number;
+  name: string | undefined;
 };
 
-export const CardEffectActionAddCardEmpty =
-  (): CardEffectActionAddCard => {
-    return {
-      choice: choiceEmpty(),
-      zoneToAddCard: zoneValueEmpty(),
-      insertCardPosition: undefined,
-      numOfAddCards: 1,
-    };
+export const CardEffectActionAddCardEmpty = (): CardEffectActionAddCard => {
+  return {
+    choice: choiceEmpty(),
+    zoneToAddCard: zoneValueEmpty(),
+    insertCardPosition: undefined,
+    numOfAddCards: 1,
+    name: undefined,
   };
+};

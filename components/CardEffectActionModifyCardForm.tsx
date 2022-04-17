@@ -6,6 +6,7 @@ import InputOption from "./input/InputOption";
 import NumValueModifierForm from "./NumValueModifierForm";
 import CreatureAbilityModifierForm from "./CreatureAbilityModifierForm";
 import { creatureAbilityModifierEmpty } from "../types/CreatureAbilityModifier";
+import InputTextOption from "./input/InputTextOption";
 
 interface Props {
   model: CardEffectActionModifyCard;
@@ -15,6 +16,7 @@ interface Props {
 const CardEffectActionModifyCardForm: React.FC<Props> = ({ model, onChanged }) => {
   return (
     <>
+      <InputTextOption label="アクション名" model={model} keyName="name" onChanged={onChanged} />
       <InputOption
         label="コスト"
         model={model}
