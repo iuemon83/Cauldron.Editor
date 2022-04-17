@@ -5,6 +5,8 @@ import InputSelect from "./input/InputSelect";
 
 import OrPlayerConditionListForm from "./OrPlayerConditionListForm";
 import OrCardConditionListForm from "./OrCardConditionListForm";
+import FormSet from "./input/FormSet";
+import NumValueForm from "./NumValueForm";
 
 interface Props {
   model: ChoiceSource;
@@ -27,9 +29,9 @@ const ChoiceSourceForm: React.FC<Props> = ({ model, onChanged }) => {
           onChanged={onChanged}
         />
       </div>
-      <div>
-        <InputNumber label="対象の数" keyName="numPicks" model={model} onChanged={onChanged} />
-      </div>
+      <FormSet label="対象の数">
+        <NumValueForm model={model.numPicks} onChanged={(x) => onChanged({ numPicks: { ...model.numPicks, ...x } })} />
+      </FormSet>
       <OrPlayerConditionListForm model={model} onChanged={onChanged} />
       <OrCardConditionListForm model={model} onChanged={onChanged} />
     </>

@@ -1,5 +1,4 @@
 import { CardCondition, cardConditionEmpty } from "../types/CardCondition";
-import { ChoiceSource } from "../types/ChoiceSource";
 import CardConditionForm from "./CardConditionForm";
 
 import { Button, FormGroup } from "@mui/material";
@@ -8,8 +7,8 @@ import AddIcon from "@mui/icons-material/Add";
 import FormSet from "./input/FormSet";
 
 interface Props {
-  model: ChoiceSource;
-  onChanged: (newValue: Partial<ChoiceSource>) => void;
+  model: { orCardConditions: CardCondition[] };
+  onChanged: (newValue: Partial<{ orCardConditions: CardCondition[] }>) => void;
 }
 
 const OrCardConditionListForm: React.FC<Props> = ({ model, onChanged }) => {

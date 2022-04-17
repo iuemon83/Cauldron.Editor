@@ -1,8 +1,5 @@
 import { CardEffectActionModifyDamage } from "../types/CardEffectActionModifyDamage";
-import { choiceEmpty } from "../types/Choice";
-import ChoiceForm from "./ChoiceForm";
 import FormSet from "./input/FormSet";
-import InputOption from "./input/InputOption";
 import NumValueModifierForm from "./NumValueModifierForm";
 
 interface Props {
@@ -23,14 +20,6 @@ const CardEffectActionModifyDamageForm: React.FC<Props> = ({ model, onChanged })
           }
         ></NumValueModifierForm>
       </FormSet>
-      <InputOption
-        label="対象の選択条件"
-        model={model}
-        keyName="choice"
-        empty={choiceEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <ChoiceForm model={d!} onChanged={h}></ChoiceForm>}
-      />
     </>
   );
 };

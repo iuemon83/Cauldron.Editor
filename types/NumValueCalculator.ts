@@ -1,15 +1,22 @@
-import { globalCache } from "../components/CauldronApi";
-import { NumValueCalculatorValueType } from "./CardMetaData";
-import { Choice, choiceEmpty } from "./Choice";
+import { NumValueCalculatorRandom } from "./NumValueCalculatorRandom";
+import { NumValueCalculatorForCard } from "./NumValueCalculatorForCard";
+import { NumValueCalculatorForPlayer } from "./NumValueCalculatorForPlayer";
+import { NumValueCalculatorForCounter } from "./NumValueCalculatorForCounter";
 
 export type NumValueCalculator = {
-  type: NumValueCalculatorValueType["code"];
-  cardsChoice: Choice;
+  eventContext: undefined;
+  random: NumValueCalculatorRandom | undefined;
+  forCard: NumValueCalculatorForCard | undefined;
+  forPlayer: NumValueCalculatorForPlayer | undefined;
+  forCounter: NumValueCalculatorForCounter | undefined;
 };
 
 export const numValueCalculatorEmpty = (): NumValueCalculator => {
   return {
-    type: globalCache.metadata!.numValueCalculatorValueTypes[0].code,
-    cardsChoice: choiceEmpty(),
+    eventContext: undefined,
+    random: undefined,
+    forCard: undefined,
+    forPlayer: undefined,
+    forCounter: undefined,
   };
 };

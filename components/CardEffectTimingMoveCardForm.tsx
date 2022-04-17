@@ -1,6 +1,7 @@
 import { CardEffectTimingMoveCardEvent } from "../types/CardEffectTimingMoveCardEvent";
 import { globalCache } from "./CauldronApi";
 import InputSelect from "./input/InputSelect";
+import OrCardConditionListForm from "./OrCardConditionListForm";
 
 interface Props {
   model: CardEffectTimingMoveCardEvent;
@@ -8,24 +9,12 @@ interface Props {
 }
 
 const CardEffectTimingMoveCardForm: React.FC<Props> = ({ model, onChanged }) => {
-  const eventSourcesLabelsByValue = Object.fromEntries(
-    globalCache.metadata!.effectTimingMoveCardEventSources.map((v) => [v.code, v.displayText])
-  );
-  const eventSources = Object.keys(eventSourcesLabelsByValue);
-
   const zoneNamesLabelsByValue = Object.fromEntries(globalCache.metadata!.zoneNames.map((v) => [v.code, v.displayText]));
   const zoneNames = Object.keys(zoneNamesLabelsByValue);
 
   return (
     <>
-      <InputSelect
-        label="source"
-        values={eventSources}
-        model={model}
-        keyName={"source"}
-        getLabel={(v) => eventSourcesLabelsByValue[v]}
-        onChanged={onChanged}
-      />
+      <OrCardConditionListForm model={model} onChanged={onChanged} />
       <InputSelect
         label="from"
         values={zoneNames}

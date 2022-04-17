@@ -13,11 +13,6 @@ const PlayerConditionForm: React.FC<Props> = ({ model, onChanged }) => {
   );
   const playerConditionContexts = Object.keys(playerConditionContextsLabelsByValue);
 
-  const playerConditionTypesLabelsByValue = Object.fromEntries(
-    globalCache.metadata!.playerConditionTypes.map((v) => [v.code, v.displayText])
-  );
-  const playerConditionTypes = Object.keys(playerConditionTypesLabelsByValue);
-
   return (
     <>
       <div>
@@ -27,16 +22,6 @@ const PlayerConditionForm: React.FC<Props> = ({ model, onChanged }) => {
           model={model}
           keyName={"context"}
           getLabel={(v) => playerConditionContextsLabelsByValue[v]}
-          onChanged={onChanged}
-        />
-      </div>
-      <div>
-        <InputSelect
-          label="type"
-          values={playerConditionTypes}
-          model={model}
-          keyName={"type"}
-          getLabel={(v) => playerConditionTypesLabelsByValue[v]}
           onChanged={onChanged}
         />
       </div>

@@ -1,13 +1,9 @@
 import { CardEffectCondition } from "../types/CardEffectCondition";
-import { CardEffectIfEmpty } from "../types/CardEffectIf";
-import { CardEffectWhenEmpty } from "../types/CardEffectWhen";
-import { CardEffectWhileEmpty } from "../types/CardEffectWhile";
-import CardEffectIfForm from "./CardEffectIfForm";
-import CardEffectWhenForm from "./CardEffectWhenForm";
-import CardEffectWhileForm from "./CardEffectWhileForm";
-import { globalCache } from "./CauldronApi";
+import { CardEffectConditionAsNotPlayEmpty } from "../types/CardEffectConditionAsNotPlay";
+import CardEffectConditionAsNotPlayForm from "./CardEffectConditionAsNotPlayForm";
+import CardEffectConditionByPlayingForm from "./CardEffectConditionByPlayingForm";
+import CardEffectConditionAsReserveForm from "./CardEffectConditionAsReserveForm";
 import InputOption from "./input/InputOption";
-import InputSelect from "./input/InputSelect";
 
 interface Props {
   model: CardEffectCondition;
@@ -15,42 +11,31 @@ interface Props {
 }
 
 const CardEffectConditionForm: React.FC<Props> = ({ model, onChanged }) => {
-  const zoneNamesLabelsByValue = Object.fromEntries(globalCache.metadata!.zoneNames.map((v) => [v.code, v.displayText]));
-  const zoneNames = Object.keys(zoneNamesLabelsByValue);
-
   return (
     <>
-      <InputSelect
-        label="領域"
-        values={zoneNames}
+      <InputOption
+        label="このカードをプレイしたとき"
         model={model}
-        keyName={"zonePrettyName"}
-        getLabel={(v) => zoneNamesLabelsByValue[v]}
+        keyName="byPlay"
+        empty={CardEffectConditionAsNotPlayEmpty}
         onChanged={onChanged}
+        jtx={(d, h) => <CardEffectConditionByPlayingForm model={d!} onChanged={h}></CardEffectConditionByPlayingForm>}
       />
       <InputOption
-        label="いつ"
+        label="プレイしたとき以外"
         model={model}
-        keyName="when"
-        empty={CardEffectWhenEmpty}
+        keyName="byNotPlay"
+        empty={CardEffectConditionAsNotPlayEmpty}
         onChanged={onChanged}
-        jtx={(d, h) => <CardEffectWhenForm model={d!} onChanged={h}></CardEffectWhenForm>}
+        jtx={(d, h) => <CardEffectConditionAsNotPlayForm model={d!} onChanged={h}></CardEffectConditionAsNotPlayForm>}
       />
       <InputOption
-        label="期間"
+        label="予約されてるとき"
         model={model}
-        keyName="while"
-        empty={CardEffectWhileEmpty}
+        keyName="reserve"
+        empty={CardEffectConditionAsNotPlayEmpty}
         onChanged={onChanged}
-        jtx={(d, h) => <CardEffectWhileForm model={d!} onChanged={h}></CardEffectWhileForm>}
-      />
-      <InputOption
-        label="もし"
-        model={model}
-        keyName="if"
-        empty={CardEffectIfEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectIfForm model={d!} onChanged={h}></CardEffectIfForm>}
+        jtx={(d, h) => <CardEffectConditionAsReserveForm model={d!} onChanged={h}></CardEffectConditionAsReserveForm>}
       />
     </>
   );

@@ -6,6 +6,8 @@ import CardEffectActionForm from "./CardEffectActionForm";
 import CardEffectConditionForm from "./CardEffectConditionForm";
 import FormSet from "./input/FormSet";
 import InputList from "./input/InputList";
+import InputText from "./input/InputText";
+import { TextField } from "@mui/material";
 
 interface Props {
   model: CardEffect;
@@ -22,6 +24,15 @@ const CardEffectForm: React.FC<Props> = ({ model, onChanged }) => {
 
   return (
     <>
+      <div>
+        <TextField
+          label="効果の説明"
+          multiline
+          value={model.description}
+          onChange={(e) => onChanged({ description: e.target.value })}
+          sx={{ width: "40ch" }}
+        />
+      </div>
       <FormSet label="条件">
         <CardEffectConditionForm model={model.condition} onChanged={handleChangeCardEffectCondition}></CardEffectConditionForm>
       </FormSet>

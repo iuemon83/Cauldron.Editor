@@ -21,7 +21,9 @@ import CardEffectActionModifyPlayerForm from "./CardEffectActionModifyPlayerForm
 import CardEffectActionMoveCardForm from "./CardEffectActionMoveCardForm";
 import CardEffectActionSetVariableForm from "./CardEffectActionSetVariableForm";
 import CardEffectActionWinForm from "./CardEffectActionWinForm";
+import CardEffectActionReserveEffectForm from "./CardEffectActionReserveEffectForm";
 import InputOption from "./input/InputOption";
+import { cardEffectActionReserveEffectEmpty } from "../types/CardEffectActionReserveEffect";
 
 interface Props {
   model: CardEffectAction;
@@ -118,6 +120,14 @@ const CardEffectActionForm: React.FC<Props> = ({ model, onChanged }) => {
         empty={CardEffectActionWinEmpty}
         onChanged={onChanged}
         jtx={(d, h) => <CardEffectActionWinForm model={d!} onChanged={h}></CardEffectActionWinForm>}
+      />
+      <InputOption
+        label="効果の予約"
+        model={model}
+        keyName="reserveEffect"
+        empty={cardEffectActionReserveEffectEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardEffectActionReserveEffectForm model={d!} onChanged={h} />}
       />
     </>
   );

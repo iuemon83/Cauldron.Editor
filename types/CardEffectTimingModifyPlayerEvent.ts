@@ -1,8 +1,7 @@
-import { globalCache } from "../components/CauldronApi";
-import { CardEffectTimingModifyPlayerEventSource } from "./CardMetaData";
+import { PlayerCondition } from "./PlayerCondition";
 
 export type CardEffectTimingModifyPlayerEvent = {
-  source: CardEffectTimingModifyPlayerEventSource;
+  orPlayerConditions: PlayerCondition[];
   modifyMaxHp: boolean;
   modifyHp: boolean;
   modifyMaxMp: boolean;
@@ -12,7 +11,7 @@ export type CardEffectTimingModifyPlayerEvent = {
 export const CardEffectTimingDamageBeforeEventEmpty =
   (): CardEffectTimingModifyPlayerEvent => {
     return {
-      source: globalCache.metadata!.effectTimingDamageBeforeEventSources[0],
+      orPlayerConditions:[],
       modifyMaxHp: false,
       modifyHp: false,
       modifyMaxMp: false,

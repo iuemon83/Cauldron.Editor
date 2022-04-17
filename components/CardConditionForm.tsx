@@ -13,6 +13,8 @@ import InputSelect from "./input/InputSelect";
 import NumConditionForm from "./NumConditionForm";
 import TextConditionForm from "./TextConditionForm";
 import ZoneConditionForm from "./ZoneConditionForm";
+import ActionContextCardsForm from "./ActionContextCardsForm";
+import { actionContextCardsEmpty } from "../types/ActionContextCards";
 
 interface Props {
   model: CardCondition;
@@ -39,6 +41,14 @@ const CardConditionForm: React.FC<Props> = ({ model, onChanged }) => {
         keyName={"contextCondition"}
         getLabel={(v) => cardConditionContextsLabelsByValue[v]}
         onChanged={onChanged}
+      />
+      <InputOption
+        label="アクションの結果"
+        model={model}
+        keyName="actionContext"
+        empty={actionContextCardsEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <ActionContextCardsForm model={d!} onChanged={h} />}
       />
       <InputOption
         label="カードセットの条件"

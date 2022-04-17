@@ -1,13 +1,12 @@
-import { globalCache } from "../components/CauldronApi";
-import { CardEffectTimingEndTurnEventSource } from "./CardMetaData";
+import { PlayerCondition } from "./PlayerCondition";
 
 export type CardEffectTimingEndTurnEvent = {
-  source: CardEffectTimingEndTurnEventSource["code"];
+  orPlayerConditions: PlayerCondition[];
 };
 
 export const cardEffectTimingEndTurnEventEmpty =
   (): CardEffectTimingEndTurnEvent => {
     return {
-      source: globalCache.metadata!.effectTimingEndTurnEventSources[0].code,
+      orPlayerConditions: [],
     };
   };

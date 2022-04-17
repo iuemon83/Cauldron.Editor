@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "../types/Card";
 import { cardEffectEmpty } from "../types/CardEffect";
-import CardEffect from "./CardEffectForm";
+import CardEffectForm from "./CardEffectForm";
 import { globalCache } from "./CauldronApi";
 import InputNumber from "./input/InputNumber";
 import InputNumberOption from "./input/InputNumberOption";
@@ -118,7 +118,7 @@ const CardForm: React.FC<Props> = ({ model, onChanged }) => {
         keyName="effects"
         newItem={cardEffectEmpty}
         onChanged={onChanged}
-        jtx={(item, onItemChanged) => <CardEffect model={item} onChanged={onItemChanged}></CardEffect>}
+        jtx={(item, onItemChanged) => <CardEffectForm model={item} onChanged={onItemChanged} />}
       />
     </>
   );

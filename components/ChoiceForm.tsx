@@ -4,6 +4,7 @@ import ChoiceSourceForm from "./ChoiceSourceForm";
 import FormSet from "./input/FormSet";
 import InputNumber from "./input/InputNumber";
 import InputSelect from "./input/InputSelect";
+import NumValueForm from "./NumValueForm";
 
 interface Props {
   model: Choice;
@@ -26,14 +27,12 @@ const ChoiceForm: React.FC<Props> = ({ model, onChanged }) => {
           onChanged={onChanged}
         />
       </div>
-      <div>
-        <InputNumber label="対象の数" keyName="numPicks" model={model} onChanged={onChanged} />
-      </div>
-      <div>
-        <FormSet label="選択候補">
-          <ChoiceSourceForm model={model.source} onChanged={(e) => onChanged({ source: { ...model.source, ...e } })} />
-        </FormSet>
-      </div>
+      <FormSet label="対象の数">
+        <NumValueForm model={model.numPicks} onChanged={(x) => onChanged({ numPicks: { ...model.numPicks, ...x } })} />
+      </FormSet>
+      <FormSet label="選択候補">
+        <ChoiceSourceForm model={model.source} onChanged={(e) => onChanged({ source: { ...model.source, ...e } })} />
+      </FormSet>
     </>
   );
 };

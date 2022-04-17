@@ -16,31 +16,39 @@ interface Props {
 const NumValueForm: React.FC<Props> = ({ model, onChanged }) => {
   return (
     <>
-      <InputNumberOption label="定数" keyName="pureValue" model={model} onChanged={onChanged} />
-      <InputOption
-        label="算出"
-        model={model}
-        keyName="numValueCalculator"
-        empty={numValueCalculatorEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <NumValueCalculatorForm model={d!} onChanged={h}></NumValueCalculatorForm>}
-      />
-      <InputOption
-        label="変数"
-        model={model}
-        keyName="numValueVariableCalculator"
-        empty={numValueVariableCalculatorEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <NumValueVariableCalculatorForm model={d!} onChanged={h}></NumValueVariableCalculatorForm>}
-      />
-      <InputOption
-        label="演算"
-        model={model}
-        keyName="numValueModifier"
-        empty={numValueModifierEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <NumValueModifierForm model={d!} onChanged={h}></NumValueModifierForm>}
-      />
+      <div>
+        <InputNumberOption label="定数" keyName="pureValue" model={model} onChanged={onChanged} />
+      </div>
+      <div>
+        <InputOption
+          label="算出"
+          model={model}
+          keyName="numValueCalculator"
+          empty={numValueCalculatorEmpty}
+          onChanged={onChanged}
+          jtx={(d, h) => <NumValueCalculatorForm model={d!} onChanged={h}></NumValueCalculatorForm>}
+        />
+      </div>
+      <div>
+        <InputOption
+          label="変数"
+          model={model}
+          keyName="numValueVariableCalculator"
+          empty={numValueVariableCalculatorEmpty}
+          onChanged={onChanged}
+          jtx={(d, h) => <NumValueVariableCalculatorForm model={d!} onChanged={h}></NumValueVariableCalculatorForm>}
+        />
+      </div>
+      <div>
+        <InputOption
+          label="演算"
+          model={model}
+          keyName="numValueModifier"
+          empty={numValueModifierEmpty}
+          onChanged={onChanged}
+          jtx={(d, h) => <NumValueModifierForm model={d!} onChanged={h}></NumValueModifierForm>}
+        />
+      </div>
     </>
   );
 };

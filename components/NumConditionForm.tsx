@@ -1,8 +1,8 @@
 import { NumCondition } from "../types/NumCondition";
 import { globalCache } from "./CauldronApi";
-import InputNumber from "./input/InputNumber";
 import InputSelect from "./input/InputSelect";
 import { FormControlLabel, Switch } from "@mui/material";
+import NumValueForm from "./NumValueForm";
 
 interface Props {
   model: NumCondition;
@@ -18,7 +18,7 @@ const NumConditionForm: React.FC<Props> = ({ model, onChanged }) => {
   return (
     <>
       <div>
-        <InputNumber label="値" keyName="value" model={model} onChanged={onChanged} />
+        <NumValueForm model={model.value} onChanged={(x) => onChanged({ value: { ...model.value, ...x } })}></NumValueForm>
       </div>
       <div>
         <InputSelect

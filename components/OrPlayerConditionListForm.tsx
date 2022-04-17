@@ -1,4 +1,3 @@
-import { ChoiceSource } from "../types/ChoiceSource";
 import { PlayerCondition, playerConditionEmpty } from "../types/PlayerCondition";
 
 import PlayerConditionForm from "./PlayerConditionForm";
@@ -9,8 +8,8 @@ import AddIcon from "@mui/icons-material/Add";
 import FormSet from "./input/FormSet";
 
 interface Props {
-  model: ChoiceSource;
-  onChanged: (newValue: Partial<ChoiceSource>) => void;
+  model: { orPlayerConditions: PlayerCondition[] };
+  onChanged: (newValue: Partial<{ orPlayerConditions: PlayerCondition[] }>) => void;
 }
 
 const OrPlayerConditionListForm: React.FC<Props> = ({ model, onChanged }) => {

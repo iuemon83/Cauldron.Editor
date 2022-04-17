@@ -18,11 +18,6 @@ const CardEffectTimingDamageBeforeForm: React.FC<Props> = ({ model, onChanged })
   );
   const damageTypes = Object.keys(damageTypesLabelsByValue);
 
-  const eventSourcesLabelsByValue = Object.fromEntries(
-    globalCache.metadata!.effectTimingDamageBeforeEventSources.map((v) => [v.code, v.displayText])
-  );
-  const eventSources = Object.keys(eventSourcesLabelsByValue);
-
   return (
     <>
       <div>
@@ -35,20 +30,18 @@ const CardEffectTimingDamageBeforeForm: React.FC<Props> = ({ model, onChanged })
           onChanged={onChanged}
         />
       </div>
-      <div>
-        <InputSelect
-          label="source"
-          values={eventSources}
-          model={model}
-          keyName={"source"}
-          getLabel={(v) => eventSourcesLabelsByValue[v]}
-          onChanged={onChanged}
-        />
-      </div>
+      <InputOption
+        label="カードの選択条件"
+        model={model}
+        keyName="sourceCardCondition"
+        empty={cardConditionEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardConditionForm model={d!} onChanged={h}></CardConditionForm>}
+      />
       <InputOption
         label="プレイヤーの選択条件"
         model={model}
-        keyName="playerCondition"
+        keyName="takePlayerCondition"
         empty={playerConditionEmpty}
         onChanged={onChanged}
         jtx={(d, h) => <PlayerConditionForm model={d!} onChanged={h}></PlayerConditionForm>}
@@ -56,7 +49,7 @@ const CardEffectTimingDamageBeforeForm: React.FC<Props> = ({ model, onChanged })
       <InputOption
         label="カードの選択条件"
         model={model}
-        keyName="cardCondition"
+        keyName="takeCardCondition"
         empty={cardConditionEmpty}
         onChanged={onChanged}
         jtx={(d, h) => <CardConditionForm model={d!} onChanged={h}></CardConditionForm>}

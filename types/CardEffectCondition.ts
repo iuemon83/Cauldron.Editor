@@ -1,21 +1,17 @@
-import { globalCache } from "../components/CauldronApi";
-import { CardEffectIf } from "./CardEffectIf";
-import { CardEffectWhen } from "./CardEffectWhen";
-import { CardEffectWhile } from "./CardEffectWhile";
-import { ZoneName } from "./CardMetaData";
+import { CardEffectConditionByPlaying } from "./CardEffectConditionByPlaying";
+import { CardEffectConditionAsNotPlay } from "./CardEffectConditionAsNotPlay";
+import { CardEffectConditionAsReserve } from "./CardEffectConditionAsReserve";
 
 export type CardEffectCondition = {
-  zonePrettyName: ZoneName["code"];
-  when: CardEffectWhen | undefined;
-  while: CardEffectWhile | undefined;
-  if: CardEffectIf | undefined;
+  byPlay: CardEffectConditionByPlaying | undefined;
+  byNotPlay: CardEffectConditionAsNotPlay | undefined;
+  reserve: CardEffectConditionAsReserve | undefined;
 };
 
 export const CardEffectConditionEmpty = (): CardEffectCondition => {
   return {
-    zonePrettyName: globalCache.metadata!.zoneNames[0].code,
-    when: undefined,
-    while: undefined,
-    if: undefined,
+    byPlay: undefined,
+    byNotPlay: undefined,
+    reserve: undefined,
   };
 };
