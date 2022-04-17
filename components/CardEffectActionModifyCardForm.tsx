@@ -5,8 +5,10 @@ import FormSet from "./input/FormSet";
 import InputOption from "./input/InputOption";
 import NumValueModifierForm from "./NumValueModifierForm";
 import CreatureAbilityModifierForm from "./CreatureAbilityModifierForm";
+import AnnotationsModifierForm from "./AnnotationsModifierForm";
 import { creatureAbilityModifierEmpty } from "../types/CreatureAbilityModifier";
 import InputTextOption from "./input/InputTextOption";
+import { annotationsModifierEmpty } from "../types/AnnotationsModifier";
 
 interface Props {
   model: CardEffectActionModifyCard;
@@ -48,6 +50,14 @@ const CardEffectActionModifyCardForm: React.FC<Props> = ({ model, onChanged }) =
         empty={creatureAbilityModifierEmpty}
         onChanged={onChanged}
         jtx={(d, h) => <CreatureAbilityModifierForm model={d!} onChanged={h} />}
+      />
+      <InputOption
+        label="アノテーション"
+        model={model}
+        keyName="annotations"
+        empty={annotationsModifierEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <AnnotationsModifierForm model={d!} onChanged={h} />}
       />
       <FormSet label="対象の選択条件">
         <ChoiceForm
