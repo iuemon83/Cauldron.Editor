@@ -86,49 +86,55 @@ const CardForm: React.FC<Props> = ({ model, onChanged }) => {
           onChanged={onChanged}
         />
       </div>
-      <div>
-        <InputNumber
-          label="パワー"
-          model={model}
-          keyName="power"
-          onChanged={onChanged}
-          sx={{
-            width: "8ch",
-            textAlign: "right",
-          }}
-        />
-        /
-        <InputNumber label="タフネス" model={model} keyName="toughness" onChanged={onChanged} sx={{ width: "10ch" }} />
-      </div>
-      <div>
-        <FormSet label="アビリティ">
-          <FormGroup row>
-            {cardAbilities.map((e, index) => (
-              <FormControlLabel
-                key={index}
-                control={<Checkbox value={index} checked={model.abilities.indexOf(e) !== -1} onChange={handleAbilityChange} />}
-                label={cardAbilitiesLabelsByValue[e]}
-              />
-            ))}
-          </FormGroup>
-        </FormSet>
-      </div>
-      <div>
-        <InputNumberOption
-          label="攻撃可能となるまでのターン数"
-          model={model}
-          keyName="numTurnsToCanAttack"
-          onChanged={onChanged}
-        />
-      </div>
-      <div>
-        <InputNumberOption
-          label="1ターン中に攻撃可能な回数"
-          model={model}
-          keyName="numAttacksLimitInTurn"
-          onChanged={onChanged}
-        />
-      </div>
+      {model.type === "creature" && (
+        <>
+          <div>
+            <InputNumber
+              label="パワー"
+              model={model}
+              keyName="power"
+              onChanged={onChanged}
+              sx={{
+                width: "8ch",
+                textAlign: "right",
+              }}
+            />
+            /
+            <InputNumber label="タフネス" model={model} keyName="toughness" onChanged={onChanged} sx={{ width: "10ch" }} />
+          </div>
+          <div>
+            <FormSet label="アビリティ">
+              <FormGroup row>
+                {cardAbilities.map((e, index) => (
+                  <FormControlLabel
+                    key={index}
+                    control={
+                      <Checkbox value={index} checked={model.abilities.indexOf(e) !== -1} onChange={handleAbilityChange} />
+                    }
+                    label={cardAbilitiesLabelsByValue[e]}
+                  />
+                ))}
+              </FormGroup>
+            </FormSet>
+          </div>
+          <div>
+            <InputNumberOption
+              label="攻撃可能となるまでのターン数"
+              model={model}
+              keyName="numTurnsToCanAttack"
+              onChanged={onChanged}
+            />
+          </div>
+          <div>
+            <InputNumberOption
+              label="1ターン中に攻撃可能な回数"
+              model={model}
+              keyName="numAttacksLimitInTurn"
+              onChanged={onChanged}
+            />
+          </div>
+        </>
+      )}
       <InputList
         label="効果"
         model={model}
