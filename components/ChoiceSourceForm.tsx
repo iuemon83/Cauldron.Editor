@@ -1,12 +1,14 @@
 import { ChoiceSource } from "../types/ChoiceSource";
 import { globalCache } from "./CauldronApi";
-import InputNumber from "./input/InputNumber";
 import InputSelect from "./input/InputSelect";
 
 import OrPlayerConditionListForm from "./OrPlayerConditionListForm";
 import OrCardConditionListForm from "./OrCardConditionListForm";
+import CardDefConditionForm from "./CardDefConditionForm";
 import FormSet from "./input/FormSet";
 import NumValueForm from "./NumValueForm";
+import InputList from "./input/InputList";
+import { cardDefConditionEmpty } from "../types/CardDefCondition";
 
 interface Props {
   model: ChoiceSource;
@@ -14,7 +16,7 @@ interface Props {
 }
 
 const ChoiceSourceForm: React.FC<Props> = ({ model, onChanged }) => {
-  const howListLabelsByValue = Object.fromEntries(globalCache.metadata!.choiceHowList.map((v) => [v.code, v.displayText]));
+  const howListLabelsByValue = Object.fromEntries(globalCache.metadata!.choiceSourceHowList.map((v) => [v.code, v.displayText]));
   const howList = Object.keys(howListLabelsByValue);
 
   return (
@@ -34,6 +36,15 @@ const ChoiceSourceForm: React.FC<Props> = ({ model, onChanged }) => {
       </FormSet>
       <OrPlayerConditionListForm model={model} onChanged={onChanged} />
       <OrCardConditionListForm model={model} onChanged={onChanged} />
+
+      <InputList
+        label="カード定義の選択条件"
+        model={model}
+        keyName="orCardDefConditions"
+        newItem={cardDefConditionEmpty}
+        onChanged={onChanged}
+        jtx={(item, onItemChanged) => <CardDefConditionForm model={item} onChanged={onItemChanged} />}
+      />
     </>
   );
 };

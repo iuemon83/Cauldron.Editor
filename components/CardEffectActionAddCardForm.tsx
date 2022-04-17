@@ -16,14 +16,14 @@ interface Props {
 const CardEffectActionAddCardForm: React.FC<Props> = ({ model, onChanged }) => {
   return (
     <>
-      <FormSet label="生成先の領域">
+      <FormSet label="生成する場所">
         <ZoneValueForm
           model={model.zoneToAddCard}
           onChanged={(x) => onChanged({ zoneToAddCard: { ...model.zoneToAddCard, ...x } })}
         ></ZoneValueForm>
       </FormSet>
       <InputOption
-        label="生成先の位置"
+        label="生成する位置"
         model={model}
         keyName="insertCardPosition"
         empty={InsertCardPositionEmpty}

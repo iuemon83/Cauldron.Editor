@@ -16,6 +16,7 @@ export type Operator = CardMetadataElm;
 export type TextCompare = CardMetadataElm;
 export type TextValueCalculatorValueType = CardMetadataElm;
 export type ZoneName = CardMetadataElm;
+export type OutZoneName = CardMetadataElm;
 export type CardConditionContext = CardMetadataElm;
 export type CardConditionDamageEventContextCondition = CardMetadataElm;
 export type CardConditionBattleEventContextCondition = CardMetadataElm;
@@ -51,6 +52,7 @@ export type CardMetaData = {
   textConditionCompares: TextCompare[];
   textValueCalculatorValueTypes: TextValueCalculatorValueType[];
   zoneNames: ZoneName[];
+  outZoneNames: OutZoneName[];
   cardConditionContexts: CardConditionContext[];
   cardConditionDamageEventContextConditions: CardConditionDamageEventContextCondition[];
   cardConditionBattleEventContextConditions: CardConditionBattleEventContextCondition[];

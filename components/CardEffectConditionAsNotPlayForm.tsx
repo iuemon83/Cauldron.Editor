@@ -21,7 +21,7 @@ const CardEffectConditionAsNotPlayForm: React.FC<Props> = ({ model, onChanged })
   return (
     <>
       <InputSelect
-        label="このカードがここにある限り"
+        label="このカードがここにあるとき"
         values={zoneNames}
         model={model}
         keyName={"zone"}
