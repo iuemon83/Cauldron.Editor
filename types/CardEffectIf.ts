@@ -1,14 +1,11 @@
-import { NumCondition, numConditionEmpty } from "./NumCondition";
-import { NumValue, numValueEmpty } from "./NumValue";
+import { ConditionWrap, conditionWrapEmpty } from "./ConditionWrap";
 
 export type CardEffectIf = {
-  numCondition: NumCondition;
-  numValue: NumValue;
+  condition: ConditionWrap;
 };
 
 export const CardEffectIfEmpty = (): CardEffectIf => {
   return {
-    numCondition: numConditionEmpty(),
-    numValue: numValueEmpty(),
+    condition: conditionWrapEmpty(),
   };
 };

@@ -1,17 +1,16 @@
-import { globalCache } from "../components/CauldronApi";
-import { NumConditionCompare } from "./CardMetaData";
+import { NumCompare, numCompareEmpty } from "./NumCompare";
 import { NumValue, numValueEmpty } from "./NumValue";
 
 export type NumCondition = {
   value: NumValue;
-  compare: NumConditionCompare["code"];
+  compare: NumCompare;
   not: boolean;
 };
 
 export const numConditionEmpty = (): NumCondition => {
   return {
     value: numValueEmpty(),
-    compare: globalCache.metadata!.numConditionCompares[0].code,
+    compare: numCompareEmpty(),
     not: false,
   };
 };

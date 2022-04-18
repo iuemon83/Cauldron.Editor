@@ -1,8 +1,8 @@
 import { NumCondition } from "../types/NumCondition";
 import { globalCache } from "./CauldronApi";
-import InputSelect from "./input/InputSelect";
 import { FormControlLabel, Switch } from "@mui/material";
 import NumValueForm from "./NumValueForm";
+import NumCompareForm from "./NumCompareForm";
 
 interface Props {
   model: NumCondition;
@@ -18,17 +18,10 @@ const NumConditionForm: React.FC<Props> = ({ model, onChanged }) => {
   return (
     <>
       <div>
-        <NumValueForm model={model.value} onChanged={(x) => onChanged({ value: { ...model.value, ...x } })}></NumValueForm>
+        <NumValueForm model={model.value} onChanged={(x) => onChanged({ value: { ...model.value, ...x } })} />
       </div>
       <div>
-        <InputSelect
-          label="比較方法"
-          values={numCompares}
-          model={model}
-          keyName={"compare"}
-          getLabel={(v) => numComparesLabelsByValue[v]}
-          onChanged={onChanged}
-        />
+        <NumCompareForm model={model.compare} onChanged={(x) => onChanged({ value: { ...model.value, ...x } })} />
       </div>
       <div>
         <FormControlLabel
