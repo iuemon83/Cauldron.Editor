@@ -1,4 +1,5 @@
 const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
+const urlPrefix = process.env.URL_PREFIX ? "/" + process.env.URL_PREFIX : "";
 
 module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
@@ -17,7 +18,7 @@ module.exports = (phase, { defaultConfig }) => {
 
   return {
     /* config options for all phases except development here */
-    assetPrefix: "/editor",
+    assetPrefix: urlPrefix,
     experimental: {
       outputStandalone: true,
     },
