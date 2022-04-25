@@ -54,7 +54,7 @@ const CardForm: React.FC<Props> = ({ model, onChanged }) => {
         />
       </div>
       <InputList
-        label="アノテーション"
+        label="タグ"
         model={model}
         keyName="annotations"
         newItem={() => ""}
@@ -73,7 +73,7 @@ const CardForm: React.FC<Props> = ({ model, onChanged }) => {
       <div>
         <FormControlLabel
           control={<Switch checked={model.isToken} onChange={(e) => onChanged({ isToken: e.target.checked })} />}
-          label="トークン"
+          label="トークン?"
         />
       </div>
       <div>

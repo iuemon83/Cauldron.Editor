@@ -1,4 +1,4 @@
-import { Button, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Link } from "@mui/material";
+import { Button, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { cardEmpty } from "../types/Card";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -9,6 +9,9 @@ import { CardSet } from "../types/CardSet";
 import CardEditorForm from "./CardEditorForm";
 import InputText from "./input/InputText";
 import { Card } from "../types/Card";
+import Link from "next/link";
+import CardSetEditorMenu from "../components/CardSetEditorMenu";
+import React from "react";
 
 interface Props {
   cardset: CardSet;
@@ -19,6 +22,13 @@ interface Props {
 
 const CardSetEditorForm: React.FC<Props> = (props: Props) => {
   const { cardset, setCardset, cardIndex, setCardIndex } = props;
+
+  const newCard = (index: number) => {
+    const newCard = cardEmpty();
+    newCard.name = `カード${index}`;
+
+    return newCard;
+  };
 
   const AddCardButton = () => {
     const handleAddCardButtonClick = () => {
@@ -64,23 +74,12 @@ const CardSetEditorForm: React.FC<Props> = (props: Props) => {
     setCardset({ cards: newCards });
   };
 
-  const handleCardListItemClick = (index: number) => {
-    console.log(cardset.cards[index]);
-    setCardIndex(index);
-  };
-
-  const newCard = (index: number) => {
-    const newCard = cardEmpty();
-    newCard.name = `カード${index}`;
-
-    return newCard;
-  };
-
   // カードセットのエディター
   if (cardIndex < 0) {
     return (
       <>
         <InputText label="カードセット名" model={cardset} keyName="name" onChanged={setCardset} />
+        <CardSetEditorMenu cardset={cardset} setCardset={setCardset} />
         <Divider />
         <AddCardButton></AddCardButton>
         <Button variant="contained" onClick={() => handleClearCardsButtonClick()} color="secondary" startIcon={<DeleteIcon />}>
@@ -105,7 +104,7 @@ const CardSetEditorForm: React.FC<Props> = (props: Props) => {
                     {card.type === "creature" ? <CreatureIcon /> : card.type === "artifact" ? <ArtifactIcon /> : <MagicIcon />}
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    <Link href="#" onClick={() => handleCardListItemClick(index)}>
+                    <Link href={`/cardset?index=${index}`} shallow={true}>
                       {card.name}
                     </Link>
                   </TableCell>

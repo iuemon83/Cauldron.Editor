@@ -1,7 +1,8 @@
-import { Button, Typography, Divider, Breadcrumbs, Link } from "@mui/material";
+import { Button, Typography, Divider, Breadcrumbs } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Card } from "../types/Card";
 import CardForm from "../components/CardForm";
+import Link from "next/link";
 
 interface Props {
   cardsetName: string;
@@ -14,10 +15,6 @@ interface Props {
 
 const CardEditorForm: React.FC<Props> = (props: Props) => {
   const { cardsetName, card, onChanged, deleteCard, cardIndex, setCardIndex } = props;
-
-  const handleClickCardsetLink = () => {
-    setCardIndex(-1);
-  };
 
   const DeleteCardButton = () => {
     const handleDeleteCardButtonClick = () => {
@@ -34,7 +31,7 @@ const CardEditorForm: React.FC<Props> = (props: Props) => {
   return (
     <>
       <Breadcrumbs aria-label="breadcrumb">
-        <Link color="inherit" href="#" onClick={() => handleClickCardsetLink()}>
+        <Link href="/cardset" shallow={true}>
           {cardsetName}
         </Link>
         <Typography color="textPrimary">{card.name}</Typography>

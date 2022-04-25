@@ -1,10 +1,10 @@
 import Head from "next/head";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import theme from "../styles/theme";
 import createEmotionCache from "../styles/createEmotionCache";
+import { ResponsiveDrawer } from "../components/ResponsiveDrawer";
 
 const clientSideEmotionCache = createEmotionCache();
 interface MyAppProps extends AppProps {
@@ -17,10 +17,13 @@ function MyApp(props: MyAppProps) {
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <title>Cauldron DCG Editor</title>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...pageProps} />
+        <ResponsiveDrawer>
+          <Component {...pageProps} />
+        </ResponsiveDrawer>
       </ThemeProvider>
     </CacheProvider>
   );
