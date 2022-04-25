@@ -23,6 +23,8 @@ const CardSetEditorMenu = (p: Props) => {
   };
 
   const handleDownloadCardset = () => {
+    handleClose();
+
     const saveJson = (filename: string, jsonSource: {}) => {
       const json = JSON.stringify(jsonSource);
 
@@ -38,13 +40,16 @@ const CardSetEditorMenu = (p: Props) => {
       document.body.removeChild(element);
     };
 
-    const filename = "cardset.json";
+    if (!cardset.name) {
+      alert("カードセットの名前を入力してください");
+      return;
+    }
+
+    const filename = `${cardset.name}.json`;
 
     const downloadCardSet = (cardset: CardSet) => saveJson(filename, cardset);
 
     downloadCardSet(cardset);
-
-    handleClose();
   };
 
   const openCardSet = (newCardSet: CardSet) => {
