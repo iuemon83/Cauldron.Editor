@@ -5,7 +5,7 @@ declare type Url = string | UrlObject;
 
 const getAs = (url: Url) => {
   const { publicRuntimeConfig } = getConfig();
-  return `${publicRuntimeConfig.basePath ? "/" + publicRuntimeConfig.basePath : ""}${url}`;
+  return `${publicRuntimeConfig.basePath || ""}${url}`;
 };
 
 const MyLink = (props: React.PropsWithChildren<LinkProps>) => {
