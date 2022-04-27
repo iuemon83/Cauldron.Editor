@@ -3,16 +3,12 @@ import CardSetDataViewerForm from "../components/CardSetDataViewerForm";
 import { useEffect, useState } from "react";
 import { cardEmpty } from "../types/Card";
 import { CardSet } from "../types/CardSet";
-import { getSampleCardSet } from "../components/CauldronApi";
-import { Button, Tabs, Tab, Box } from "@mui/material";
+import { Tabs, Tab, Box } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
-import GetAppIcon from "@mui/icons-material/GetApp";
-import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
 import { styled } from "@mui/material/styles";
 import { useRouter } from "next/router";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import { getAs } from "../components/MyLink";
 
 const CardSetEditor: React.VFC = () => {
   console.log("card set editor");
@@ -58,7 +54,9 @@ const CardSetEditor: React.VFC = () => {
       return;
     }
 
-    router.push(`/cardset?tab=${index}`, undefined, { shallow: true });
+    router.push(`/cardset?tab=${index}`, getAs(`/cardset?tab=${index}`), {
+      shallow: true,
+    });
   };
 
   const changeCard = (index: number) => {
@@ -67,7 +65,9 @@ const CardSetEditor: React.VFC = () => {
     }
 
     if (index >= 0 && index < cardset.cards.length) {
-      router.push(`/cardset?index=${index}`, undefined, { shallow: true });
+      router.push(`/cardset?index=${index}`, getAs(`/cardset?index=${index}`), {
+        shallow: true,
+      });
     } else {
       changeTab(0);
     }

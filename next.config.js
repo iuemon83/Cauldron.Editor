@@ -22,5 +22,8 @@ module.exports = (phase, { defaultConfig }) => {
     experimental: {
       outputStandalone: true,
     },
+    publicRuntimeConfig: {
+      basePath: urlPrefix,
+    },
   };
 };

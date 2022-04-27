@@ -10,13 +10,13 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import { useEffect, useState } from "react";
-import { cardEmpty } from "../types/Card";
 import { getCardMetaData, globalCache } from "../components/CauldronApi";
 import { CssBaseline, AppBar, Toolbar, Typography, CircularProgress } from "@mui/material";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import InfoIcon from "@mui/icons-material/Info";
 import { styled } from "@mui/material/styles";
 import { useRouter } from "next/router";
+import { getAs } from "./MyLink";
 
 const drawerWidth = 200;
 
@@ -36,13 +36,6 @@ export const ResponsiveDrawer: React.FC<Props> = ({ children }) => {
 
     console.log(globalCache.metadata);
   }
-
-  const newCard = (index: number) => {
-    const newCard = cardEmpty();
-    newCard.name = `カード${index}`;
-
-    return newCard;
-  };
 
   useEffect(() => {
     if (!loading) {
@@ -81,7 +74,7 @@ export const ResponsiveDrawer: React.FC<Props> = ({ children }) => {
 
   const handleListItemClick = (index: number, url: string) => {
     setSelectedIndex(index);
-    router.push(url);
+    router.push(url, getAs(url));
   };
 
   const drawer = (
@@ -89,7 +82,7 @@ export const ResponsiveDrawer: React.FC<Props> = ({ children }) => {
       <Toolbar />
       <Divider />
       <List>
-        <ListItem button key="Card Set" selected={selectedIndex === 0} onClick={(event) => handleListItemClick(0, "cardset")}>
+        <ListItem button key="Card Set" selected={selectedIndex === 0} onClick={(event) => handleListItemClick(0, "/cardset")}>
           <ListItemIcon>
             <ListAltIcon />
           </ListItemIcon>

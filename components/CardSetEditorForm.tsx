@@ -9,7 +9,7 @@ import { CardSet } from "../types/CardSet";
 import CardEditorForm from "./CardEditorForm";
 import InputText from "./input/InputText";
 import { Card } from "../types/Card";
-import Link from "next/link";
+import { MyLink } from "../components/MyLink";
 import CardSetEditorMenu from "../components/CardSetEditorMenu";
 import React from "react";
 
@@ -104,9 +104,9 @@ const CardSetEditorForm: React.FC<Props> = (props: Props) => {
                     {card.type === "creature" ? <CreatureIcon /> : card.type === "artifact" ? <ArtifactIcon /> : <MagicIcon />}
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    <Link href={`/cardset?index=${index}`} shallow={true}>
+                    <MyLink href={`/cardset?index=${index}`} shallow={true}>
                       {card.name}
-                    </Link>
+                    </MyLink>
                   </TableCell>
                   <TableCell align="right">{card.cost}</TableCell>
                   <TableCell align="right">{card.power}</TableCell>
@@ -147,8 +147,6 @@ const CardSetEditorForm: React.FC<Props> = (props: Props) => {
       card={cardset.cards[cardIndex]}
       onChanged={handleCardChange}
       deleteCard={() => handleDeleteCardButtonClick(cardIndex)}
-      cardIndex={cardIndex}
-      setCardIndex={setCardIndex}
     ></CardEditorForm>
   );
 };
