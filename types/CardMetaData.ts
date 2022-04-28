@@ -7,6 +7,7 @@ export type CardType = CardMetadataElm;
 export type CardAbility = CardMetadataElm;
 export type CardEffectTimingDamageAfterDamageType = CardMetadataElm;
 export type CardEffectTimingDamageBeforeDamageType = CardMetadataElm;
+export type EffectTimingModifyCounterOnCardEventOperator = CardMetadataElm;
 export type ChoiceHow = CardMetadataElm;
 export type NumConditionCompare = CardMetadataElm;
 export type NumValueCalculatorEventContext = CardMetadataElm;
@@ -42,6 +43,7 @@ export type CardMetaData = {
   cardAbilities: CardAbility[];
   effectTimingDamageAfterDamageTypes: CardEffectTimingDamageAfterDamageType[];
   effectTimingDamageBeforeDamageTypes: CardEffectTimingDamageBeforeDamageType[];
+  effectTimingModifyCounterOnCardEventOperators: EffectTimingModifyCounterOnCardEventOperator[];
   choiceHowList: ChoiceHow[];
   choiceSourceHowList: ChoiceHow[];
   numConditionCompares: NumConditionCompare[];

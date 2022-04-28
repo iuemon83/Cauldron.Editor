@@ -11,7 +11,13 @@ import CardEffectTimingEndTurnForm from "./CardEffectTimingEndTurnForm";
 import CardEffectTimingMoveCardForm from "./CardEffectTimingMoveCardForm";
 import CardEffectTimingPlayForm from "./CardEffectTimingPlayForm";
 import CardEffectTimingStartTurnForm from "./CardEffectTimingStartTurnForm";
+import CardEffectTimingAttackBeforeForm from "./CardEffectTimingAttackBeforeForm";
+import CardEffectTimingExcludeCardForm from "./CardEffectTimingExcludeCardForm";
+import CardEffectTimingModifyCounterOnCardForm from "./CardEffectTimingModifyCounterOnCardForm";
 import InputOption from "./input/InputOption";
+import { cardEffectTimingAttackBeforeEventEmpty } from "../types/CardEffectTimingAttackBeforeEvent";
+import { cardEffectTimingExcludeCardEventEmpty } from "../types/CardEffectTimingExcludeCardEvent";
+import { cardEffectTimingModifyCounterOnCardEventEmpty } from "../types/CardEffectTimingModifyCounterOnCardEvent";
 
 interface Props {
   model: CardEffectTiming;
@@ -27,7 +33,7 @@ const CardEffectTimingForm: React.FC<Props> = ({ model, onChanged }) => {
         keyName="startTurn"
         empty={cardEffectTimingStartTurnEventEmpty}
         onChanged={onChanged}
-        jtx={(d, h) => <CardEffectTimingStartTurnForm model={d!} onChanged={h}></CardEffectTimingStartTurnForm>}
+        jtx={(d, h) => <CardEffectTimingStartTurnForm model={d!} onChanged={h} />}
       />
       <InputOption
         label="ターン終了時"
@@ -35,7 +41,7 @@ const CardEffectTimingForm: React.FC<Props> = ({ model, onChanged }) => {
         keyName="endTurn"
         empty={cardEffectTimingEndTurnEventEmpty}
         onChanged={onChanged}
-        jtx={(d, h) => <CardEffectTimingEndTurnForm model={d!} onChanged={h}></CardEffectTimingEndTurnForm>}
+        jtx={(d, h) => <CardEffectTimingEndTurnForm model={d!} onChanged={h} />}
       />
       <InputOption
         label="カードのプレイ時"
@@ -43,15 +49,7 @@ const CardEffectTimingForm: React.FC<Props> = ({ model, onChanged }) => {
         keyName="play"
         empty={cardEffectTimingPlayEventEmpty}
         onChanged={onChanged}
-        jtx={(d, h) => <CardEffectTimingPlayForm model={d!} onChanged={h}></CardEffectTimingPlayForm>}
-      />
-      <InputOption
-        label="カードの移動時"
-        model={model}
-        keyName="moveCard"
-        empty={cardEffectTimingMoveCardEventEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectTimingMoveCardForm model={d!} onChanged={h}></CardEffectTimingMoveCardForm>}
+        jtx={(d, h) => <CardEffectTimingPlayForm model={d!} onChanged={h} />}
       />
       <InputOption
         label="カードの破壊時"
@@ -59,7 +57,23 @@ const CardEffectTimingForm: React.FC<Props> = ({ model, onChanged }) => {
         keyName="destroy"
         empty={cardEffectTimingDestroyEventEmpty}
         onChanged={onChanged}
-        jtx={(d, h) => <CardEffectTimingDestroyForm model={d!} onChanged={h}></CardEffectTimingDestroyForm>}
+        jtx={(d, h) => <CardEffectTimingDestroyForm model={d!} onChanged={h} />}
+      />
+      <InputOption
+        label="攻撃前"
+        model={model}
+        keyName="attackBefore"
+        empty={cardEffectTimingAttackBeforeEventEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardEffectTimingAttackBeforeForm model={d!} onChanged={h} />}
+      />
+      <InputOption
+        label="攻撃後"
+        model={model}
+        keyName="attackAfter"
+        empty={cardEffectTimingAttackBeforeEventEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardEffectTimingAttackBeforeForm model={d!} onChanged={h} />}
       />
       <InputOption
         label="ダメージ前"
@@ -67,7 +81,39 @@ const CardEffectTimingForm: React.FC<Props> = ({ model, onChanged }) => {
         keyName="damageBefore"
         empty={cardEffectTimingDamageBeforeEventEmpty}
         onChanged={onChanged}
-        jtx={(d, h) => <CardEffectTimingDamageBeforeForm model={d!} onChanged={h}></CardEffectTimingDamageBeforeForm>}
+        jtx={(d, h) => <CardEffectTimingDamageBeforeForm model={d!} onChanged={h} />}
+      />
+      <InputOption
+        label="ダメージ後"
+        model={model}
+        keyName="damageAfter"
+        empty={cardEffectTimingDamageBeforeEventEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardEffectTimingDamageBeforeForm model={d!} onChanged={h} />}
+      />
+      <InputOption
+        label="カードの移動時"
+        model={model}
+        keyName="moveCard"
+        empty={cardEffectTimingMoveCardEventEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardEffectTimingMoveCardForm model={d!} onChanged={h} />}
+      />
+      <InputOption
+        label="カードの除外時"
+        model={model}
+        keyName="excludeCard"
+        empty={cardEffectTimingExcludeCardEventEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardEffectTimingExcludeCardForm model={d!} onChanged={h} />}
+      />
+      <InputOption
+        label="カウンターの変更時"
+        model={model}
+        keyName="modifyCounter"
+        empty={cardEffectTimingModifyCounterOnCardEventEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardEffectTimingModifyCounterOnCardForm model={d!} onChanged={h} />}
       />
     </>
   );
