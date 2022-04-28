@@ -9,7 +9,7 @@ interface Props {
 const CardEffectIfForm: React.FC<Props> = ({ model, onChanged }) => {
   return (
     <>
-      <ConditionWrapForm model={model.condition} onChanged={(x) => onChanged({ condition: { ...x, ...model.condition } })} />
+      <ConditionWrapForm model={model.condition} onChanged={(x) => onChanged({ condition: { ...model.condition, ...x } })} />
     </>
   );
 };
