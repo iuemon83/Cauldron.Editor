@@ -52,7 +52,7 @@ const CardEffectActionModifyCardForm: React.FC<Props> = ({ model, onChanged }) =
         jtx={(d, h) => <CreatureAbilityModifierForm model={d!} onChanged={h} />}
       />
       <InputOption
-        label="アノテーション"
+        label="タグ"
         model={model}
         keyName="annotations"
         empty={annotationsModifierEmpty}

@@ -26,7 +26,7 @@ const AnnotationsModifierForm: React.FC<Props> = ({ model, onChanged }) => {
         onChanged={onChanged}
       />
       <InputList
-        label="アノテーション"
+        label="タグ"
         model={model}
         keyName="value"
         newItem={() => ""}

@@ -3,6 +3,7 @@ import { CardTypeCondition } from "./CardTypeCondition";
 import { NumCondition } from "./NumCondition";
 import { OutZoneCondition, outZoneConditionEmpty } from "./OutZoneCondition";
 import { TextCondition } from "./TextCondition";
+import { CardAnnotationCondition } from "./CardAnnotationCondition";
 
 export type CardDefCondition = {
   outZoneCondition: OutZoneCondition;
@@ -12,6 +13,7 @@ export type CardDefCondition = {
   cardSetCondition: CardSetCondition | undefined;
   nameCondition: TextCondition | undefined;
   typeCondition: CardTypeCondition | undefined;
+  annotationCondition: CardAnnotationCondition | undefined;
 };
 
 export const cardDefConditionEmpty = (): CardDefCondition => {
@@ -23,5 +25,6 @@ export const cardDefConditionEmpty = (): CardDefCondition => {
     cardSetCondition: undefined,
     nameCondition: undefined,
     typeCondition: undefined,
+    annotationCondition: undefined,
   };
 };

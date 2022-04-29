@@ -1,8 +1,10 @@
+import { cardAnnotationConditionEmpty } from "../types/CardAnnotationCondition";
 import { CardDefCondition } from "../types/CardDefCondition";
 import { cardSetConditionEmpty } from "../types/CardSetCondition";
 import { cardTypeConditionEmpty } from "../types/CardTypeCondition";
 import { numConditionEmpty } from "../types/NumCondition";
 import { textConditionEmpty } from "../types/TextCondition";
+import CardAnnotationConditionForm from "./CardAnnotationConditionForm";
 import CardSetConditionForm from "./CardSetConditionForm";
 import CardTypeConditionForm from "./CardTypeConditionForm";
 import FormSet from "./input/FormSet";
@@ -73,6 +75,14 @@ const CardDefConditionForm: React.FC<Props> = ({ model, onChanged }) => {
         empty={cardTypeConditionEmpty}
         onChanged={onChanged}
         jtx={(d, h) => <CardTypeConditionForm model={d!} onChanged={h}></CardTypeConditionForm>}
+      />
+      <InputOption
+        label="タグの条件"
+        model={model}
+        keyName="annotationCondition"
+        empty={cardAnnotationConditionEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardAnnotationConditionForm model={d!} onChanged={h} />}
       />
     </>
   );

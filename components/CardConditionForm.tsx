@@ -131,7 +131,7 @@ const CardConditionForm: React.FC<Props> = ({ model, onChanged }) => {
         jtx={(d, h) => <ZoneConditionForm model={d!} onChanged={h}></ZoneConditionForm>}
       />
       <InputOption
-        label="アノテーションの条件"
+        label="タグの条件"
         model={model}
         keyName="annotationCondition"
         empty={cardAnnotationConditionEmpty}

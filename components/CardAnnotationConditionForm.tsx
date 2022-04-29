@@ -11,7 +11,7 @@ const CardAnnotationConditionForm: React.FC<Props> = ({ model, onChanged }) => {
   return (
     <>
       <div>
-        <InputText label="アノテーション" model={model} keyName="value" onChanged={onChanged} />
+        <InputText label="タグ" model={model} keyName="value" onChanged={onChanged} />
       </div>
       <div>
         <FormControlLabel
