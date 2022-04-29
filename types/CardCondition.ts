@@ -8,7 +8,7 @@ import {
 } from "./CardMetaData";
 import { CardSetCondition } from "./CardSetCondition";
 import { CardTypeCondition } from "./CardTypeCondition";
-import { NumCondition } from "./NumCondition";
+import { NumCompare } from "./NumCompare";
 import { TextCondition } from "./TextCondition";
 import { ZoneCondition } from "./ZoneCondition";
 import { CounterCondition } from "./CounterCondition";
@@ -20,9 +20,9 @@ export type CardCondition = {
   actionContext: ActionContextCards | undefined;
   battleEventContextCondition: CardConditionBattleEventContextCondition["code"];
   damageEventContextCondition: CardConditionDamageEventContextCondition["code"];
-  costCondition: NumCondition | undefined;
-  powerCondition: NumCondition | undefined;
-  toughnessCondition: NumCondition | undefined;
+  costCondition: NumCompare | undefined;
+  powerCondition: NumCompare | undefined;
+  toughnessCondition: NumCompare | undefined;
   cardSetCondition: CardSetCondition | undefined;
   nameCondition: TextCondition | undefined;
   annotationCondition: CardAnnotationCondition | undefined;

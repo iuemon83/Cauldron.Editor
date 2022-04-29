@@ -2,43 +2,107 @@ import { numValueCalculatorEmpty } from "../types/NumValueCalculator";
 import { numValueVariableCalculatorEmpty } from "../types/NumValueVariableCalculator";
 import { numValueModifierEmpty } from "../types/NumValueModifier";
 import { NumValue } from "../types/NumValue";
-import InputNumberOption from "./input/InputNumberOption";
 import InputOption from "./input/InputOption";
 import NumValueCalculatorForm from "./NumValueCalculatorForm";
 import NumValueModifierForm from "./NumValueModifierForm";
 import NumValueVariableCalculatorForm from "./NumValueVariableCalculatorForm";
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import InputNumber from "./input/InputNumber";
 
 interface Props {
   model: NumValue;
   onChanged: (model: Partial<NumValue>) => void;
 }
 
+type ActionNameKey = "pureValue" | "numValueCalculator" | "numValueVariableCalculator";
+type ActionKeyMap = { [key in ActionNameKey]: string };
+
+const actionNames: ActionKeyMap = {
+  pureValue: "定数",
+  numValueCalculator: "算出",
+  numValueVariableCalculator: "変数",
+} as const;
+
+const actionNameKeys = Object.keys(actionNames) as ActionNameKey[];
+
+function isActionNameKey(x: string): x is ActionNameKey {
+  return (actionNameKeys as readonly string[]).indexOf(x) >= 0;
+}
+
 const NumValueForm: React.FC<Props> = ({ model, onChanged }) => {
+  console.log(model);
+
+  const selectedAction = (() => {
+    for (const key of actionNameKeys) {
+      if (model[key] !== undefined) {
+        console.log(key);
+        return key;
+      }
+    }
+
+    return "";
+  })();
+
+  const handleActionNameChanged = (e: SelectChangeEvent<string>) => {
+    const newSelectedActionName = e.target.value;
+
+    if (!isActionNameKey(newSelectedActionName)) {
+      return;
+    }
+
+    actionNameKeys.forEach((x) => {
+      if (x !== newSelectedActionName) {
+        model[x] = undefined;
+      }
+    });
+
+    switch (newSelectedActionName) {
+      case "pureValue":
+        model.pureValue = 0;
+        break;
+      case "numValueCalculator":
+        model.numValueCalculator = numValueCalculatorEmpty();
+        break;
+      case "numValueVariableCalculator":
+        model.numValueVariableCalculator = numValueVariableCalculatorEmpty();
+        break;
+    }
+
+    onChanged(model);
+  };
+
   return (
     <>
-      <div>
-        <InputNumberOption label="定数" keyName="pureValue" model={model} onChanged={onChanged} />
-      </div>
-      <div>
-        <InputOption
-          label="算出"
-          model={model}
-          keyName="numValueCalculator"
-          empty={numValueCalculatorEmpty}
-          onChanged={onChanged}
-          jtx={(d, h) => <NumValueCalculatorForm model={d!} onChanged={h}></NumValueCalculatorForm>}
+      <FormControl>
+        <InputLabel>数値の種類</InputLabel>
+        <Select value={selectedAction} onChange={handleActionNameChanged}>
+          {actionNameKeys.map((key, index) => (
+            <MenuItem key={index} value={key}>
+              {actionNames[key as keyof typeof actionNames]}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      {selectedAction === "pureValue" && model.pureValue !== undefined && (
+        <InputNumber label="" model={model} keyName="pureValue" onChanged={onChanged} />
+      )}
+      {selectedAction === "numValueCalculator" && model.numValueCalculator !== undefined && (
+        <NumValueCalculatorForm
+          model={model.numValueCalculator}
+          onChanged={(x) =>
+            model.numValueCalculator !== undefined && onChanged({ numValueCalculator: { ...model.numValueCalculator, ...x } })
+          }
         />
-      </div>
-      <div>
-        <InputOption
-          label="変数"
-          model={model}
-          keyName="numValueVariableCalculator"
-          empty={numValueVariableCalculatorEmpty}
-          onChanged={onChanged}
-          jtx={(d, h) => <NumValueVariableCalculatorForm model={d!} onChanged={h}></NumValueVariableCalculatorForm>}
+      )}
+      {selectedAction === "numValueVariableCalculator" && model.numValueVariableCalculator !== undefined && (
+        <NumValueVariableCalculatorForm
+          model={model.numValueVariableCalculator}
+          onChanged={(x) =>
+            model.numValueVariableCalculator !== undefined &&
+            onChanged({ numValueVariableCalculator: { ...model.numValueVariableCalculator, ...x } })
+          }
         />
-      </div>
+      )}
       <div>
         <InputOption
           label="演算"

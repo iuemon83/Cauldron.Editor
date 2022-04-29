@@ -1,15 +1,15 @@
 import { CardSetCondition } from "./CardSetCondition";
 import { CardTypeCondition } from "./CardTypeCondition";
-import { NumCondition } from "./NumCondition";
+import { NumCompare } from "./NumCompare";
 import { OutZoneCondition, outZoneConditionEmpty } from "./OutZoneCondition";
 import { TextCondition } from "./TextCondition";
 import { CardAnnotationCondition } from "./CardAnnotationCondition";
 
 export type CardDefCondition = {
   outZoneCondition: OutZoneCondition;
-  costCondition: NumCondition | undefined;
-  powerCondition: NumCondition | undefined;
-  toughnessCondition: NumCondition | undefined;
+  costCondition: NumCompare | undefined;
+  powerCondition: NumCompare | undefined;
+  toughnessCondition: NumCompare | undefined;
   cardSetCondition: CardSetCondition | undefined;
   nameCondition: TextCondition | undefined;
   typeCondition: CardTypeCondition | undefined;

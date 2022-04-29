@@ -1,7 +1,6 @@
 import { CardCondition } from "../types/CardCondition";
 import { cardSetConditionEmpty } from "../types/CardSetCondition";
 import { cardTypeConditionEmpty } from "../types/CardTypeCondition";
-import { numConditionEmpty } from "../types/NumCondition";
 import { textConditionEmpty } from "../types/TextCondition";
 import { zoneConditionEmpty } from "../types/ZoneCondition";
 import CardSetConditionForm from "./CardSetConditionForm";
@@ -10,7 +9,7 @@ import { globalCache } from "./CauldronApi";
 import InputOption from "./input/InputOption";
 import InputSelect from "./input/InputSelect";
 
-import NumConditionForm from "./NumConditionForm";
+import NumCompareForm from "./NumCompareForm";
 import TextConditionForm from "./TextConditionForm";
 import ZoneConditionForm from "./ZoneConditionForm";
 import ActionContextCardsForm from "./ActionContextCardsForm";
@@ -18,6 +17,7 @@ import CardAnnotationConditionForm from "./CardAnnotationConditionForm";
 import { actionContextCardsEmpty } from "../types/ActionContextCards";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { cardAnnotationConditionEmpty } from "../types/CardAnnotationCondition";
+import { numCompareEmpty } from "../types/NumCompare";
 
 interface Props {
   model: CardCondition;
@@ -67,6 +67,38 @@ const CardConditionForm: React.FC<Props> = ({ model, onChanged }) => {
         onChanged={onChanged}
       />
       <InputOption
+        label="領域の条件"
+        model={model}
+        keyName="zoneCondition"
+        empty={zoneConditionEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <ZoneConditionForm model={d!} onChanged={h}></ZoneConditionForm>}
+      />
+      <InputOption
+        label="カードタイプの条件"
+        model={model}
+        keyName="typeCondition"
+        empty={cardTypeConditionEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardTypeConditionForm model={d!} onChanged={h}></CardTypeConditionForm>}
+      />
+      <InputOption
+        label="名前の条件"
+        model={model}
+        keyName="nameCondition"
+        empty={textConditionEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <TextConditionForm model={d!} onChanged={h}></TextConditionForm>}
+      />
+      <InputOption
+        label="タグの条件"
+        model={model}
+        keyName="annotationCondition"
+        empty={cardAnnotationConditionEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardAnnotationConditionForm model={d!} onChanged={h} />}
+      />
+      <InputOption
         label="アクションの結果"
         model={model}
         keyName="actionContext"
@@ -86,57 +118,25 @@ const CardConditionForm: React.FC<Props> = ({ model, onChanged }) => {
         label="コストの条件"
         model={model}
         keyName="costCondition"
-        empty={numConditionEmpty}
+        empty={numCompareEmpty}
         onChanged={onChanged}
-        jtx={(d, h) => <NumConditionForm model={d!} onChanged={h}></NumConditionForm>}
-      />
-      <InputOption
-        label="名前の条件"
-        model={model}
-        keyName="nameCondition"
-        empty={textConditionEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <TextConditionForm model={d!} onChanged={h}></TextConditionForm>}
+        jtx={(d, h) => <NumCompareForm model={d!} onChanged={h}></NumCompareForm>}
       />
       <InputOption
         label="パワーの条件"
         model={model}
         keyName="powerCondition"
-        empty={numConditionEmpty}
+        empty={numCompareEmpty}
         onChanged={onChanged}
-        jtx={(d, h) => <NumConditionForm model={d!} onChanged={h}></NumConditionForm>}
+        jtx={(d, h) => <NumCompareForm model={d!} onChanged={h}></NumCompareForm>}
       />
       <InputOption
         label="タフネスの条件"
         model={model}
         keyName="toughnessCondition"
-        empty={numConditionEmpty}
+        empty={numCompareEmpty}
         onChanged={onChanged}
-        jtx={(d, h) => <NumConditionForm model={d!} onChanged={h}></NumConditionForm>}
-      />
-      <InputOption
-        label="カードタイプの条件"
-        model={model}
-        keyName="typeCondition"
-        empty={cardTypeConditionEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardTypeConditionForm model={d!} onChanged={h}></CardTypeConditionForm>}
-      />
-      <InputOption
-        label="領域の条件"
-        model={model}
-        keyName="zoneCondition"
-        empty={zoneConditionEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <ZoneConditionForm model={d!} onChanged={h}></ZoneConditionForm>}
-      />
-      <InputOption
-        label="タグの条件"
-        model={model}
-        keyName="annotationCondition"
-        empty={cardAnnotationConditionEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardAnnotationConditionForm model={d!} onChanged={h} />}
+        jtx={(d, h) => <NumCompareForm model={d!} onChanged={h}></NumCompareForm>}
       />
       <InputOption
         label="アビリティの条件"

@@ -24,131 +24,213 @@ import CardEffectActionWinForm from "./CardEffectActionWinForm";
 import CardEffectActionReserveEffectForm from "./CardEffectActionReserveEffectForm";
 import CardEffectActionExcludeCardForm from "./CardEffectActionExcludeCardForm";
 import CardEffectActionModifyCounterForm from "./CardEffectActionModifyCounterForm";
-import InputOption from "./input/InputOption";
 import { cardEffectActionReserveEffectEmpty } from "../types/CardEffectActionReserveEffect";
 import { cardEffectActionExcludeCardEmpty } from "../types/CardEffectActionExcludeCard";
 import { cardEffectActionModifyCounterEmpty } from "../types/CardEffectActionModifyCounter";
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 
-interface Props {
+type Props = {
   model: CardEffectAction;
   onChanged: (model: Partial<CardEffectAction>) => void;
+};
+
+type ActionNameKey = keyof CardEffectAction;
+type ActionKeyMap = { [key in ActionNameKey]: string };
+
+const actionNames: ActionKeyMap = {
+  damage: "ダメージ",
+  addCard: "カードの生成",
+  excludeCard: "カードの除外",
+  modifyCard: "カードの修整",
+  destroyCard: "カードの破壊",
+  moveCard: "カードの移動",
+  modifyDamage: "ダメージの修整",
+  modifyPlayer: "プレイヤーの修整",
+  drawCard: "ドロー",
+  addEffect: "効果の追加",
+  setVariable: "値のセット",
+  modifyCounter: "カウンターの修整",
+  win: "勝利",
+  reserveEffect: "効果の予約",
+} as const;
+
+const actionNameKeys = Object.keys(actionNames) as ActionNameKey[];
+
+function isActionNameKey(x: string): x is ActionNameKey {
+  return (actionNameKeys as readonly string[]).indexOf(x) >= 0;
 }
 
 const CardEffectActionForm: React.FC<Props> = ({ model, onChanged }) => {
+  console.log(model);
+
+  const selectedAction = (() => {
+    for (const key of actionNameKeys) {
+      if (model[key] !== undefined) {
+        console.log(key);
+        return key;
+      }
+    }
+
+    return "";
+  })();
+
+  const handleActionNameChanged = (e: SelectChangeEvent<string>) => {
+    const newSelectedActionName = e.target.value;
+
+    if (!isActionNameKey(newSelectedActionName)) {
+      return;
+    }
+
+    actionNameKeys.forEach((x) => {
+      if (x !== newSelectedActionName) {
+        model[x] = undefined;
+      }
+    });
+
+    switch (newSelectedActionName) {
+      case "addCard":
+        model.addCard = CardEffectActionAddCardEmpty();
+        break;
+      case "addEffect":
+        model.addEffect = cardEffectActionAddEffectEmpty();
+        break;
+      case "damage":
+        model.damage = CardEffectActionDamageEmpty();
+        break;
+      case "destroyCard":
+        model.destroyCard = CardEffectActionDestroyCardEmpty();
+        break;
+      case "drawCard":
+        model.drawCard = CardEffectActionDrawCardEmpty();
+        break;
+      case "excludeCard":
+        model.excludeCard = cardEffectActionExcludeCardEmpty();
+        break;
+      case "modifyCard":
+        model.modifyCard = CardEffectActionModifyCardEmpty();
+        break;
+      case "modifyCounter":
+        model.modifyCounter = cardEffectActionModifyCounterEmpty();
+        break;
+      case "modifyDamage":
+        model.modifyDamage = CardEffectActionModifyDamageEmpty();
+        break;
+      case "modifyPlayer":
+        model.modifyPlayer = cardEffectActionModifyPlayerEmpty();
+        break;
+      case "moveCard":
+        model.moveCard = cardEffectActionMoveCardEmpty();
+        break;
+      case "reserveEffect":
+        model.reserveEffect = cardEffectActionReserveEffectEmpty();
+        break;
+      case "setVariable":
+        model.setVariable = CardEffectActionSetVariableEmpty();
+        break;
+      case "win":
+        model.win = CardEffectActionWinEmpty();
+        break;
+    }
+
+    onChanged(model);
+  };
+
   return (
     <>
-      <InputOption
-        label="ダメージ"
-        model={model}
-        keyName="damage"
-        empty={CardEffectActionDamageEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectActionDamageForm model={d!} onChanged={h}></CardEffectActionDamageForm>}
-      />
-      <InputOption
-        label="カードの生成"
-        model={model}
-        keyName="addCard"
-        empty={CardEffectActionAddCardEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectActionAddCardForm model={d!} onChanged={h}></CardEffectActionAddCardForm>}
-      />
-      <InputOption
-        label="カードの除外"
-        model={model}
-        keyName="excludeCard"
-        empty={cardEffectActionExcludeCardEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectActionExcludeCardForm model={d!} onChanged={h} />}
-      />
-      <InputOption
-        label="カードの修整"
-        model={model}
-        keyName="modifyCard"
-        empty={CardEffectActionModifyCardEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectActionModifyCardForm model={d!} onChanged={h}></CardEffectActionModifyCardForm>}
-      />
-      <InputOption
-        label="カードの破壊"
-        model={model}
-        keyName="destroyCard"
-        empty={CardEffectActionDestroyCardEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectActionDestroyCardForm model={d!} onChanged={h}></CardEffectActionDestroyCardForm>}
-      />
-      <InputOption
-        label="カードの移動"
-        model={model}
-        keyName="moveCard"
-        empty={cardEffectActionMoveCardEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectActionMoveCardForm model={d!} onChanged={h}></CardEffectActionMoveCardForm>}
-      />
-      <InputOption
-        label="ダメージの修整"
-        model={model}
-        keyName="modifyDamage"
-        empty={CardEffectActionModifyDamageEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectActionModifyDamageForm model={d!} onChanged={h}></CardEffectActionModifyDamageForm>}
-      />
-      <InputOption
-        label="プレイヤーの修整"
-        model={model}
-        keyName="modifyPlayer"
-        empty={cardEffectActionModifyPlayerEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectActionModifyPlayerForm model={d!} onChanged={h}></CardEffectActionModifyPlayerForm>}
-      />
-      <InputOption
-        label="ドロー"
-        model={model}
-        keyName="drawCard"
-        empty={CardEffectActionDrawCardEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectActionDrawCardForm model={d!} onChanged={h}></CardEffectActionDrawCardForm>}
-      />
-      <InputOption
-        label="効果の追加"
-        model={model}
-        keyName="addEffect"
-        empty={cardEffectActionAddEffectEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectActionAddEffectForm model={d!} onChanged={h}></CardEffectActionAddEffectForm>}
-      />
-      <InputOption
-        label="値のセット"
-        model={model}
-        keyName="setVariable"
-        empty={CardEffectActionSetVariableEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectActionSetVariableForm model={d!} onChanged={h}></CardEffectActionSetVariableForm>}
-      />
-      <InputOption
-        label="カウンターの修整"
-        model={model}
-        keyName="modifyCounter"
-        empty={cardEffectActionModifyCounterEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectActionModifyCounterForm model={d!} onChanged={h} />}
-      />
-      <InputOption
-        label="勝利"
-        model={model}
-        keyName="win"
-        empty={CardEffectActionWinEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectActionWinForm model={d!} onChanged={h}></CardEffectActionWinForm>}
-      />
-      <InputOption
-        label="効果の予約"
-        model={model}
-        keyName="reserveEffect"
-        empty={cardEffectActionReserveEffectEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardEffectActionReserveEffectForm model={d!} onChanged={h} />}
-      />
+      <FormControl>
+        <InputLabel>アクション</InputLabel>
+        <Select value={selectedAction} onChange={handleActionNameChanged}>
+          {actionNameKeys.map((key, index) => (
+            <MenuItem key={index} value={key}>
+              {actionNames[key as keyof typeof actionNames]}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      {selectedAction === "damage" && model.damage !== undefined && (
+        <CardEffectActionDamageForm
+          model={model.damage}
+          onChanged={(x) => model.damage !== undefined && onChanged({ damage: { ...model.damage, ...x } })}
+        />
+      )}
+      {selectedAction === "addCard" && model.addCard !== undefined && (
+        <CardEffectActionAddCardForm
+          model={model.addCard}
+          onChanged={(x) => model.addCard !== undefined && onChanged({ addCard: { ...model.addCard, ...x } })}
+        />
+      )}
+      {selectedAction === "excludeCard" && model.excludeCard !== undefined && (
+        <CardEffectActionExcludeCardForm
+          model={model.excludeCard}
+          onChanged={(x) => model.excludeCard !== undefined && onChanged({ excludeCard: { ...model.excludeCard, ...x } })}
+        />
+      )}
+      {selectedAction === "modifyCard" && model.modifyCard !== undefined && (
+        <CardEffectActionModifyCardForm
+          model={model.modifyCard}
+          onChanged={(x) => model.modifyCard !== undefined && onChanged({ modifyCard: { ...model.modifyCard, ...x } })}
+        />
+      )}
+      {selectedAction === "destroyCard" && model.destroyCard !== undefined && (
+        <CardEffectActionDestroyCardForm
+          model={model.destroyCard}
+          onChanged={(x) => model.destroyCard !== undefined && onChanged({ destroyCard: { ...model.destroyCard, ...x } })}
+        />
+      )}
+      {selectedAction === "moveCard" && model.moveCard !== undefined && (
+        <CardEffectActionMoveCardForm
+          model={model.moveCard}
+          onChanged={(x) => model.moveCard !== undefined && onChanged({ moveCard: { ...model.moveCard, ...x } })}
+        />
+      )}
+      {selectedAction === "modifyDamage" && model.modifyDamage !== undefined && (
+        <CardEffectActionModifyDamageForm
+          model={model.modifyDamage}
+          onChanged={(x) => model.modifyDamage !== undefined && onChanged({ modifyDamage: { ...model.modifyDamage, ...x } })}
+        />
+      )}
+      {selectedAction === "modifyPlayer" && model.modifyPlayer !== undefined && (
+        <CardEffectActionModifyPlayerForm
+          model={model.modifyPlayer}
+          onChanged={(x) => model.modifyPlayer !== undefined && onChanged({ modifyPlayer: { ...model.modifyPlayer, ...x } })}
+        />
+      )}
+      {selectedAction === "drawCard" && model.drawCard !== undefined && (
+        <CardEffectActionDrawCardForm
+          model={model.drawCard}
+          onChanged={(x) => model.drawCard !== undefined && onChanged({ drawCard: { ...model.drawCard, ...x } })}
+        />
+      )}
+      {selectedAction === "addEffect" && model.addEffect !== undefined && (
+        <CardEffectActionAddEffectForm
+          model={model.addEffect}
+          onChanged={(x) => model.addEffect !== undefined && onChanged({ addEffect: { ...model.addEffect, ...x } })}
+        />
+      )}
+      {selectedAction === "setVariable" && model.setVariable !== undefined && (
+        <CardEffectActionSetVariableForm
+          model={model.setVariable}
+          onChanged={(x) => model.setVariable !== undefined && onChanged({ setVariable: { ...model.setVariable, ...x } })}
+        />
+      )}
+      {selectedAction === "modifyCounter" && model.modifyCounter !== undefined && (
+        <CardEffectActionModifyCounterForm
+          model={model.modifyCounter}
+          onChanged={(x) => model.modifyCounter !== undefined && onChanged({ modifyCounter: { ...model.modifyCounter, ...x } })}
+        />
+      )}
+      {selectedAction === "win" && model.win !== undefined && (
+        <CardEffectActionWinForm
+          model={model.win}
+          onChanged={(x) => model.win !== undefined && onChanged({ win: { ...model.win, ...x } })}
+        />
+      )}
+      {selectedAction === "reserveEffect" && model.reserveEffect !== undefined && (
+        <CardEffectActionReserveEffectForm
+          model={model.reserveEffect}
+          onChanged={(x) => model.reserveEffect !== undefined && onChanged({ reserveEffect: { ...model.reserveEffect, ...x } })}
+        />
+      )}
     </>
   );
 };

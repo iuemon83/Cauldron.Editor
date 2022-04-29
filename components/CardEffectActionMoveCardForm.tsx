@@ -15,6 +15,8 @@ interface Props {
 }
 
 const CardEffectActionMoveCardForm: React.FC<Props> = ({ model, onChanged }) => {
+  console.log(model);
+
   const zoneNamesLabelsByValue = Object.fromEntries(globalCache.metadata!.zoneNames.map((v) => [v.code, v.displayText]));
   const zoneNames = Object.keys(zoneNamesLabelsByValue);
 

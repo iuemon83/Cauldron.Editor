@@ -2,7 +2,7 @@ import { cardAnnotationConditionEmpty } from "../types/CardAnnotationCondition";
 import { CardDefCondition } from "../types/CardDefCondition";
 import { cardSetConditionEmpty } from "../types/CardSetCondition";
 import { cardTypeConditionEmpty } from "../types/CardTypeCondition";
-import { numConditionEmpty } from "../types/NumCondition";
+import { numCompareEmpty } from "../types/NumCompare";
 import { textConditionEmpty } from "../types/TextCondition";
 import CardAnnotationConditionForm from "./CardAnnotationConditionForm";
 import CardSetConditionForm from "./CardSetConditionForm";
@@ -10,7 +10,7 @@ import CardTypeConditionForm from "./CardTypeConditionForm";
 import FormSet from "./input/FormSet";
 import InputOption from "./input/InputOption";
 
-import NumConditionForm from "./NumConditionForm";
+import NumCompareForm from "./NumCompareForm";
 import OutZoneConditionForm from "./OutZoneConditionForm";
 import TextConditionForm from "./TextConditionForm";
 
@@ -29,6 +29,30 @@ const CardDefConditionForm: React.FC<Props> = ({ model, onChanged }) => {
         />
       </FormSet>
       <InputOption
+        label="カードタイプの条件"
+        model={model}
+        keyName="typeCondition"
+        empty={cardTypeConditionEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardTypeConditionForm model={d!} onChanged={h}></CardTypeConditionForm>}
+      />
+      <InputOption
+        label="名前の条件"
+        model={model}
+        keyName="nameCondition"
+        empty={textConditionEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <TextConditionForm model={d!} onChanged={h}></TextConditionForm>}
+      />
+      <InputOption
+        label="タグの条件"
+        model={model}
+        keyName="annotationCondition"
+        empty={cardAnnotationConditionEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardAnnotationConditionForm model={d!} onChanged={h} />}
+      />
+      <InputOption
         label="カードセットの条件"
         model={model}
         keyName="cardSetCondition"
@@ -40,49 +64,25 @@ const CardDefConditionForm: React.FC<Props> = ({ model, onChanged }) => {
         label="コストの条件"
         model={model}
         keyName="costCondition"
-        empty={numConditionEmpty}
+        empty={numCompareEmpty}
         onChanged={onChanged}
-        jtx={(d, h) => <NumConditionForm model={d!} onChanged={h}></NumConditionForm>}
-      />
-      <InputOption
-        label="名前の条件"
-        model={model}
-        keyName="nameCondition"
-        empty={textConditionEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <TextConditionForm model={d!} onChanged={h}></TextConditionForm>}
+        jtx={(d, h) => <NumCompareForm model={d!} onChanged={h}></NumCompareForm>}
       />
       <InputOption
         label="パワーの条件"
         model={model}
         keyName="powerCondition"
-        empty={numConditionEmpty}
+        empty={numCompareEmpty}
         onChanged={onChanged}
-        jtx={(d, h) => <NumConditionForm model={d!} onChanged={h}></NumConditionForm>}
+        jtx={(d, h) => <NumCompareForm model={d!} onChanged={h}></NumCompareForm>}
       />
       <InputOption
         label="タフネスの条件"
         model={model}
         keyName="toughnessCondition"
-        empty={numConditionEmpty}
+        empty={numCompareEmpty}
         onChanged={onChanged}
-        jtx={(d, h) => <NumConditionForm model={d!} onChanged={h}></NumConditionForm>}
-      />
-      <InputOption
-        label="カードタイプの条件"
-        model={model}
-        keyName="typeCondition"
-        empty={cardTypeConditionEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardTypeConditionForm model={d!} onChanged={h}></CardTypeConditionForm>}
-      />
-      <InputOption
-        label="タグの条件"
-        model={model}
-        keyName="annotationCondition"
-        empty={cardAnnotationConditionEmpty}
-        onChanged={onChanged}
-        jtx={(d, h) => <CardAnnotationConditionForm model={d!} onChanged={h} />}
+        jtx={(d, h) => <NumCompareForm model={d!} onChanged={h}></NumCompareForm>}
       />
     </>
   );

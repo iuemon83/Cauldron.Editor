@@ -11,6 +11,8 @@ interface Props {
 }
 
 const ChoiceForm: React.FC<Props> = ({ model, onChanged }) => {
+  console.log(model);
+
   const howListLabelsByValue = Object.fromEntries(globalCache.metadata!.choiceHowList.map((v) => [v.code, v.displayText]));
   const howList = Object.keys(howListLabelsByValue);
 
