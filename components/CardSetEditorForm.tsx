@@ -3,6 +3,7 @@ import { cardEmpty } from "../types/Card";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ArtifactIcon from "@mui/icons-material/AccountBalance";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CreatureIcon from "@mui/icons-material/Accessibility";
 import MagicIcon from "@mui/icons-material/Whatshot";
 import { CardSet } from "../types/CardSet";
@@ -74,6 +75,27 @@ const CardSetEditorForm: React.FC<Props> = (props: Props) => {
     setCardset({ cards: newCards });
   };
 
+  const handleCopyCardButtonClick = (copyIndex: number) => {
+    if (copyIndex < 0 && cardset.cards.length <= copyIndex) {
+      return;
+    }
+
+    const confirmMessage = `「${cardset.cards[copyIndex].name}」をコピーします。`;
+    if (!confirm(confirmMessage)) {
+      return;
+    }
+
+    const copy: Card = JSON.parse(JSON.stringify(cardset.cards[copyIndex]));
+    copy.name = `${copy.name} - コピー`;
+
+    setCardset({
+      cards: [copy, ...cardset.cards],
+    });
+
+    // 追加したカードを選択する
+    setCardIndex(0);
+  };
+
   // カードセットのエディター
   if (cardIndex < 0) {
     return (
@@ -94,6 +116,7 @@ const CardSetEditorForm: React.FC<Props> = (props: Props) => {
                 <TableCell align="right">Cost</TableCell>
                 <TableCell align="right">Power</TableCell>
                 <TableCell align="right">Toughness</TableCell>
+                <TableCell align="right"></TableCell>
                 <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
@@ -117,9 +140,15 @@ const CardSetEditorForm: React.FC<Props> = (props: Props) => {
                       onClick={() => handleDeleteCardButtonClick(index)}
                       color="secondary"
                       startIcon={<DeleteIcon />}
-                    >
-                      Delete
-                    </Button>
+                    ></Button>
+                  </TableCell>
+                  <TableCell align="right">
+                    <Button
+                      variant="contained"
+                      onClick={() => handleCopyCardButtonClick(index)}
+                      color="secondary"
+                      startIcon={<ContentCopyIcon />}
+                    ></Button>
                   </TableCell>
                 </TableRow>
               ))}
