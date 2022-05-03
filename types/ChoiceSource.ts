@@ -15,7 +15,7 @@ export type ChoiceSource = {
 
 export const choiceSourceEmpty = (): ChoiceSource => {
   return {
-    how: globalCache.metadata!.choiceSourceHowList[0].code,
+    how: "all",
     numPicks: numValueEmpty(),
     orPlayerConditions: [],
     orCardConditions: [],

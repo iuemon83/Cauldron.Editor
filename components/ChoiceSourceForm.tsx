@@ -33,9 +33,11 @@ const ChoiceSourceForm: React.FC<Props> = ({ model, onChanged }) => {
           onChanged={onChanged}
         />
       </div>
-      <FormSet label="対象の数">
-        <NumValueForm model={model.numPicks} onChanged={(x) => onChanged({ numPicks: { ...model.numPicks, ...x } })} />
-      </FormSet>
+      {model.how !== "all" && (
+        <FormSet label="対象の数">
+          <NumValueForm model={model.numPicks} onChanged={(x) => onChanged({ numPicks: { ...model.numPicks, ...x } })} />
+        </FormSet>
+      )}
       <OrPlayerConditionListForm model={model} onChanged={onChanged} />
       <OrCardConditionListForm model={model} onChanged={onChanged} />
 

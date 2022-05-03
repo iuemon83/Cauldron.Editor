@@ -28,9 +28,11 @@ const ChoiceForm: React.FC<Props> = ({ model, onChanged }) => {
           onChanged={onChanged}
         />
       </div>
-      <FormSet label="対象の数">
-        <NumValueForm model={model.numPicks} onChanged={(x) => onChanged({ numPicks: { ...model.numPicks, ...x } })} />
-      </FormSet>
+      {model.how !== "all" && (
+        <FormSet label="対象の数">
+          <NumValueForm model={model.numPicks} onChanged={(x) => onChanged({ numPicks: { ...model.numPicks, ...x } })} />
+        </FormSet>
+      )}
       <FormSet label="選択できる候補">
         <ChoiceSourceForm model={model.source} onChanged={(e) => onChanged({ source: { ...model.source, ...e } })} />
       </FormSet>

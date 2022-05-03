@@ -11,7 +11,7 @@ export type Choice = {
 
 export const choiceEmpty = (): Choice => {
   return {
-    how: globalCache.metadata!.choiceHowList[0].code,
+    how: "all",
     numPicks: numValueEmpty(),
     source: choiceSourceEmpty(),
   };
