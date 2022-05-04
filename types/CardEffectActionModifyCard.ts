@@ -9,6 +9,7 @@ export type CardEffectActionModifyCard = {
   toughness: NumValueModifier | undefined;
   ability: CreatureAbilityModifier | undefined;
   annotations: AnnotationsModifier | undefined;
+  numTurnsToCanAttack: NumValueModifier | undefined;
   choice: Choice;
   name: string | undefined;
 };
@@ -20,6 +21,7 @@ export const CardEffectActionModifyCardEmpty = (): CardEffectActionModifyCard =>
     toughness: undefined,
     ability: undefined,
     annotations: undefined,
+    numTurnsToCanAttack: undefined,
     choice: choiceEmpty(),
     name: undefined,
   };
