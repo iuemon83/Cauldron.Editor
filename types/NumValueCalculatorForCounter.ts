@@ -3,14 +3,14 @@ import { ActionContextCounters } from "./ActionContextCounters";
 
 export type NumValueCalculatorForCounter = {
   counterName: string | undefined;
-  cardsChoice: Choice;
+  targetChoice: Choice;
   actionContextCounters: ActionContextCounters | undefined;
 };
 
 export const numValueCalculatorForCounterEmpty = (): NumValueCalculatorForCounter => {
   return {
     counterName: undefined,
-    cardsChoice: choiceEmpty(),
+    targetChoice: choiceEmpty(),
     actionContextCounters: undefined,
   };
 };

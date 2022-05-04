@@ -1,6 +1,7 @@
 import { CardEffectTimingModifyCounterOnCardEvent } from "../types/CardEffectTimingModifyCounterOnCardEvent";
 import { globalCache } from "./CauldronApi";
 import InputSelect from "./input/InputSelect";
+import InputText from "./input/InputText";
 import OrCardConditionListForm from "./OrCardConditionListForm";
 
 interface Props {
@@ -16,7 +17,9 @@ const CardEffectTimingModifyCounterOnCardForm: React.FC<Props> = ({ model, onCha
 
   return (
     <>
-      <OrCardConditionListForm model={model} onChanged={onChanged} />
+      <div>
+        <InputText label="カウンターの名前" model={model} keyName="countername" onChanged={onChanged} />
+      </div>
       <InputSelect
         label="from"
         values={operators}
@@ -25,6 +28,7 @@ const CardEffectTimingModifyCounterOnCardForm: React.FC<Props> = ({ model, onCha
         getLabel={(v) => operatorsLabelsByValue[v]}
         onChanged={onChanged}
       />
+      <OrCardConditionListForm model={model} onChanged={onChanged} />
     </>
   );
 };

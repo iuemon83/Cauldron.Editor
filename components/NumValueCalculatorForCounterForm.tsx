@@ -19,13 +19,13 @@ const NumValueCalculatorForCounterForm: React.FC<Props> = ({ model, onChanged })
       </div>
       <FormSet label="カードの選択条件">
         <ChoiceForm
-          model={model.cardsChoice}
-          onChanged={(x) => onChanged({ cardsChoice: { ...model.cardsChoice, ...x } })}
+          model={model.targetChoice}
+          onChanged={(x) => onChanged({ targetChoice: { ...model.targetChoice, ...x } })}
         ></ChoiceForm>
       </FormSet>
       <div>
         <InputOption
-          label="カウンター"
+          label="アクションの結果"
           model={model}
           keyName="actionContextCounters"
           empty={actionContextCountersEmpty}
