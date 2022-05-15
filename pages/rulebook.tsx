@@ -32,7 +32,7 @@ const RuleBookEditor: React.VFC = () => {
       saveJson("rulebook.json", rulebook);
     };
     return (
-      <Button variant="contained" onClick={handleSaveRuleBook} color="primary" startIcon={<GetAppIcon />}>
+      <Button variant="contained" onClick={handleSaveRuleBook} color="success" startIcon={<GetAppIcon />}>
         Save
       </Button>
     );
@@ -72,7 +72,7 @@ const RuleBookEditor: React.VFC = () => {
       <label htmlFor="load-rulebook">
         <input style={{ display: "none" }} id="load-rulebook" onChange={handleChangeInput} type="file" />
 
-        <Button variant="contained" color="secondary" component="span" startIcon={<OpenInBrowserIcon />}>
+        <Button variant="contained" color="primary" component="span" startIcon={<OpenInBrowserIcon />}>
           Open
         </Button>
       </label>
@@ -89,7 +89,7 @@ const RuleBookEditor: React.VFC = () => {
     };
 
     return (
-      <Button variant="contained" onClick={handleClearRuleBook} color="warning" startIcon={<DeleteIcon />}>
+      <Button variant="contained" onClick={handleClearRuleBook} color="error" startIcon={<DeleteIcon />}>
         Clear
       </Button>
     );

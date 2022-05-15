@@ -42,7 +42,7 @@ const CardSetEditorForm: React.FC<Props> = (props: Props) => {
     };
 
     return (
-      <Button variant="contained" onClick={handleAddCardButtonClick} color="primary" startIcon={<AddIcon />}>
+      <Button variant="contained" onClick={handleAddCardButtonClick} color="success" startIcon={<AddIcon />}>
         New Card
       </Button>
     );
@@ -104,7 +104,7 @@ const CardSetEditorForm: React.FC<Props> = (props: Props) => {
         <CardSetEditorMenu cardset={cardset} setCardset={setCardset} />
         <Divider />
         <AddCardButton></AddCardButton>
-        <Button variant="contained" onClick={() => handleClearCardsButtonClick()} color="secondary" startIcon={<DeleteIcon />}>
+        <Button variant="contained" onClick={() => handleClearCardsButtonClick()} color="error" startIcon={<DeleteIcon />}>
           Clear
         </Button>
         <TableContainer component={Paper}>
@@ -138,7 +138,7 @@ const CardSetEditorForm: React.FC<Props> = (props: Props) => {
                     <Button
                       variant="contained"
                       onClick={() => handleDeleteCardButtonClick(index)}
-                      color="secondary"
+                      color="error"
                       startIcon={<DeleteIcon />}
                     ></Button>
                   </TableCell>
@@ -146,7 +146,7 @@ const CardSetEditorForm: React.FC<Props> = (props: Props) => {
                     <Button
                       variant="contained"
                       onClick={() => handleCopyCardButtonClick(index)}
-                      color="secondary"
+                      color="primary"
                       startIcon={<ContentCopyIcon />}
                     ></Button>
                   </TableCell>

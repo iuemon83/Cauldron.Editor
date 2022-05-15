@@ -42,7 +42,7 @@ const OrCardConditionListForm: React.FC<Props> = ({ model, onChanged }) => {
     <FormSet
       label={
         <>
-          カードの選択条件
+          ゲーム内のカードの選択条件
           <Button variant="contained" onClick={() => add()} color="primary" startIcon={<AddIcon />} />
           <Button variant="contained" onClick={() => clear()} color="secondary">
             Clear

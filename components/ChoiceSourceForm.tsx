@@ -42,7 +42,7 @@ const ChoiceSourceForm: React.FC<Props> = ({ model, onChanged }) => {
       <OrCardConditionListForm model={model} onChanged={onChanged} />
 
       <InputList
-        label="カード定義の選択条件"
+        label="ゲーム外のカードの選択条件"
         model={model}
         keyName="orCardDefConditions"
         newItem={cardDefConditionEmpty}
