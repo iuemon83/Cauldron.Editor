@@ -13,6 +13,7 @@ export type RuleBook = {
   maxNumFieldCards: number;
   defaultNumTurnsToCanAttack: number;
   defaultNumAttacksLimitInTurn: number;
+  defaultLimitNumCardsInDeck: number;
 };
 
 export const ruleBookEmpty = (): RuleBook => {
@@ -31,5 +32,6 @@ export const ruleBookEmpty = (): RuleBook => {
     maxNumFieldCards: 0,
     defaultNumTurnsToCanAttack: 0,
     defaultNumAttacksLimitInTurn: 0,
+    defaultLimitNumCardsInDeck: 0,
   };
 };

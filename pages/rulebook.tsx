@@ -126,6 +126,12 @@ const RuleBookEditor: React.VFC = () => {
         <FormSet label="デッキ枚数">
           <InputNumber label="上限値" model={rulebook} keyName="maxNumDeckCards" onChanged={onChanged} />
           <InputNumber label="下限値" model={rulebook} keyName="minNumDeckCards" onChanged={onChanged} />
+          <InputNumber
+            label="1種類のカードをデッキに含められる上限枚数の初期値"
+            model={rulebook}
+            keyName="defaultLimitNumCardsInDeck"
+            onChanged={onChanged}
+          />
         </FormSet>
       </div>
       <div>

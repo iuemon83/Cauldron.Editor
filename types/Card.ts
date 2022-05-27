@@ -15,6 +15,7 @@ export type Card = {
   effects: CardEffect[];
   numTurnsToCanAttack: number | undefined;
   numAttacksLimitInTurn: number | undefined;
+  limitNumCardsInDeck: number | undefined;
 };
 
 export const cardEmpty = (): Card => {
@@ -31,5 +32,6 @@ export const cardEmpty = (): Card => {
     effects: [],
     numAttacksLimitInTurn: undefined,
     numTurnsToCanAttack: undefined,
+    limitNumCardsInDeck: undefined,
   };
 };
