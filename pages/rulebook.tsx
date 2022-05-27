@@ -103,7 +103,8 @@ const RuleBookEditor: React.VFC = () => {
 
       <div>
         <FormSet label="MP">
-          <InputNumber label="初期値" model={rulebook} keyName="initialMp" onChanged={onChanged} />
+          <InputNumber label="先攻のゲーム開始時" model={rulebook} keyName="firstPlayerStartMp" onChanged={onChanged} />
+          <InputNumber label="後攻のゲーム開始時" model={rulebook} keyName="secondPlayerStartMp" onChanged={onChanged} />
           <InputNumber label="上限値" model={rulebook} keyName="maxLimitMp" onChanged={onChanged} />
           <InputNumber label="下限値" model={rulebook} keyName="minMp" onChanged={onChanged} />
           <InputNumber label="ターンごとの増加値" model={rulebook} keyName="limitMpToIncrease" onChanged={onChanged} />
@@ -111,13 +112,30 @@ const RuleBookEditor: React.VFC = () => {
       </div>
       <div>
         <FormSet label="手札の枚数">
-          <InputNumber label="初期値" model={rulebook} keyName="initialNumHands" onChanged={onChanged} />
+          <InputNumber label="ゲーム開始時" model={rulebook} keyName="initialNumHands" onChanged={onChanged} />
           <InputNumber label="上限値" model={rulebook} keyName="maxNumHands" onChanged={onChanged} />
         </FormSet>
       </div>
       <div>
+        <FormSet label="ドロー">
+          <InputNumber label="ターン開始時のドロー枚数" model={rulebook} keyName="numDraws" onChanged={onChanged} />
+          <InputNumber
+            label="先攻1ターン目のドロー枚数"
+            model={rulebook}
+            keyName="firstPlayerNumDrawsInFirstTurn"
+            onChanged={onChanged}
+          />
+          <InputNumber
+            label="後攻1ターン目のドロー枚数"
+            model={rulebook}
+            keyName="secondPlayerNumDrawsInFirstTurn"
+            onChanged={onChanged}
+          />
+        </FormSet>
+      </div>
+      <div>
         <FormSet label="プレイヤーのHP">
-          <InputNumber label="初期値" model={rulebook} keyName="initialPlayerHp" onChanged={onChanged} />
+          <InputNumber label="ゲーム開始時" model={rulebook} keyName="initialPlayerHp" onChanged={onChanged} />
           <InputNumber label="上限値" model={rulebook} keyName="maxPlayerHp" onChanged={onChanged} />
           <InputNumber label="下限値" model={rulebook} keyName="minPlayerHp" onChanged={onChanged} />
         </FormSet>
@@ -127,7 +145,7 @@ const RuleBookEditor: React.VFC = () => {
           <InputNumber label="上限値" model={rulebook} keyName="maxNumDeckCards" onChanged={onChanged} />
           <InputNumber label="下限値" model={rulebook} keyName="minNumDeckCards" onChanged={onChanged} />
           <InputNumber
-            label="1種類のカードをデッキに含められる上限枚数の初期値"
+            label="1種類のカードをデッキに含められる上限枚数の基本値"
             model={rulebook}
             keyName="defaultLimitNumCardsInDeck"
             onChanged={onChanged}
@@ -141,7 +159,7 @@ const RuleBookEditor: React.VFC = () => {
       </div>
       <div>
         <InputNumber
-          label="1ターンの攻撃回数の初期値"
+          label="1ターンの攻撃回数の基本値"
           model={rulebook}
           keyName="defaultNumTurnsToCanAttack"
           onChanged={onChanged}
@@ -149,7 +167,7 @@ const RuleBookEditor: React.VFC = () => {
       </div>
       <div>
         <InputNumber
-          label="攻撃可能となるまでのターン数の初期値"
+          label="攻撃可能となるまでのターン数の基本値"
           model={rulebook}
           keyName="defaultNumAttacksLimitInTurn"
           onChanged={onChanged}

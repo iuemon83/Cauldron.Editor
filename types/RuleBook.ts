@@ -1,10 +1,14 @@
 export type RuleBook = {
-  initialMp: number;
+  firstPlayerStartMp: number;
+  secondPlayerStartMp: number;
   maxLimitMp: number;
   minMp: number;
   limitMpToIncrease: number;
   initialNumHands: number;
   maxNumHands: number;
+  numDraws: number;
+  firstPlayerNumDrawsInFirstTurn: number;
+  secondPlayerNumDrawsInFirstTurn: number;
   initialPlayerHp: number;
   maxPlayerHp: number;
   minPlayerHp: number;
@@ -18,12 +22,16 @@ export type RuleBook = {
 
 export const ruleBookEmpty = (): RuleBook => {
   return {
-    initialMp: 0,
+    firstPlayerStartMp: 0,
+    secondPlayerStartMp: 0,
     maxLimitMp: 0,
     minMp: 0,
     limitMpToIncrease: 0,
     initialNumHands: 0,
     maxNumHands: 0,
+    numDraws: 0,
+    firstPlayerNumDrawsInFirstTurn: 0,
+    secondPlayerNumDrawsInFirstTurn: 0,
     initialPlayerHp: 0,
     maxPlayerHp: 0,
     minPlayerHp: 0,
