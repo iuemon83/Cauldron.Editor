@@ -17,6 +17,7 @@ function MyApp(props: MyAppProps) {
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <meta name="description" content="自作のカードで遊べるカードゲームCauldron DCGで利用できるカードのエディターです。" />
         <title>Cauldron DCG Editor</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>

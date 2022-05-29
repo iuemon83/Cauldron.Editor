@@ -10,7 +10,7 @@ interface Props {
 
 const ActionContextCardsOfModifyCardForm: React.FC<Props> = ({ model, onChanged }) => {
   const valueTypesLabelsByValue = Object.fromEntries(
-    globalCache.metadata!.actionContextCardsOfExcludeCardTypes.map((v) => [v.code, v.displayText])
+    globalCache.metadata!.actionContextCardsOfModifyCardTypes.map((v) => [v.code, v.displayText])
   );
   const valueTypes = Object.keys(valueTypesLabelsByValue);
 
