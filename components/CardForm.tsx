@@ -133,11 +133,11 @@ const CardForm: React.FC<Props> = ({ model, onChanged }) => {
               onChanged={onChanged}
             />
           </div>
-          <div>
-            <InputNumberOption label="デッキに含められる枚数" model={model} keyName="limitNumCardsInDeck" onChanged={onChanged} />
-          </div>
         </>
       )}
+      <div>
+        <InputNumberOption label="デッキに含められる枚数" model={model} keyName="limitNumCardsInDeck" onChanged={onChanged} />
+      </div>
       <InputList
         label="効果"
         model={model}
