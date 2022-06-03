@@ -16,7 +16,7 @@ module.exports = (phase, { defaultConfig }) => {
 
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
-      ...d,
+      ...c,
       ...{
         /* development only config options here */
         webpack: (config) => {
@@ -32,7 +32,7 @@ module.exports = (phase, { defaultConfig }) => {
   }
 
   return {
-    ...d,
+    ...c,
     ...{
       /* config options for all phases except development here */
       assetPrefix: urlPrefix,
