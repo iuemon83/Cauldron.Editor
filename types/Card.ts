@@ -13,7 +13,8 @@ export type Card = {
   isToken: boolean;
   abilities: CardAbility["code"][];
   effects: CardEffect[];
-  numTurnsToCanAttack: number | undefined;
+  numTurnsToCanAttackToCreature: number | undefined;
+  numTurnsToCanAttackToPlayer: number | undefined;
   numAttacksLimitInTurn: number | undefined;
   limitNumCardsInDeck: number | undefined;
 };
@@ -31,7 +32,8 @@ export const cardEmpty = (): Card => {
     abilities: [],
     effects: [],
     numAttacksLimitInTurn: undefined,
-    numTurnsToCanAttack: undefined,
+    numTurnsToCanAttackToCreature: undefined,
+    numTurnsToCanAttackToPlayer: undefined,
     limitNumCardsInDeck: undefined,
   };
 };

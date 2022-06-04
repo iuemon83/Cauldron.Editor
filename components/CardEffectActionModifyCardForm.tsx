@@ -60,9 +60,17 @@ const CardEffectActionModifyCardForm: React.FC<Props> = ({ model, onChanged }) =
         jtx={(d, h) => <AnnotationsModifierForm model={d!} onChanged={h} />}
       />
       <InputOption
-        label="攻撃可能となるまでのターン数"
+        label="クリーチャーへ攻撃可能となるまでのターン数"
         model={model}
-        keyName="numTurnsToCanAttack"
+        keyName="numTurnsToCanAttackToCreature"
+        empty={numValueModifierEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <NumValueModifierForm model={d!} onChanged={h}></NumValueModifierForm>}
+      />
+      <InputOption
+        label="プレイヤーへ攻撃可能となるまでのターン数"
+        model={model}
+        keyName="numTurnsToCanAttackToPlayer"
         empty={numValueModifierEmpty}
         onChanged={onChanged}
         jtx={(d, h) => <NumValueModifierForm model={d!} onChanged={h}></NumValueModifierForm>}

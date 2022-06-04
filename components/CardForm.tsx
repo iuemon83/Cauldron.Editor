@@ -119,9 +119,17 @@ const CardForm: React.FC<Props> = ({ model, onChanged }) => {
           </div>
           <div>
             <InputNumberOption
-              label="攻撃可能となるまでのターン数"
+              label="クリーチャーへ攻撃可能となるまでのターン数"
               model={model}
-              keyName="numTurnsToCanAttack"
+              keyName="numTurnsToCanAttackToCreature"
+              onChanged={onChanged}
+            />
+          </div>
+          <div>
+            <InputNumberOption
+              label="プレイヤーへ攻撃可能となるまでのターン数"
+              model={model}
+              keyName="numTurnsToCanAttackToPlayer"
               onChanged={onChanged}
             />
           </div>
