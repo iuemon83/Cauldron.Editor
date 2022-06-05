@@ -14,13 +14,13 @@ interface Props {
   onChanged: (model: Partial<NumValue>) => void;
 }
 
-type ActionNameKey = "pureValue" | "numValueCalculator" | "numValueVariableCalculator";
+type ActionNameKey = "pureValue" | "numValueCalculator" | "numVariable";
 type ActionKeyMap = { [key in ActionNameKey]: string };
 
 const actionNames: ActionKeyMap = {
   pureValue: "定数",
   numValueCalculator: "算出",
-  numValueVariableCalculator: "変数",
+  numVariable: "変数",
 } as const;
 
 const actionNameKeys = Object.keys(actionNames) as ActionNameKey[];
@@ -63,8 +63,8 @@ const NumValueForm: React.FC<Props> = ({ model, onChanged }) => {
       case "numValueCalculator":
         model.numValueCalculator = numValueCalculatorEmpty();
         break;
-      case "numValueVariableCalculator":
-        model.numValueVariableCalculator = numValueVariableCalculatorEmpty();
+      case "numVariable":
+        model.numVariable = numValueVariableCalculatorEmpty();
         break;
     }
 
@@ -94,13 +94,10 @@ const NumValueForm: React.FC<Props> = ({ model, onChanged }) => {
           }
         />
       )}
-      {selectedAction === "numValueVariableCalculator" && model.numValueVariableCalculator !== undefined && (
+      {selectedAction === "numVariable" && model.numVariable !== undefined && (
         <NumValueVariableCalculatorForm
-          model={model.numValueVariableCalculator}
-          onChanged={(x) =>
-            model.numValueVariableCalculator !== undefined &&
-            onChanged({ numValueVariableCalculator: { ...model.numValueVariableCalculator, ...x } })
-          }
+          model={model.numVariable}
+          onChanged={(x) => model.numVariable !== undefined && onChanged({ numVariable: { ...model.numVariable, ...x } })}
         />
       )}
       <div>
