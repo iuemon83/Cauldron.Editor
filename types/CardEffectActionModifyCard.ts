@@ -11,6 +11,7 @@ export type CardEffectActionModifyCard = {
   annotations: AnnotationsModifier | undefined;
   numTurnsToCanAttackToCreature: NumValueModifier | undefined;
   numTurnsToCanAttackToPlayer: NumValueModifier | undefined;
+  numAttacksLimitInTurn: NumValueModifier | undefined;
   choice: Choice;
   name: string | undefined;
 };
@@ -24,6 +25,7 @@ export const CardEffectActionModifyCardEmpty = (): CardEffectActionModifyCard =>
     annotations: undefined,
     numTurnsToCanAttackToCreature: undefined,
     numTurnsToCanAttackToPlayer: undefined,
+    numAttacksLimitInTurn: undefined,
     choice: choiceEmpty(),
     name: undefined,
   };

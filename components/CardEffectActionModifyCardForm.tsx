@@ -75,6 +75,14 @@ const CardEffectActionModifyCardForm: React.FC<Props> = ({ model, onChanged }) =
         onChanged={onChanged}
         jtx={(d, h) => <NumValueModifierForm model={d!} onChanged={h}></NumValueModifierForm>}
       />
+      <InputOption
+        label="攻撃回数"
+        model={model}
+        keyName="numAttacksLimitInTurn"
+        empty={numValueModifierEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <NumValueModifierForm model={d!} onChanged={h}></NumValueModifierForm>}
+      />
       <FormSet label="対象の選択条件">
         <ChoiceForm
           model={model.choice}
