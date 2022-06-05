@@ -25,8 +25,8 @@ const NumValueCalculatorForPlayerForm: React.FC<Props> = ({ model, onChanged }) 
         onChanged={onChanged}
       />
       <ChoiceForm
-        model={model.cardsChoice}
-        onChanged={(x) => onChanged({ cardsChoice: { ...model.cardsChoice, ...x } })}
+        model={model.playersChoice}
+        onChanged={(x) => onChanged({ playersChoice: { ...model.playersChoice, ...x } })}
       ></ChoiceForm>
     </>
   );

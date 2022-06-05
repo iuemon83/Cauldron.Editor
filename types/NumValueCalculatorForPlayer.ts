@@ -4,12 +4,12 @@ import { Choice, choiceEmpty } from "./Choice";
 
 export type NumValueCalculatorForPlayer = {
   type: NumValueCalculatorForPlayerType["code"];
-  cardsChoice: Choice;
+  playersChoice: Choice;
 };
 
 export const numValueCalculatorForPlayerEmpty = (): NumValueCalculatorForPlayer => {
   return {
     type: globalCache.metadata!.numValueCalculatorForPlayerTypes[0].code,
-    cardsChoice: choiceEmpty(),
+    playersChoice: choiceEmpty(),
   };
 };
