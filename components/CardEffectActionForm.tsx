@@ -28,13 +28,16 @@ import { cardEffectActionReserveEffectEmpty } from "../types/CardEffectActionRes
 import { cardEffectActionExcludeCardEmpty } from "../types/CardEffectActionExcludeCard";
 import { cardEffectActionModifyCounterEmpty } from "../types/CardEffectActionModifyCounter";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import InputOption from "./input/InputOption";
+import CardEffectIfForm from "./CardEffectIfForm";
+import { CardEffectIfEmpty } from "../types/CardEffectIf";
 
 type Props = {
   model: CardEffectAction;
   onChanged: (model: Partial<CardEffectAction>) => void;
 };
 
-type ActionNameKey = keyof CardEffectAction;
+type ActionNameKey = keyof Omit<CardEffectAction, "if">;
 type ActionKeyMap = { [key in ActionNameKey]: string };
 
 const actionNames: ActionKeyMap = {
@@ -137,6 +140,14 @@ const CardEffectActionForm: React.FC<Props> = ({ model, onChanged }) => {
 
   return (
     <>
+      <InputOption
+        label="もし"
+        model={model}
+        keyName="if"
+        empty={CardEffectIfEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardEffectIfForm model={d!} onChanged={h}></CardEffectIfForm>}
+      />
       <FormControl>
         <InputLabel>アクション</InputLabel>
         <Select value={selectedAction} onChange={handleActionNameChanged}>

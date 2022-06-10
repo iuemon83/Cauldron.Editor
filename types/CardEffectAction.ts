@@ -12,8 +12,10 @@ import { CardEffectActionSetVariable } from "./CardEffectActionSetVariable";
 import { CardEffectActionWin } from "./CardEffectActionWin";
 import { CardEffectActionReserveEffect } from "./CardEffectActionReserveEffect";
 import { CardEffectActionModifyCounter } from "./CardEffectActionModifyCounter";
+import { CardEffectIf } from "./CardEffectIf";
 
 export type CardEffectAction = {
+  if: CardEffectIf | undefined;
   damage: CardEffectActionDamage | undefined;
   addCard: CardEffectActionAddCard | undefined;
   excludeCard: CardEffectActionExcludeCard | undefined;
@@ -32,6 +34,7 @@ export type CardEffectAction = {
 
 export const cardEffectActionEmpty = (): CardEffectAction => {
   return {
+    if: undefined,
     damage: undefined,
     addCard: undefined,
     excludeCard: undefined,
