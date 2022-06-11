@@ -1,8 +1,10 @@
 import { Switch } from "@mui/material";
+import { numCompareEmpty } from "../types/NumCompare";
 import { PlayerCondition } from "../types/PlayerCondition";
 import { globalCache } from "./CauldronApi";
 import InputOption from "./input/InputOption";
 import InputSelect from "./input/InputSelect";
+import NumCompareForm from "./NumCompareForm";
 
 interface Props {
   model: PlayerCondition;
@@ -34,6 +36,38 @@ const PlayerConditionForm: React.FC<Props> = ({ model, onChanged }) => {
         empty={() => false}
         onChanged={onChanged}
         jtx={(d, h) => <Switch checked={model.isFirst} onChange={(e) => onChanged({ isFirst: e.target.checked })} />}
+      />
+      <InputOption
+        label="最大HPの条件"
+        model={model}
+        keyName="maxHpCondition"
+        empty={numCompareEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <NumCompareForm model={d!} onChanged={h} />}
+      />
+      <InputOption
+        label="HPの条件"
+        model={model}
+        keyName="currentHpCondition"
+        empty={numCompareEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <NumCompareForm model={d!} onChanged={h} />}
+      />
+      <InputOption
+        label="最大MPの条件"
+        model={model}
+        keyName="maxMpCondition"
+        empty={numCompareEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <NumCompareForm model={d!} onChanged={h} />}
+      />
+      <InputOption
+        label="MPの条件"
+        model={model}
+        keyName="currentMpCondition"
+        empty={numCompareEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <NumCompareForm model={d!} onChanged={h} />}
       />
     </>
   );
