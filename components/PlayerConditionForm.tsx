@@ -1,5 +1,7 @@
+import { Switch } from "@mui/material";
 import { PlayerCondition } from "../types/PlayerCondition";
 import { globalCache } from "./CauldronApi";
+import InputOption from "./input/InputOption";
 import InputSelect from "./input/InputSelect";
 
 interface Props {
@@ -25,6 +27,14 @@ const PlayerConditionForm: React.FC<Props> = ({ model, onChanged }) => {
           onChanged={onChanged}
         />
       </div>
+      <InputOption
+        label="先攻?"
+        model={model}
+        keyName="isFirst"
+        empty={() => false}
+        onChanged={onChanged}
+        jtx={(d, h) => <Switch checked={model.isFirst} onChange={(e) => onChanged({ isFirst: e.target.checked })} />}
+      />
     </>
   );
 };
