@@ -1,4 +1,5 @@
 import { cardEffectTimingDamageBeforeEventEmpty } from "../types/CardEffectTimingDamageBeforeEvent";
+import { cardEffectTimingHealBeforeEventEmpty } from "../types/CardEffectTimingHealBeforeEvent";
 import { cardEffectTimingDestroyEventEmpty } from "../types/CardEffectTimingDestroyEvent";
 import { CardEffectTiming } from "../types/CardEffectTiming";
 import { cardEffectTimingEndTurnEventEmpty } from "../types/CardEffectTimingEndTurnEvent";
@@ -6,6 +7,7 @@ import { cardEffectTimingMoveCardEventEmpty } from "../types/CardEffectTimingMov
 import { cardEffectTimingPlayEventEmpty } from "../types/CardEffectTimingPlayEvent";
 import { cardEffectTimingStartTurnEventEmpty } from "../types/CardEffectTimingStartTurnEvent";
 import CardEffectTimingDamageBeforeForm from "./CardEffectTimingDamageBeforeForm";
+import CardEffectTimingHealBeforeForm from "./CardEffectTimingHealBeforeForm";
 import CardEffectTimingDestroyForm from "./CardEffectTimingDestroyForm";
 import CardEffectTimingEndTurnForm from "./CardEffectTimingEndTurnForm";
 import CardEffectTimingMoveCardForm from "./CardEffectTimingMoveCardForm";
@@ -90,6 +92,22 @@ const CardEffectTimingForm: React.FC<Props> = ({ model, onChanged }) => {
         empty={cardEffectTimingDamageBeforeEventEmpty}
         onChanged={onChanged}
         jtx={(d, h) => <CardEffectTimingDamageBeforeForm model={d!} onChanged={h} />}
+      />
+      <InputOption
+        label="回復前"
+        model={model}
+        keyName="healBefore"
+        empty={cardEffectTimingHealBeforeEventEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardEffectTimingHealBeforeForm model={d!} onChanged={h} />}
+      />
+      <InputOption
+        label="回復後"
+        model={model}
+        keyName="healAfter"
+        empty={cardEffectTimingHealBeforeEventEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <CardEffectTimingHealBeforeForm model={d!} onChanged={h} />}
       />
       <InputOption
         label="カードの移動時"

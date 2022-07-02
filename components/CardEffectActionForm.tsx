@@ -13,6 +13,7 @@ import { CardEffectActionWinEmpty } from "../types/CardEffectActionWin";
 import CardEffectActionAddCardForm from "./CardEffectActionAddCardForm";
 import CardEffectActionAddEffectForm from "./CardEffectActionAddEffectForm";
 import CardEffectActionDamageForm from "./CardEffectActionDamageForm";
+import CardEffectActionHealForm from "./CardEffectActionHealForm";
 import CardEffectActionDestroyCardForm from "./CardEffectActionDestroyCardForm";
 import CardEffectActionDrawCardForm from "./CardEffectActionDrawCardForm";
 import CardEffectActionModifyCardForm from "./CardEffectActionModifyCardForm";
@@ -31,6 +32,7 @@ import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@m
 import InputOption from "./input/InputOption";
 import CardEffectIfForm from "./CardEffectIfForm";
 import { CardEffectIfEmpty } from "../types/CardEffectIf";
+import { CardEffectActionHealEmpty } from "../types/CardEffectActionHeal";
 
 type Props = {
   model: CardEffectAction;
@@ -42,6 +44,7 @@ type ActionKeyMap = { [key in ActionNameKey]: string };
 
 const actionNames: ActionKeyMap = {
   damage: "ダメージ",
+  heal: "回復",
   addCard: "カードの生成",
   excludeCard: "カードの除外",
   modifyCard: "カードの修整",
@@ -99,6 +102,9 @@ const CardEffectActionForm: React.FC<Props> = ({ model, onChanged }) => {
         break;
       case "damage":
         model.damage = CardEffectActionDamageEmpty();
+        break;
+      case "heal":
+        model.heal = CardEffectActionHealEmpty();
         break;
       case "destroyCard":
         model.destroyCard = CardEffectActionDestroyCardEmpty();
@@ -162,6 +168,12 @@ const CardEffectActionForm: React.FC<Props> = ({ model, onChanged }) => {
         <CardEffectActionDamageForm
           model={model.damage}
           onChanged={(x) => model.damage !== undefined && onChanged({ damage: { ...model.damage, ...x } })}
+        />
+      )}
+      {selectedAction === "heal" && model.heal !== undefined && (
+        <CardEffectActionHealForm
+          model={model.heal}
+          onChanged={(x) => model.heal !== undefined && onChanged({ heal: { ...model.heal, ...x } })}
         />
       )}
       {selectedAction === "addCard" && model.addCard !== undefined && (

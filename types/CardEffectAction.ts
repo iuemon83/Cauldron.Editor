@@ -2,6 +2,7 @@ import { CardEffectActionAddCard } from "./CardEffectActionAddCard";
 import { CardEffectActionExcludeCard } from "./CardEffectActionExcludeCard";
 import { CardEffectActionAddEffect } from "./CardEffectActionAddEffect";
 import { CardEffectActionDamage } from "./CardEffectActionDamage";
+import { CardEffectActionHeal } from "./CardEffectActionHeal";
 import { CardEffectActionDestroyCard } from "./CardEffectActionDestroyCard";
 import { CardEffectActionDrawCard } from "./CardEffectActionDrawCard";
 import { CardEffectActionModifyCard } from "./CardEffectActionModifyCard";
@@ -17,6 +18,7 @@ import { CardEffectIf } from "./CardEffectIf";
 export type CardEffectAction = {
   if: CardEffectIf | undefined;
   damage: CardEffectActionDamage | undefined;
+  heal: CardEffectActionHeal | undefined;
   addCard: CardEffectActionAddCard | undefined;
   excludeCard: CardEffectActionExcludeCard | undefined;
   modifyCard: CardEffectActionModifyCard | undefined;
@@ -36,6 +38,7 @@ export const cardEffectActionEmpty = (): CardEffectAction => {
   return {
     if: undefined,
     damage: undefined,
+    heal: undefined,
     addCard: undefined,
     excludeCard: undefined,
     modifyCard: undefined,

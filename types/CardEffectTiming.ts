@@ -1,4 +1,5 @@
 import { CardEffectTimingDamageBeforeEvent } from "./CardEffectTimingDamageBeforeEvent";
+import { CardEffectTimingHealBeforeEvent } from "./CardEffectTimingHealBeforeEvent";
 import { CardEffectTimingDestroyEvent } from "./CardEffectTimingDestroyEvent";
 import { CardEffectTimingEndTurnEvent } from "./CardEffectTimingEndTurnEvent";
 import { CardEffectTimingMoveCardEvent } from "./CardEffectTimingMoveCardEvent";
@@ -17,6 +18,8 @@ export type CardEffectTiming = {
   attackAfter: CardEffectTimingAttackBeforeEvent | undefined;
   damageBefore: CardEffectTimingDamageBeforeEvent | undefined;
   damageAfter: CardEffectTimingDamageBeforeEvent | undefined;
+  healBefore: CardEffectTimingHealBeforeEvent | undefined;
+  healAfter: CardEffectTimingHealBeforeEvent | undefined;
   moveCard: CardEffectTimingMoveCardEvent | undefined;
   excludeCard: CardEffectTimingExcludeCardEvent | undefined;
   modifyCounter: CardEffectTimingModifyCounterOnCardEvent | undefined;
@@ -32,6 +35,8 @@ export const cardEffectTimingEmpty = (): CardEffectTiming => {
     attackAfter: undefined,
     damageBefore: undefined,
     damageAfter: undefined,
+    healBefore: undefined,
+    healAfter: undefined,
     moveCard: undefined,
     excludeCard: undefined,
     modifyCounter: undefined,
