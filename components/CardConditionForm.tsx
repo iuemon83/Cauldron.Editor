@@ -139,6 +139,14 @@ const CardConditionForm: React.FC<Props> = ({ model, onChanged }) => {
         jtx={(d, h) => <NumCompareForm model={d!} onChanged={h}></NumCompareForm>}
       />
       <InputOption
+        label="タフネスの変化量の条件"
+        model={model}
+        keyName="diffToughnessCondition"
+        empty={numCompareEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <NumCompareForm model={d!} onChanged={h}></NumCompareForm>}
+      />
+      <InputOption
         label="アビリティの条件"
         model={model}
         keyName="abilityCondition"

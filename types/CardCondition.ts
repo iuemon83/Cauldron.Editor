@@ -23,6 +23,7 @@ export type CardCondition = {
   costCondition: NumCompare | undefined;
   powerCondition: NumCompare | undefined;
   toughnessCondition: NumCompare | undefined;
+  diffToughnessCondition: NumCompare | undefined;
   cardSetCondition: CardSetCondition | undefined;
   nameCondition: TextCondition | undefined;
   annotationCondition: CardAnnotationCondition | undefined;
@@ -42,6 +43,7 @@ export const cardConditionEmpty = (): CardCondition => {
     costCondition: undefined,
     powerCondition: undefined,
     toughnessCondition: undefined,
+    diffToughnessCondition: undefined,
     cardSetCondition: undefined,
     nameCondition: undefined,
     annotationCondition: undefined,
