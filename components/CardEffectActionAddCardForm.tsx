@@ -3,10 +3,10 @@ import { CardEffectActionAddCard } from "../types/CardEffectActionAddCard";
 import { InsertCardPositionEmpty } from "../types/InsertCardPosition";
 import ChoiceForm from "./ChoiceForm";
 import FormSet from "./input/FormSet";
-import InputNumber from "./input/InputNumber";
 import InputOption from "./input/InputOption";
 import InputTextOption from "./input/InputTextOption";
 import InsertCardPositionForm from "./InsertCardPositionForm";
+import NumValueForm from "./NumValueForm";
 import ZoneValueForm from "./ZoneValueForm";
 
 interface Props {
@@ -35,7 +35,12 @@ const CardEffectActionAddCardForm: React.FC<Props> = ({ model, onChanged }) => {
       <FormSet label="生成するカードの選択条件">
         <ChoiceForm model={model.choice} onChanged={(x) => onChanged({ choice: { ...model.choice, ...x } })}></ChoiceForm>
       </FormSet>
-      <InputNumber label="選択したカードを生成する数" model={model} keyName="numOfAddCards" onChanged={onChanged} />
+      <FormSet label="選択したカードを生成する数">
+        <NumValueForm
+          model={model.numOfAddCards}
+          onChanged={(x) => onChanged({ numOfAddCards: { ...model.numOfAddCards, ...x } })}
+        />
+      </FormSet>
     </>
   );
 };

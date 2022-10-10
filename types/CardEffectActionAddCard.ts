@@ -1,12 +1,13 @@
 import { Choice, choiceEmpty } from "./Choice";
 import { InsertCardPosition } from "./InsertCardPosition";
+import { NumValue, numValueEmpty } from "./NumValue";
 import { ZoneValue, zoneValueEmpty } from "./ZoneValue";
 
 export type CardEffectActionAddCard = {
   choice: Choice;
   zoneToAddCard: ZoneValue;
   insertCardPosition: InsertCardPosition | undefined;
-  numOfAddCards: number;
+  numOfAddCards: NumValue;
   name: string | undefined;
 };
 
@@ -15,7 +16,7 @@ export const CardEffectActionAddCardEmpty = (): CardEffectActionAddCard => {
     choice: choiceEmpty(),
     zoneToAddCard: zoneValueEmpty(),
     insertCardPosition: undefined,
-    numOfAddCards: 1,
+    numOfAddCards: numValueEmpty(),
     name: undefined,
   };
 };
