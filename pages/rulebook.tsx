@@ -112,7 +112,7 @@ const RuleBookEditor: React.VFC = () => {
       </div>
       <div>
         <FormSet label="手札の枚数">
-          <InputNumber label="ゲーム開始時" model={rulebook} keyName="initialNumHands" onChanged={onChanged} />
+          <InputNumber label="ゲーム開始時" model={rulebook} keyName="startNumHands" onChanged={onChanged} />
           <InputNumber label="上限値" model={rulebook} keyName="maxNumHands" onChanged={onChanged} />
         </FormSet>
       </div>
@@ -135,7 +135,7 @@ const RuleBookEditor: React.VFC = () => {
       </div>
       <div>
         <FormSet label="プレイヤーのHP">
-          <InputNumber label="ゲーム開始時" model={rulebook} keyName="initialPlayerHp" onChanged={onChanged} />
+          <InputNumber label="ゲーム開始時" model={rulebook} keyName="startPlayerHp" onChanged={onChanged} />
           <InputNumber label="上限値" model={rulebook} keyName="maxPlayerHp" onChanged={onChanged} />
           <InputNumber label="下限値" model={rulebook} keyName="minPlayerHp" onChanged={onChanged} />
         </FormSet>
@@ -154,7 +154,8 @@ const RuleBookEditor: React.VFC = () => {
       </div>
       <div>
         <FormSet label="場の枚数">
-          <InputNumber label="上限値" model={rulebook} keyName="maxNumFieldCards" onChanged={onChanged} />
+          <InputNumber label="ゲーム開始時の上限値" model={rulebook} keyName="startMaxNumFields" onChanged={onChanged} />
+          <InputNumber label="最終的な上限値" model={rulebook} keyName="maxNumFields" onChanged={onChanged} />
         </FormSet>
       </div>
       <div>
