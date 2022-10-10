@@ -1,7 +1,10 @@
 import { CardEffectTimingMoveCardEvent } from "../types/CardEffectTimingMoveCardEvent";
+import { zoneConditionEmpty } from "../types/ZoneCondition";
 import { globalCache } from "./CauldronApi";
+import InputOption from "./input/InputOption";
 import InputSelect from "./input/InputSelect";
 import OrCardConditionListForm from "./OrCardConditionListForm";
+import ZoneConditionForm from "./ZoneConditionForm";
 
 interface Props {
   model: CardEffectTimingMoveCardEvent;
@@ -15,21 +18,21 @@ const CardEffectTimingMoveCardForm: React.FC<Props> = ({ model, onChanged }) => 
   return (
     <>
       <OrCardConditionListForm model={model} onChanged={onChanged} />
-      <InputSelect
-        label="from"
-        values={zoneNames}
+      <InputOption
+        label="移動前"
         model={model}
-        keyName={"from"}
-        getLabel={(v) => zoneNamesLabelsByValue[v]}
+        keyName="from"
+        empty={zoneConditionEmpty}
         onChanged={onChanged}
+        jtx={(d, h) => <ZoneConditionForm model={d!} onChanged={h}></ZoneConditionForm>}
       />
-      <InputSelect
-        label="to"
-        values={zoneNames}
+      <InputOption
+        label="移動後"
         model={model}
-        keyName={"to"}
-        getLabel={(v) => zoneNamesLabelsByValue[v]}
+        keyName="to"
+        empty={zoneConditionEmpty}
         onChanged={onChanged}
+        jtx={(d, h) => <ZoneConditionForm model={d!} onChanged={h}></ZoneConditionForm>}
       />
     </>
   );

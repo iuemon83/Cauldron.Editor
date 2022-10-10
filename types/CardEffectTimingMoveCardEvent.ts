@@ -1,18 +1,16 @@
-import { globalCache } from "../components/CauldronApi";
 import { CardCondition } from "./CardCondition";
-import { ZoneName } from "./CardMetaData";
+import { ZoneCondition } from "./ZoneCondition";
 
 export type CardEffectTimingMoveCardEvent = {
   orCardConditions: CardCondition[];
-  from: ZoneName["code"];
-  to: ZoneName["code"];
+  from: ZoneCondition | undefined;
+  to: ZoneCondition | undefined;
 };
 
-export const cardEffectTimingMoveCardEventEmpty =
-  (): CardEffectTimingMoveCardEvent => {
-    return {
-      orCardConditions:[],
-      from: globalCache.metadata!.zoneNames[0].code,
-      to: globalCache.metadata!.zoneNames[0].code,
-    };
+export const cardEffectTimingMoveCardEventEmpty = (): CardEffectTimingMoveCardEvent => {
+  return {
+    orCardConditions: [],
+    from: undefined,
+    to: undefined,
   };
+};
