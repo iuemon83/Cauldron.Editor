@@ -30,6 +30,16 @@ const CardConditionForm: React.FC<Props> = ({ model, onChanged }) => {
   );
   const cardConditionContexts = Object.keys(cardConditionContextsLabelsByValue);
 
+  const cardConditionBattleEventContextsLabelsByValue = Object.fromEntries(
+    globalCache.metadata!.cardConditionBattleEventContextConditions.map((v) => [v.code, v.displayText])
+  );
+  const cardConditionBattleEventContexts = Object.keys(cardConditionBattleEventContextsLabelsByValue);
+
+  const cardConditionDamageEventContextsLabelsByValue = Object.fromEntries(
+    globalCache.metadata!.cardConditionDamageEventContextConditions.map((v) => [v.code, v.displayText])
+  );
+  const cardConditionDamageEventContexts = Object.keys(cardConditionDamageEventContextsLabelsByValue);
+
   const ownerConditionValuesLabelsByValue = Object.fromEntries(
     globalCache.metadata!.ownerConditionValues.map((v) => [v.code, v.displayText])
   );
@@ -64,6 +74,22 @@ const CardConditionForm: React.FC<Props> = ({ model, onChanged }) => {
         model={model}
         keyName={"contextCondition"}
         getLabel={(v) => cardConditionContextsLabelsByValue[v]}
+        onChanged={onChanged}
+      />
+      <InputSelect
+        label="戦闘イベントのコンテキスト"
+        values={cardConditionBattleEventContexts}
+        model={model}
+        keyName={"battleEventContextCondition"}
+        getLabel={(v) => cardConditionBattleEventContextsLabelsByValue[v]}
+        onChanged={onChanged}
+      />
+      <InputSelect
+        label="ダメージイベントのコンテキスト"
+        values={cardConditionDamageEventContexts}
+        model={model}
+        keyName={"damageEventContextCondition"}
+        getLabel={(v) => cardConditionDamageEventContextsLabelsByValue[v]}
         onChanged={onChanged}
       />
       <InputOption
