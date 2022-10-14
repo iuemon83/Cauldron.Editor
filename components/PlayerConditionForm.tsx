@@ -38,6 +38,14 @@ const PlayerConditionForm: React.FC<Props> = ({ model, onChanged }) => {
         jtx={(d, h) => <Switch checked={model.isFirst} onChange={(e) => onChanged({ isFirst: e.target.checked })} />}
       />
       <InputOption
+        label="アクティブ?"
+        model={model}
+        keyName="isActive"
+        empty={() => false}
+        onChanged={onChanged}
+        jtx={(d, h) => <Switch checked={model.isActive} onChange={(e) => onChanged({ isActive: e.target.checked })} />}
+      />
+      <InputOption
         label="最大HPの条件"
         model={model}
         keyName="maxHpCondition"
