@@ -25,6 +25,7 @@ import CardEffectActionWinForm from "./CardEffectActionWinForm";
 import CardEffectActionReserveEffectForm from "./CardEffectActionReserveEffectForm";
 import CardEffectActionExcludeCardForm from "./CardEffectActionExcludeCardForm";
 import CardEffectActionModifyCounterForm from "./CardEffectActionModifyCounterForm";
+import CardEffectActionModifyNumFieldsForm from "./CardEffectActionModifyNumFieldsForm";
 import { cardEffectActionReserveEffectEmpty } from "../types/CardEffectActionReserveEffect";
 import { cardEffectActionExcludeCardEmpty } from "../types/CardEffectActionExcludeCard";
 import { cardEffectActionModifyCounterEmpty } from "../types/CardEffectActionModifyCounter";
@@ -33,6 +34,7 @@ import InputOption from "./input/InputOption";
 import CardEffectIfForm from "./CardEffectIfForm";
 import { CardEffectIfEmpty } from "../types/CardEffectIf";
 import { CardEffectActionHealEmpty } from "../types/CardEffectActionHeal";
+import { CardEffectActionModifyNumFieldsEmpty } from "../types/CardEffectActionModifyNumFields";
 
 type Props = {
   model: CardEffectAction;
@@ -50,6 +52,7 @@ const actionNames: ActionKeyMap = {
   modifyCard: "カードの修整",
   destroyCard: "カードの破壊",
   moveCard: "カードの移動",
+  modifyNumFields: "場の数の修整",
   modifyDamage: "ダメージの修整",
   modifyPlayer: "プレイヤーの修整",
   drawCard: "ドロー",
@@ -130,6 +133,9 @@ const CardEffectActionForm: React.FC<Props> = ({ model, onChanged }) => {
       case "moveCard":
         model.moveCard = cardEffectActionMoveCardEmpty();
         break;
+      case "modifyNumFields":
+        model.modifyNumFields = CardEffectActionModifyNumFieldsEmpty();
+        break;
       case "reserveEffect":
         model.reserveEffect = cardEffectActionReserveEffectEmpty();
         break;
@@ -204,6 +210,14 @@ const CardEffectActionForm: React.FC<Props> = ({ model, onChanged }) => {
         <CardEffectActionMoveCardForm
           model={model.moveCard}
           onChanged={(x) => model.moveCard !== undefined && onChanged({ moveCard: { ...model.moveCard, ...x } })}
+        />
+      )}
+      {selectedAction === "modifyNumFields" && model.modifyNumFields !== undefined && (
+        <CardEffectActionModifyNumFieldsForm
+          model={model.modifyNumFields}
+          onChanged={(x) =>
+            model.modifyNumFields !== undefined && onChanged({ modifyNumFields: { ...model.modifyNumFields, ...x } })
+          }
         />
       )}
       {selectedAction === "modifyDamage" && model.modifyDamage !== undefined && (
