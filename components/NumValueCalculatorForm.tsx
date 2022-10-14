@@ -8,6 +8,8 @@ import { numValueCalculatorRandomEmpty } from "../types/NumValueCalculatorRandom
 import { numValueCalculatorForPlayerEmpty } from "../types/NumValueCalculatorForPlayer";
 import { numValueCalculatorForCounterEmpty } from "../types/NumValueCalculatorForCounter";
 import { numValueCalculatorForCardEmpty } from "../types/NumValueCalculatorForCard";
+import { globalCache } from "./CauldronApi";
+import InputSelect from "./input/InputSelect";
 
 interface Props {
   model: NumValueCalculator;
@@ -15,8 +17,21 @@ interface Props {
 }
 
 const NumValueCalculatorForm: React.FC<Props> = ({ model, onChanged }) => {
+  const eventContextsLabelsByValue = Object.fromEntries(
+    globalCache.metadata!.numValueCalculatorEventContexts.map((v) => [v.code, v.displayText])
+  );
+  const eventContexts = Object.keys(eventContextsLabelsByValue);
+
   return (
     <>
+      <InputSelect
+        label="種類"
+        values={eventContexts}
+        model={model}
+        keyName={"eventContext"}
+        getLabel={(v) => eventContextsLabelsByValue[v]}
+        onChanged={onChanged}
+      />
       <div>
         <InputOption
           label="ランダム"

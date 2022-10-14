@@ -2,9 +2,11 @@ import { NumValueCalculatorRandom } from "./NumValueCalculatorRandom";
 import { NumValueCalculatorForCard } from "./NumValueCalculatorForCard";
 import { NumValueCalculatorForPlayer } from "./NumValueCalculatorForPlayer";
 import { NumValueCalculatorForCounter } from "./NumValueCalculatorForCounter";
+import { NumValueCalculatorEventContext } from "./CardMetaData";
+import { globalCache } from "../components/CauldronApi";
 
 export type NumValueCalculator = {
-  eventContext: undefined;
+  eventContext: NumValueCalculatorEventContext["code"];
   random: NumValueCalculatorRandom | undefined;
   forCard: NumValueCalculatorForCard | undefined;
   forPlayer: NumValueCalculatorForPlayer | undefined;
@@ -13,7 +15,7 @@ export type NumValueCalculator = {
 
 export const numValueCalculatorEmpty = (): NumValueCalculator => {
   return {
-    eventContext: undefined,
+    eventContext: globalCache.metadata!.numValueCalculatorEventContexts[0].code,
     random: undefined,
     forCard: undefined,
     forPlayer: undefined,
