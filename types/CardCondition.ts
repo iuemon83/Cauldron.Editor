@@ -22,6 +22,7 @@ export type CardCondition = {
   damageEventContextCondition: CardConditionDamageEventContextCondition["code"];
   costCondition: NumCompare | undefined;
   powerCondition: NumCompare | undefined;
+  diffPowerCondition: NumCompare | undefined;
   toughnessCondition: NumCompare | undefined;
   diffToughnessCondition: NumCompare | undefined;
   cardSetCondition: CardSetCondition | undefined;
@@ -42,6 +43,7 @@ export const cardConditionEmpty = (): CardCondition => {
     damageEventContextCondition: globalCache.metadata!.cardConditionBattleEventContextConditions[0].code,
     costCondition: undefined,
     powerCondition: undefined,
+    diffPowerCondition: undefined,
     toughnessCondition: undefined,
     diffToughnessCondition: undefined,
     cardSetCondition: undefined,
