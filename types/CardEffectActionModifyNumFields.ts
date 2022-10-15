@@ -1,16 +1,16 @@
 import { Choice, choiceEmpty } from "./Choice";
-import { NumValue, numValueEmpty } from "./NumValue";
+import { NumValueModifier, numValueModifierEmpty } from "./NumValueModifier";
 
 export type CardEffectActionModifyNumFields = {
   choicePlayers: Choice;
-  diffNum: NumValue;
+  diffNum: NumValueModifier;
   name: string | undefined;
 };
 
 export const CardEffectActionModifyNumFieldsEmpty = (): CardEffectActionModifyNumFields => {
   return {
     choicePlayers: choiceEmpty(),
-    diffNum: numValueEmpty(),
+    diffNum: numValueModifierEmpty(),
     name: undefined,
   };
 };

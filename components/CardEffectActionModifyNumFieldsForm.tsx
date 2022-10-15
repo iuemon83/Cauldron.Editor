@@ -2,8 +2,8 @@ import { CardEffectActionModifyNumFields } from "../types/CardEffectActionModify
 import ChoiceForm from "./ChoiceForm";
 import FormSet from "./input/FormSet";
 import InputTextOption from "./input/InputTextOption";
-import NumValueForm from "./NumValueForm";
 import React from "react";
+import NumValueModifierForm from "./NumValueModifierForm";
 
 interface Props {
   model: CardEffectActionModifyNumFields;
@@ -25,7 +25,7 @@ const CardEffectActionModifyNumFieldsForm: React.FC<Props> = ({ model, onChanged
         ></ChoiceForm>
       </FormSet>
       <FormSet label="場の数の変化量">
-        <NumValueForm model={model.diffNum} onChanged={(x) => onChanged({ diffNum: { ...model.diffNum, ...x } })} />
+        <NumValueModifierForm model={model.diffNum} onChanged={(x) => onChanged({ diffNum: { ...model.diffNum, ...x } })} />
       </FormSet>
     </>
   );
