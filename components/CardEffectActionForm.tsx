@@ -26,6 +26,7 @@ import CardEffectActionReserveEffectForm from "./CardEffectActionReserveEffectFo
 import CardEffectActionExcludeCardForm from "./CardEffectActionExcludeCardForm";
 import CardEffectActionModifyCounterForm from "./CardEffectActionModifyCounterForm";
 import CardEffectActionModifyNumFieldsForm from "./CardEffectActionModifyNumFieldsForm";
+import CardEffectActionChoiceForm from "./CardEffectActionChoiceForm";
 import { cardEffectActionReserveEffectEmpty } from "../types/CardEffectActionReserveEffect";
 import { cardEffectActionExcludeCardEmpty } from "../types/CardEffectActionExcludeCard";
 import { cardEffectActionModifyCounterEmpty } from "../types/CardEffectActionModifyCounter";
@@ -35,6 +36,7 @@ import CardEffectIfForm from "./CardEffectIfForm";
 import { CardEffectIfEmpty } from "../types/CardEffectIf";
 import { CardEffectActionHealEmpty } from "../types/CardEffectActionHeal";
 import { CardEffectActionModifyNumFieldsEmpty } from "../types/CardEffectActionModifyNumFields";
+import { cardEffectActionChoiceEmpty } from "../types/CardEffectActionChoice";
 
 type Props = {
   model: CardEffectAction;
@@ -61,6 +63,7 @@ const actionNames: ActionKeyMap = {
   modifyCounter: "カウンターの修整",
   win: "勝利",
   reserveEffect: "効果の予約",
+  choice: "選択",
 } as const;
 
 const actionNameKeys = Object.keys(actionNames) as ActionNameKey[];
@@ -144,6 +147,9 @@ const CardEffectActionForm: React.FC<Props> = ({ model, onChanged }) => {
         break;
       case "win":
         model.win = CardEffectActionWinEmpty();
+        break;
+      case "choice":
+        model.choice = cardEffectActionChoiceEmpty();
         break;
     }
 
@@ -266,6 +272,12 @@ const CardEffectActionForm: React.FC<Props> = ({ model, onChanged }) => {
         <CardEffectActionReserveEffectForm
           model={model.reserveEffect}
           onChanged={(x) => model.reserveEffect !== undefined && onChanged({ reserveEffect: { ...model.reserveEffect, ...x } })}
+        />
+      )}
+      {selectedAction === "choice" && model.choice !== undefined && (
+        <CardEffectActionChoiceForm
+          model={model.choice}
+          onChanged={(x) => model.choice !== undefined && onChanged({ choice: { ...model.choice, ...x } })}
         />
       )}
     </>

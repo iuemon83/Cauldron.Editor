@@ -14,6 +14,7 @@ import { CardEffectActionSetVariable } from "./CardEffectActionSetVariable";
 import { CardEffectActionWin } from "./CardEffectActionWin";
 import { CardEffectActionReserveEffect } from "./CardEffectActionReserveEffect";
 import { CardEffectActionModifyCounter } from "./CardEffectActionModifyCounter";
+import { CardEffectActionChoice } from "./CardEffectActionChoice";
 import { CardEffectIf } from "./CardEffectIf";
 
 export type CardEffectAction = {
@@ -34,6 +35,7 @@ export type CardEffectAction = {
   modifyCounter: CardEffectActionModifyCounter | undefined;
   win: CardEffectActionWin | undefined;
   reserveEffect: CardEffectActionReserveEffect | undefined;
+  choice: CardEffectActionChoice | undefined;
 };
 
 export const cardEffectActionEmpty = (): CardEffectAction => {
@@ -55,5 +57,6 @@ export const cardEffectActionEmpty = (): CardEffectAction => {
     modifyCounter: undefined,
     win: undefined,
     reserveEffect: undefined,
+    choice: undefined,
   };
 };

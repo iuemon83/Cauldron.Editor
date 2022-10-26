@@ -1,6 +1,7 @@
 import { ActionContextCards } from "../types/ActionContextCards";
 import { actionContextCardsOfAddCardEmpty } from "../types/ActionContextCardsOfAddCard";
 import { actionContextCardsOfAddEffectEmpty } from "../types/ActionContextCardsOfAddEffect";
+import { actionContextCardsOfChoiceEmpty } from "../types/ActionContextCardsOfChoice";
 import { actionContextCardsOfDamageEmpty } from "../types/ActionContextCardsOfDamage";
 import { actionContextCardsOfDestroyCardEmpty } from "../types/ActionContextCardsOfDestroyCard";
 import { actionContextCardsOfDrawCardEmpty } from "../types/ActionContextCardsOfDrawCard";
@@ -17,7 +18,7 @@ import ActionContextCardsOfExcludeCardForm from "./ActionContextCardsOfExcludeCa
 import ActionContextCardsOfModifyCardForm from "./ActionContextCardsOfModifyCardForm";
 import ActionContextCardsOfModifyCounterForm from "./ActionContextCardsOfModifyCounterForm";
 import ActionContextCardsOfMoveCardForm from "./ActionContextCardsOfMoveCardForm";
-import { globalCache } from "./CauldronApi";
+import ActionContextCardsOfChoiceForm from "./ActionContextCardsOfChoiceForm";
 import InputOption from "./input/InputOption";
 
 interface Props {
@@ -26,11 +27,6 @@ interface Props {
 }
 
 const ActionContextCardsForm: React.FC<Props> = ({ model, onChanged }) => {
-  const valueTypesLabelsByValue = Object.fromEntries(
-    globalCache.metadata!.numValueCalculatorForPlayerTypes.map((v) => [v.code, v.displayText])
-  );
-  const valueTypes = Object.keys(valueTypesLabelsByValue);
-
   return (
     <>
       <InputOption
@@ -104,6 +100,14 @@ const ActionContextCardsForm: React.FC<Props> = ({ model, onChanged }) => {
         empty={actionContextCardsOfMoveCardEmpty}
         onChanged={onChanged}
         jtx={(d, h) => <ActionContextCardsOfMoveCardForm model={d!} onChanged={h} />}
+      />
+      <InputOption
+        label="選択の結果"
+        model={model}
+        keyName="choice"
+        empty={actionContextCardsOfChoiceEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <ActionContextCardsOfChoiceForm model={d!} onChanged={h} />}
       />
     </>
   );

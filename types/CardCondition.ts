@@ -14,6 +14,7 @@ import { ZoneCondition } from "./ZoneCondition";
 import { CounterCondition } from "./CounterCondition";
 import { CardAnnotationCondition } from "./CardAnnotationCondition";
 import { ActionContextCards } from "./ActionContextCards";
+import { PositionCondition } from "./PositionCondition";
 
 export type CardCondition = {
   contextCondition: CardConditionContext["code"];
@@ -33,6 +34,7 @@ export type CardCondition = {
   ownerCondition: OwnerConditionValue["code"];
   abilityCondition: CardAbility["code"][] | undefined;
   counterCondition: CounterCondition | undefined;
+  positionCondition: PositionCondition | undefined;
 };
 
 export const cardConditionEmpty = (): CardCondition => {
@@ -54,5 +56,6 @@ export const cardConditionEmpty = (): CardCondition => {
     ownerCondition: globalCache.metadata!.ownerConditionValues[0].code,
     abilityCondition: undefined,
     counterCondition: undefined,
+    positionCondition: undefined,
   };
 };

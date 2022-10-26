@@ -7,6 +7,7 @@ import { ActionContextCardsOfExcludeCard } from "./ActionContextCardsOfExcludeCa
 import { ActionContextCardsOfModifyCard } from "./ActionContextCardsOfModifyCard";
 import { ActionContextCardsOfModifyCounter } from "./ActionContextCardsOfModifyCounter";
 import { ActionContextCardsOfMoveCard } from "./ActionContextCardsOfMoveCard";
+import { ActionContextCardsOfChoice } from "./ActionContextCardsOfChoice";
 
 export type ActionContextCards = {
   addCard: ActionContextCardsOfAddCard | undefined;
@@ -18,6 +19,7 @@ export type ActionContextCards = {
   modifyCard: ActionContextCardsOfModifyCard | undefined;
   modifyCounter: ActionContextCardsOfModifyCounter | undefined;
   moveCard: ActionContextCardsOfMoveCard | undefined;
+  choice: ActionContextCardsOfChoice | undefined;
 };
 
 export const actionContextCardsEmpty = (): ActionContextCards => {
@@ -31,5 +33,6 @@ export const actionContextCardsEmpty = (): ActionContextCards => {
     modifyCard: undefined,
     modifyCounter: undefined,
     moveCard: undefined,
+    choice: undefined,
   };
 };

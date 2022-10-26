@@ -14,10 +14,12 @@ import TextConditionForm from "./TextConditionForm";
 import ZoneConditionForm from "./ZoneConditionForm";
 import ActionContextCardsForm from "./ActionContextCardsForm";
 import CardAnnotationConditionForm from "./CardAnnotationConditionForm";
+import PositionConditionForm from "./PositionConditionForm";
 import { actionContextCardsEmpty } from "../types/ActionContextCards";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { cardAnnotationConditionEmpty } from "../types/CardAnnotationCondition";
 import { numCompareEmpty } from "../types/NumCompare";
+import { positionConditionEmpty } from "../types/PositionCondition";
 
 interface Props {
   model: CardCondition;
@@ -205,6 +207,14 @@ const CardConditionForm: React.FC<Props> = ({ model, onChanged }) => {
         keyName={"ownerCondition"}
         getLabel={(v) => ownerConditionValuesLabelsByValue[v]}
         onChanged={onChanged}
+      />
+      <InputOption
+        label="場所の条件"
+        model={model}
+        keyName="positionCondition"
+        empty={positionConditionEmpty}
+        onChanged={onChanged}
+        jtx={(d, h) => <PositionConditionForm model={d!} onChanged={h} />}
       />
     </>
   );
